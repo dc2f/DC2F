@@ -4,7 +4,8 @@
 
 	'attributes': {
 		'image': { 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
-		'body': { },
+		'body': { 'nodetype': 'classpath:com/dc2f/nodetype/RichText' },
+		'date': { 'nodetype': 'classpath:com/dc2f/nodetype/Date' },
 	},
 
 
