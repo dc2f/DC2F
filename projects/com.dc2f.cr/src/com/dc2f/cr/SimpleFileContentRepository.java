@@ -3,7 +3,6 @@ package com.dc2f.cr;
 import java.io.File;
 import java.util.List;
 
-import com.dc2f.core.Node;
 
 public class SimpleFileContentRepository implements ContentRepository {
 	private File dir;

@@ -1,4 +1,4 @@
-package com.dc2f.core;
+package com.dc2f.cr;
 
 public interface Node {
 	String getName();
