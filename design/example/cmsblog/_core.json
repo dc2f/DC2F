@@ -1,0 +1,18 @@
+{
+	'nodetype':	'/.dc2f/nodetype/Project',
+	
+	'domains': { 'mycoolblog.com', 'blog.dc2f.com' },
+	'renderconfiguration':
+		[
+			{
+				'type': '/.dc2f/rendertype/web',
+				'properties': {
+				}
+			},
+			{
+				'type': '/.dc2f/rendertype/rss',
+				'properties': {
+				}
+			}
+		]
+}
