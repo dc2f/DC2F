@@ -1,4 +1,4 @@
-package com.dc2f.cr;
+package com.dc2f.datastore;
 
 public interface Node {
 	String getName();

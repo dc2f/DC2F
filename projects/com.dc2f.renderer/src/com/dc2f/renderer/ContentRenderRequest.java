@@ -1,6 +1,6 @@
 package com.dc2f.renderer;
 
-import com.dc2f.cr.Node;
+import com.dc2f.datastore.Node;
 
 public interface ContentRenderRequest {
 	public Node getNode();

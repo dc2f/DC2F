@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import com.dc2f.cr.ContentRepository;
-import com.dc2f.cr.Node;
-import com.dc2f.cr.SimpleFileContentRepository;
+import com.dc2f.datastore.ContentRepository;
+import com.dc2f.datastore.Node;
+import com.dc2f.datastore.SimpleFileContentRepository;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
