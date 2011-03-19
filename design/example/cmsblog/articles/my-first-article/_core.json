@@ -3,6 +3,6 @@
 
 
 	'image': '/cmsblog/images/myfirstarticleimage',
-	'text': 'My first cool article, yeah!',
+	'body': 'My first cool article, yeah!',
 
 }

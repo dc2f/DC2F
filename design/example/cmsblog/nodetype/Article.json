@@ -3,7 +3,7 @@
 	//'extends': '',
 
 	'attributes': {
-		'image': { 'type': 'Image' },
+		'image': { 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
 		'body': { },
 	},
 
@@ -11,28 +11,11 @@
 	'renderconfiguration': {
 		[
 			{
-				'rendertype': '/.dc2f/rendertype/web',
+				'rendertype': 'com.dc2f.rendertype.web',
 				'template': 'articletemplate',
 			},
 		],
 	},
 
-
-
-
-	'context': {
-		'imagethumb': {
-                        'nodetype': '/.dc2f/nodetype/html/ImageRenderReference',
-                        'context': 'node', /* relative to project, node or repository */
-                        'ref': '.@image' /* the same as 'ref': '/' (?) */
-			'size': '500x300',
-		},
-		'imagelarge': {
-                        'nodetype': '/.dc2f/nodetype/html/ImageRenderReference',
-                        'context': 'node', /* relative to project, node or repository */
-                        'ref': '.@image' /* the same as 'ref': '/' (?) */
-			'size': '1000x900',
-		},
-	},
 
 }

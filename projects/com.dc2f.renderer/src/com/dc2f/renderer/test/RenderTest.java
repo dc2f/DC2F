@@ -35,7 +35,7 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(null, new ContentRenderResponse() {
+		renderer.renderNode(/* request */null, new ContentRenderResponse() {
 			
 			public Writer getWriter() {
 				return writer;

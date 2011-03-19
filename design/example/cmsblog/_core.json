@@ -5,11 +5,15 @@
 	'renderconfiguration':
 		[
 			{
-				'rendertype': '/.dc2f/rendertype/web',
+				'rendertype': 'com.dc2f.renderer.web',
 				'template': 'myblogtemplate', /* or './myblogtemplate' */
 			},
 			{
-				'rendertype': '/.dc2f/rendertype/rss',
+				'rendertype': 'com.dc2f.renderer.webmobile',
+				'template': 'mymobileblogtemplate', /* or './myblogtemplate' */
+			},
+			{
+				'rendertype': 'com.dc2f.renderer.rss',
 				'properties': {
 				}
 			}

@@ -21,17 +21,22 @@
 	'context': {
 		'project': {
 			'nodetype': '/.dc2f/nodetype/Reference',
-			'context': 'project', /* relative to project, node or repository */
+			'refcontext': 'project', /* relative to project, node or repository */
+			'ref': '.' /* the same as 'ref': '/' (?) */
+		},
+		'node': {
+			'nodetype': '/.dc2f/nodetype/Reference',
+			'refcontext': 'node', /* relative to project, node or repository */
 			'ref': '.' /* the same as 'ref': '/' (?) */
 		},
 		'content': {
 			'nodetype': '/.dc2f/nodetype/RenderReference',
-			'context': 'node', /* relative to project, node or repository */
+			'refcontext': 'node', /* relative to project, node or repository */
 			'ref': '.' /* the same as 'ref': '/' (?) */
 		},
 		'navigation': {
 			'nodetype': '/.dc2f/nodetype/RenderReference',
-			'context': 'project', /* relative to project, node or repository */
+			'refcontext': 'project', /* relative to project, node or repository */
 			'ref': 'navigation' /* the same as 'ref': '/' (?) */
 		},
 		'title': {

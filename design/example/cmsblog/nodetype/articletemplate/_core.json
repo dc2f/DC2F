@@ -10,13 +10,13 @@
 ',
 	'context': {
 		'image': {
-			'nodetype': '/.dc2f/nodetype/RenderReference',
+			'nodetype': 'classpath:com/dc2f/nodetype/ImageTagRenderer',
 			'context': 'node',
 			'ref': '.@image',
-                        'size': '500x300',
+			'size': '500x300',
 		},
 		'body': {
-			'nodetype': '/.dc2f/nodetype/RenderReference',
+			'nodetype': 'classpath:com/dc2f/nodetype/StringRenderer',
 			'context': 'node',
 			'ref': '.@body',
 		},
