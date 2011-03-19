@@ -1,0 +1,24 @@
+{
+	'nodetype': 'classpath:com/dc2f/nodetype/HtmlTemplate',
+
+
+	'source': '
+<div class="article">
+	$image
+	<div class="body">$body</div>
+</div>
+',
+	'context': {
+		'image': {
+			'nodetype': '/.dc2f/nodetype/RenderReference',
+			'context': 'node',
+			'ref': '.@image',
+                        'size': '500x300',
+		},
+		'body': {
+			'nodetype': '/.dc2f/nodetype/RenderReference',
+			'context': 'node',
+			'ref': '.@body',
+		},
+	},
+}

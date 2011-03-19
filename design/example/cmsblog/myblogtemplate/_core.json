@@ -1,5 +1,5 @@
 {
-	'nodetype': '/.dc2f/nodetype/HtmlTemplate',
+	'nodetype': 'classpath:com/dc2f/nodetype/HtmlTemplate',
 
 	'source': '
 <html>

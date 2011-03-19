@@ -1,8 +1,20 @@
 {
 
+	//'extends': '',
+
 	'attributes': {
 		'image': { 'type': 'Image' },
-		'text': { },
+		'body': { },
+	},
+
+
+	'renderconfiguration': {
+		[
+			{
+				'rendertype': '/.dc2f/rendertype/web',
+				'template': 'articletemplate',
+			},
+		],
 	},
 
 
