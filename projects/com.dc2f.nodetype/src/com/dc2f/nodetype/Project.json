@@ -1,0 +1,16 @@
+{
+	'class': 'com.dc2f.nodetype.Project',
+	
+	'attributes': {
+		'label': {
+			'type': 'String',
+			'required': true
+		},
+		'domains': {
+			'type': 'StringArray',
+			'required': true,
+			'minlength': 1
+		},
+		'
+	}
+}
