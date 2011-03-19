@@ -1,16 +1,15 @@
 {
-	'nodetype':	'/.dc2f/nodetype/Project',
+	'nodetype':	'classpath:com/dc2f/nodetype/Project', /* tries to load Project.json from classpath, if it fails it asks all other file managers */
 	
-	'domains': { 'mycoolblog.com', 'blog.dc2f.com' },
+	'domains': [ 'mycoolblog.com', 'blog.dc2f.com' ],
 	'renderconfiguration':
 		[
 			{
-				'type': '/.dc2f/rendertype/web',
-				'properties': {
-				}
+				'rendertype': '/.dc2f/rendertype/web',
+				'template': 'myblogtemplate', /* or './myblogtemplate' */
 			},
 			{
-				'type': '/.dc2f/rendertype/rss',
+				'rendertype': '/.dc2f/rendertype/rss',
 				'properties': {
 				}
 			}

@@ -1,0 +1,26 @@
+{
+
+	'attributes': {
+		'image': { 'type': 'Image' },
+		'text': { },
+	},
+
+
+
+
+	'context': {
+		'imagethumb': {
+                        'nodetype': '/.dc2f/nodetype/html/ImageRenderReference',
+                        'context': 'node', /* relative to project, node or repository */
+                        'ref': '.@image' /* the same as 'ref': '/' (?) */
+			'size': '500x300',
+		},
+		'imagelarge': {
+                        'nodetype': '/.dc2f/nodetype/html/ImageRenderReference',
+                        'context': 'node', /* relative to project, node or repository */
+                        'ref': '.@image' /* the same as 'ref': '/' (?) */
+			'size': '1000x900',
+		},
+	},
+
+}

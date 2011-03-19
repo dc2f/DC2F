@@ -1,0 +1,8 @@
+{
+	'nodetype': '/cmsblog/nodetype/Article',
+
+
+	'image': '/cmsblog/images/myfirstarticleimage',
+	'text': 'My first cool article, yeah!',
+
+}
