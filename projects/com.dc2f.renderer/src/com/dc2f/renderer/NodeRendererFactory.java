@@ -1,10 +1,12 @@
 package com.dc2f.renderer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ServiceLoader;
+
+import com.dc2f.renderer.provider.NodeRendererProvider;
 
 public class NodeRendererFactory {
 	private static NodeRendererFactory instance;
+	private static ServiceLoader<NodeRendererProvider> providers = ServiceLoader.load(NodeRendererProvider.class);
 
 	private NodeRendererFactory() {
 		
@@ -18,8 +20,13 @@ public class NodeRendererFactory {
 	}
 
 	public NodeRenderer getRenderer(String renderTypeName) {
-		if("com.dc2f.renderer.web".equals(renderTypeName)) {
-			return new WebRenderer();
+		
+		// find the first renderer and return it ..
+		for (NodeRendererProvider provider: providers) {
+			NodeRenderer renderer = provider.getNodeRenderer(renderTypeName);
+			if (renderer != null) {
+				return renderer;
+			}
 		}
 		return null;
 	}
