@@ -7,16 +7,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.logging.Logger;
 
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
-import com.dc2f.datastore.impl.simple.SimpleFileContentRepository;
+import com.dc2f.datastore.impl.filejson.SimpleFileContentRepository;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
 
 public class RenderTest {
+	private static final Logger logger = Logger.getLogger(RenderTest.class.getName());
 
 	/**
 	 * @param args
@@ -34,6 +36,7 @@ public class RenderTest {
 		ContentRepository cr = new SimpleFileContentRepository(crdir);
 		
 		Node node = cr.getNode("/cmsblog/articles/my-first-article");
+		logger.info("We got a node: {" + node + "}");
 		
 		
 		final Writer writer = new CharArrayWriter();
