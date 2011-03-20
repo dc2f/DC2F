@@ -4,6 +4,4 @@ import com.dc2f.datastore.Node;
 
 public interface ContentRenderRequest {
 	public Node getNode();
-	
-	public Node setNode();
 }

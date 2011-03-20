@@ -1,7 +1,4 @@
 {
-
-	//'extends': '',
-
 	'attributes': {
 		'image': { 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
 		'body': { 'nodetype': 'classpath:com/dc2f/nodetype/RichText' },
@@ -9,14 +6,12 @@
 	},
 
 
-	'renderconfiguration': {
-		[
-			{
-				'rendertype': 'com.dc2f.rendertype.web',
-				'template': 'articletemplate',
-			},
-		],
-	},
+	'renderconfiguration': [
+		{
+			'rendertype': 'com.dc2f.rendertype.web',
+			'template': 'articletemplate',
+		},
+	],
 
 
 }
