@@ -1,13 +1,8 @@
 {
-	'nodetype': 'classpath:com/dc2f/nodetype/HtmlTemplate',
+	'nodetype': 'classpath:com/dc2f/nodetype/renderable/template/HtmlTemplate',
 
 
-	'source': '
-<div class="article">
-	$image
-	<div class="body">$body</div>
-</div>
-',
+	'source': '<div class="article">\n	$image\n	<div class="body">$body</div>\n</div>',
 	'context': {
 		'image': {
 			'nodetype': 'classpath:com/dc2f/nodetype/ImageTagRenderer',

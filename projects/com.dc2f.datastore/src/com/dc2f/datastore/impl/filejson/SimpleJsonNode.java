@@ -1,14 +1,14 @@
 package com.dc2f.datastore.impl.filejson;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.dc2f.datastore.Node;
-import com.dc2f.nodetype.NodeType;
+import com.dc2f.datastore.NodeType;
 
 public class SimpleJsonNode implements Node {
 	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
@@ -44,15 +44,14 @@ public class SimpleJsonNode implements Node {
 		try {
 			obj = jsonObject.get(propertyName);
 		} catch (JSONException e) {
-			logger.severe("Error while fetching property {" + propertyName + "} from node {" + this.toString() + "}");
+			logger.log(Level.SEVERE, "Error while getting property {" + propertyName
+					+ "} of node {" + path + "}", e);
 			return null;
 		}
-		if (obj instanceof JSONObject || obj instanceof JSONArray) {
-			logger.severe("FIXME: NOT IMPLEMENTED: converting of json object {"
-					+ obj.getClass().getName() + "} for property {"
-					+ propertyName + "}");
-			return null;
+		if (obj instanceof String) {
+			return obj;
 		}
+		logger.severe("FIXME: Not Implemented: Unable to convert property {" + path + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "}");
 		return null;
 	}
 	

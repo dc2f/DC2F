@@ -1,0 +1,8 @@
+{
+	'class': 'com.dc2f.nodetype.renderable.RenderableNodeType',
+	'attributes': {
+		'renderconfiguration': {
+			'definition': 'TODO :(',
+		},
+	}
+}

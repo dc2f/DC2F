@@ -1,5 +1,5 @@
 {
-	'class': 'com.dc2f.nodetype.Project',
+	'class': 'com.dc2f.nodetype.renderable.Project',
 	
 	'attributes': {
 		'label': {
@@ -11,6 +11,5 @@
 			'required': true,
 			'minlength': 1
 		},
-		'
 	}
 }

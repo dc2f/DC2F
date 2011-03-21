@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.logging.Logger;
@@ -42,7 +41,7 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(node), new ContentRenderResponse() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, node), new ContentRenderResponse() {
 			
 			public Writer getWriter() {
 				return writer;
@@ -53,7 +52,7 @@ public class RenderTest {
 			}
 		});
 		
-		System.out.println("We rendered something: " + writer.toString());
+		logger.info("We rendered something: " + writer.toString());
 	}
 
 }

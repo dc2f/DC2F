@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,7 @@ import org.json.JSONObject;
 
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
-import com.dc2f.nodetype.NodeType;
+import com.dc2f.datastore.NodeType;
 
 public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
@@ -30,45 +31,96 @@ public class SimpleFileContentRepository implements ContentRepository {
 		this.crdir = crdir;
 	}
 	
-	protected String loadFile(File f) {
+	protected String loadFile(InputStream inputStream) {
 		try {
-			InputStreamReader reader = new InputStreamReader(new FileInputStream(f));
-			StringBuilder builder = new StringBuilder((int) f.length());
+			InputStreamReader reader = new InputStreamReader(inputStream);
+			StringBuilder builder = new StringBuilder();//(int) f.length());
 			int c;
 			for (char[] buf = new char[BUFFER_SIZE] ; (c = reader.read(buf, 0, BUFFER_SIZE)) > 0 ; ) {
 				builder.append(buf, 0, c);
 			}
 			return builder.toString();
-		} catch (FileNotFoundException e) {
-			logger.log(Level.WARNING, "Unable to find file for node {" + f.getAbsolutePath() + "}", e);
 		} catch (IOException e) {
-			logger.log(Level.SEVERE, "Error while reading from file for node {" + f.getAbsolutePath() + "}", e);
+			logger.log(Level.SEVERE, "Error while reading from input stream.", e);
 		}
 		return null;
 	}
 	
 	protected JSONObject loadJSON(File f) {
-		String str = loadFile(f);
-		if (str == null) {
-			return null;
-		}
 		try {
-			return new JSONObject(str);
+			return loadJSON(new FileInputStream(f));
+		} catch (FileNotFoundException e) {
+			logger.log(Level.WARNING, "Unable to find file for node {" + f.getAbsolutePath() + "}", e);
+			return null;
 		} catch (JSONException e) {
-			logger.log(Level.SEVERE, "Error while parsing file for node {" + f.getAbsolutePath() + "}", e);
+			logger.log(Level.SEVERE, "Error while parsing file {" + f.getAbsolutePath() + "}", e);
 			return null;
 		}
 	}
-
+	
+	protected JSONObject loadJSON(InputStream inputStream) throws JSONException {
+		String str = loadFile(inputStream);
+		if (str == null) {
+			return null;
+		}
+		return new JSONObject(str);
+	}
+	
+	protected JSONObject loadJSONFromPath(String path, String appendFileName) {
+		if (path.startsWith("classpath:")) {
+			// FIXME: umm.. do it the ugly way (for now?)
+			if (appendFileName != null) {
+				path = path + "/" + appendFileName;
+			}
+			InputStream stream = this.getClass().getResourceAsStream("/" + path.substring("classpath:".length()));
+			if (stream == null) {
+				logger.severe("Unable to find resource in classpath: " + path + " === " + path.substring("classpath:".length()));
+				return null;
+			}
+			try {
+				return loadJSON(stream);
+			} catch (JSONException e) {
+				logger.log(Level.SEVERE, "Error while parsing file {" + path + "}", e);
+				return null;
+			}
+		}
+		if (appendFileName != null) {
+			return loadJSON(new File(new File(crdir, path), appendFileName));
+		} else {
+			return loadJSON(new File(crdir, path));
+		}
+	}
+	
 	@Override
 	public Node getNode(String path) {
-		JSONObject jsonObject = loadJSON(new File(new File(crdir, path), "_core.json"));
-		return new SimpleJsonNode(path, jsonObject, null);
+		JSONObject jsonObject = loadJSONFromPath(path, "_core.json");
+		NodeType nodeType = null;
+		try {
+			nodeType = getNodeType((String) jsonObject.get("nodetype"));
+		} catch (JSONException e) {
+			logger.log(Level.SEVERE, "Error while fetching nodetype property from json object", e);
+		}
+		return new SimpleJsonNode(path, jsonObject, nodeType);
 	}
 
 	@Override
 	public NodeType getNodeType(String path) {
-		return null;
+		JSONObject jsonObject = loadJSONFromPath(path + ".json", null);
+		String extendsNodeType = jsonObject.optString("extends", null);
+		NodeType parentNodeType = null;
+		if (extendsNodeType != null) {
+			parentNodeType = getNodeType(extendsNodeType);
+		}
+		SimpleJsonNodeTypeInfo nodeTypeInfo = new SimpleJsonNodeTypeInfo(parentNodeType, path, jsonObject);
+		Class<NodeType> nodeTypeClass = nodeTypeInfo.getNodeTypeClass();
+		try {
+			NodeType nodeType = nodeTypeClass.newInstance();
+			nodeType.init(nodeTypeInfo);
+			return nodeType;
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error while creating instance for node type {" + nodeTypeInfo + "}", e);
+			return null;
+		}
 	}
 
 }
