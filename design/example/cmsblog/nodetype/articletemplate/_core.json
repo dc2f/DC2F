@@ -1,5 +1,5 @@
 {
-	'nodetype': 'classpath:com/dc2f/nodetype/renderable/template/HtmlTemplate',
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
 	'source': '<div class="article">\n	$image\n	<div class="body">$body</div>\n</div>',

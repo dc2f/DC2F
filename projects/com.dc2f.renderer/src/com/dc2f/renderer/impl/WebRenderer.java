@@ -10,10 +10,10 @@ import java.util.logging.Logger;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
 import com.dc2f.nodetype.renderable.RenderableNodeType;
-import com.dc2f.nodetype.renderable.template.TemplateNodeType;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
+import com.dc2f.renderer.nodetype.template.TemplateNodeType;
 
 public class WebRenderer implements NodeRenderer {
 	private static final Logger logger = Logger.getLogger(WebRenderer.class.getName());
@@ -37,7 +37,7 @@ public class WebRenderer implements NodeRenderer {
 				
 				Node templateNode = cr.getNode(templateNodePath);
 				if (templateNode.getNodeType() instanceof TemplateNodeType) {
-					String ret = ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(templateNode);
+					String ret = ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
 					response.getWriter().write(ret);
 				}
 			} catch (URISyntaxException e) {
