@@ -1,0 +1,5 @@
+{
+	'freeattributes': true,
+	'valuetype': 'Node',
+	'valuenodetype': 'classpath:com/dc2f/datastore/nodetypedefinition/AttributeNodeType',
+}

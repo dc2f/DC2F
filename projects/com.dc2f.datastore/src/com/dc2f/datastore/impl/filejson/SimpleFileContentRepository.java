@@ -100,7 +100,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 		} catch (JSONException e) {
 			logger.log(Level.SEVERE, "Error while fetching nodetype property from json object", e);
 		}
-		return new SimpleJsonNode(path, jsonObject, nodeType);
+		return new SimpleJsonNode(this, path, jsonObject, nodeType);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 		if (extendsNodeType != null) {
 			parentNodeType = getNodeType(extendsNodeType);
 		}
-		SimpleJsonNodeTypeInfo nodeTypeInfo = new SimpleJsonNodeTypeInfo(parentNodeType, path, jsonObject);
+		SimpleJsonNodeTypeInfo nodeTypeInfo = new SimpleJsonNodeTypeInfo(this, parentNodeType, path, jsonObject);
 		Class<NodeType> nodeTypeClass = nodeTypeInfo.getNodeTypeClass();
 		try {
 			NodeType nodeType = nodeTypeClass.newInstance();

@@ -2,7 +2,8 @@
 	'class': 'com.dc2f.nodetype.renderable.RenderableNodeType',
 	'attributes': {
 		'renderconfiguration': {
-			'definition': 'TODO :(',
+			'type': 'ListOfNodes',
+			'typeofsubnodes': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 		},
 	}
 }

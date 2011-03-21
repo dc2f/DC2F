@@ -5,7 +5,7 @@ package com.dc2f.datastore;
  * 
  * @author herbert
  */
-public interface NodeTypeInfo {
+public interface NodeTypeInfo extends Node {
 	public String getName();
 	public Object getProperty(String propertyName);
 	public String getPath();

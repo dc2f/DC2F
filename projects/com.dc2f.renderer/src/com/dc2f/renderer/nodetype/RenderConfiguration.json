@@ -1,0 +1,6 @@
+{
+	'attributes': {
+		'rendertype': 'String',
+		'template': { 'nodetype': 'classpath:com/dc2f/nodetype/NodeType' },
+	},
+}

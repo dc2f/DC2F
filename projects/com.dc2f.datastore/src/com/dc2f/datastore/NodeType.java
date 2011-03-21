@@ -2,6 +2,7 @@ package com.dc2f.datastore;
 
 
 
+
 /**
  * NodeTypes define the behavior for Nodes (Nodes contain the data).
  * 
@@ -13,4 +14,6 @@ public interface NodeType {
 	public NodeTypeInfo getNodeTypeInfo();
 
 	public void init(NodeTypeInfo nodeTypeInfo);
+	
+	public Node getAttributeDefinitions();
 }

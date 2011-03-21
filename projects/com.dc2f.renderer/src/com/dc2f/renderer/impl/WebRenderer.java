@@ -26,8 +26,8 @@ public class WebRenderer implements NodeRenderer {
 		
 		if (node.getNodeType() instanceof RenderableNodeType) {
 			RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
-			Map<String, Object> renderConfig = nodeType.getRenderConfiguration(RENDER_TYPE);
-			String template = (String) renderConfig.get("template");
+			Node renderConfig = nodeType.getRenderConfiguration(RENDER_TYPE);
+			String template = (String) renderConfig.getProperty("template");
 			ContentRepository cr = request.getContentRepository();
 			logger.info("We need to load template node {" + template + "}");
 			try {

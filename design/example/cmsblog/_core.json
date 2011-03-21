@@ -5,14 +5,17 @@
 	'renderconfiguration':
 		[
 			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
 				'template': 'myblogtemplate', /* or './myblogtemplate' */
 			},
 			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
 				'template': 'mymobileblogtemplate', /* or './myblogtemplate' */
 			},
 			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
 				'properties': {
 				}

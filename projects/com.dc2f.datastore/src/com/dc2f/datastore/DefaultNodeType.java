@@ -9,4 +9,5 @@ package com.dc2f.datastore;
  */
 public class DefaultNodeType extends BaseNodeType {
 
+
 }
