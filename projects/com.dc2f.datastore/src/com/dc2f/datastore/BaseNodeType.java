@@ -2,7 +2,6 @@ package com.dc2f.datastore;
 
 import java.util.logging.Logger;
 
-import com.dc2f.datastore.impl.filejson.SimpleJsonNode;
 import com.dc2f.datastore.nodetypedefinition.KeyValuePair;
 import com.dc2f.datastore.nodetypedefinition.MapNode;
 
