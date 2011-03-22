@@ -1,9 +1,9 @@
 {
-	'extends': 'classpath:com/dc2f/nodetype/renderable/RenderableNodeType',
+	'extends': 'classpath:com/dc2f/renderer/nodetype/RenderableNodeType',
 
 	'attributes': {
-		'image': { 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
-		'body': { 'nodetype': 'classpath:com/dc2f/nodetype/RichText' },
+		'image': { 'type': 'NodeReference', 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
+		'body': { 'type': 'String',  },
 		'date': { 'nodetype': 'classpath:com/dc2f/nodetype/Date' },
 	},
 

@@ -1,11 +1,10 @@
 package com.dc2f.datastore.impl.filejson;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,6 +78,8 @@ public class SimpleJsonNode implements Node {
 		}
 	}
 	
+	
+	
 	@Override
 	public Object getProperty(String propertyName) {
 		Object obj = internalGetProperty(propertyName);
@@ -86,33 +87,70 @@ public class SimpleJsonNode implements Node {
 			// FIXME check if property is required?!
 			return null;
 		}
-		if (obj instanceof String) {
+		
+		// FIXME do this the "clean way"
+		if (obj instanceof String && ("class".equals(propertyName) || "type".equals(propertyName))) {
 			return obj;
 		}
 		
 		Node attrDefinitions = getNodeType().getAttributeDefinitions();
-		logger.info("Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
+		logger.info(this.getName() + ": Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
 		Node attrDefinition = (Node) attrDefinitions.getProperty(propertyName);
 		String attributeType = (String) attrDefinition.getProperty("type");
+		
+		if ("NodeReference".equals(attributeType) && obj instanceof String) {
+			String ref = (String) obj;
+			logger.fine("Trying to resolve object {" + ref + "}");
+			if (!ref.startsWith("/")) {
+				try {
+					ref = new URI(getPath()).resolve(ref).toString();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return repository.getNode(ref);
+		}
+
+		if (obj instanceof String) {
+			return obj;
+		}
+
 		if ("Node".equals(attributeType)) {
-			String typeofnode = (String) attrDefinition.getProperty("typeofnode");
-			NodeType subNodeType = null;
-			if (typeofnode instanceof String) {
-				subNodeType = repository.getNodeType(typeofnode);
+
+			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
+			NodeType currentSubNodeType = null;
+			if (subNodeTypeName != null) {
+				currentSubNodeType = repository.getNodeType(subNodeTypeName);
 			}
-			if (subNodeType == null) {
-				subNodeType = new DefaultNodeType();
+			
+			if (currentSubNodeType == null) {
+				String typeofnode = (String) attrDefinition.getProperty("typeofnode");
+				if (typeofnode != null) {
+					currentSubNodeType = repository.getNodeType(typeofnode);
+				}
 			}
-			return new SimpleJsonNode(repository, path, (JSONObject) obj, subNodeType);
+			if (currentSubNodeType == null) {
+				currentSubNodeType = new DefaultNodeType();
+			}
+			return new SimpleJsonNode(repository, path, (JSONObject) obj, currentSubNodeType);
 		} else if ("ListOfNodes".equals(attributeType)) {
 			JSONArray array = (JSONArray) obj;
 			String typeofsubnodes = (String) attrDefinition.getProperty("typeofsubnodes");
-			NodeType subNodeType = repository.getNodeType(typeofsubnodes);
+			NodeType subNodeType = null;
+			if (typeofsubnodes != null) {
+				subNodeType = repository.getNodeType(typeofsubnodes);
+			}
 			List<Node> ret = new ArrayList<Node>();
 			for (int i = 0 ; i < array.length() ; i++) {
 				try {
 					JSONObject arrayobj = (JSONObject) array.get(i);
-					ret.add(new SimpleJsonNode(repository, path, arrayobj, subNodeType));
+					String subNodeTypeName = arrayobj.optString("nodetype", null);
+					NodeType currentSubNodeType = subNodeType;
+					if (subNodeTypeName != null) {
+						currentSubNodeType = repository.getNodeType(subNodeTypeName);
+					}
+					ret.add(new SimpleJsonNode(repository, path, arrayobj, currentSubNodeType));
 				} catch (JSONException e) {
 					logger.log(Level.SEVERE, "Error while converting property into ListOfNodes", e);
 				}

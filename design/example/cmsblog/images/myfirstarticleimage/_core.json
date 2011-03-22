@@ -1,0 +1,6 @@
+{
+	'nodetype': 'classpath:com/dc2f/nodetype/Image',
+
+	'filename': 'myfirstarticleimage.png',
+	'alt': 'Dies ist mein erstes bild!',
+}

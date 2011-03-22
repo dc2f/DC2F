@@ -20,7 +20,7 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 
 	public SimpleJsonNodeTypeInfo(ContentRepository repository, NodeType parentNodeType, String path, JSONObject jsonObject) {
 		super(repository, path, jsonObject, parentNodeType != null ? parentNodeType : new NodeTypeDefinition());
-		this.parentNodeType = parentNodeType;
+		this.parentNodeType = parentNodeType != null ? parentNodeType : new NodeTypeDefinition();
 		this.jsonObject = jsonObject;
 	}
 	
@@ -49,8 +49,8 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 				logger.log(Level.SEVERE, "Error while getting property {" + propertyName
 						+ "} of node type {" + getPath() + "}", e);
 			}
-			if (parentNodeType != null) {
-				return parentNodeType.getNodeTypeInfo().getProperty(propertyName);
+			if (parentNodeType != null && parentNodeType.getNodeTypeInfo() instanceof SimpleJsonNodeTypeInfo) {
+				return ((SimpleJsonNodeTypeInfo)parentNodeType.getNodeTypeInfo()).internalGetProperty(propertyName);
 			}
 			return null;
 		}
@@ -60,5 +60,10 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	@Override
 	public String toString() {
 		return "{SimpleJsonNodeTypeInfo:" + jsonObject.toString() + "}";
+	}
+
+	@Override
+	public NodeType getParentNodeType() {
+		return parentNodeType;
 	}
 }

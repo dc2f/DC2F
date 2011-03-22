@@ -9,4 +9,6 @@ public interface NodeTypeInfo extends Node {
 	public String getName();
 	public Object getProperty(String propertyName);
 	public String getPath();
+	
+	public NodeType getParentNodeType();
 }

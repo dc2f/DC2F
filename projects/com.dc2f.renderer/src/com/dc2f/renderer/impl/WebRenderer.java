@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
-import com.dc2f.nodetype.renderable.RenderableNodeType;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
+import com.dc2f.renderer.nodetype.RenderableNodeType;
 import com.dc2f.renderer.nodetype.template.TemplateNodeType;
 
 public class WebRenderer implements NodeRenderer {
@@ -27,6 +28,20 @@ public class WebRenderer implements NodeRenderer {
 		if (node.getNodeType() instanceof RenderableNodeType) {
 			RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
 			Node renderConfig = nodeType.getRenderConfiguration(RENDER_TYPE);
+			
+			Node templateNode = (Node) renderConfig.getProperty("template");
+			if (templateNode.getNodeType() instanceof TemplateNodeType) {
+				String ret = ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
+				try {
+					response.getWriter().write(ret);
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, "Error while writing result.", e);
+				}
+			}
+
+
+			
+			/*
 			String template = (String) renderConfig.getProperty("template");
 			ContentRepository cr = request.getContentRepository();
 			logger.info("We need to load template node {" + template + "}");
@@ -47,6 +62,7 @@ public class WebRenderer implements NodeRenderer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 		} else {
 			logger.severe("Unable to render node which is not renderable :)");
 		}

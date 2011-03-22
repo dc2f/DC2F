@@ -1,0 +1,23 @@
+package com.dc2f.renderer.nodetype.image;
+
+import java.util.logging.Logger;
+
+import com.dc2f.datastore.BaseNodeType;
+import com.dc2f.datastore.Node;
+import com.dc2f.renderer.ContentRenderRequest;
+import com.dc2f.renderer.nodetype.ContextRendererNodeType;
+
+public class ImageTagRenderer extends BaseNodeType implements
+		ContextRendererNodeType {
+	private static final Logger logger = Logger.getLogger(ImageTagRenderer.class.getName());
+
+	@Override
+	public String renderNode(ContentRenderRequest request,
+			Object value) {
+		logger.info("need to render image tag for image {" + value + "}");
+		Node img = (Node) value;
+		// FIXME some kind of escaping - PLEASE
+		return "<img src=\"\" alt=\""+img.getProperty("alt")+"\" /><!-- DEBUG:" + img + " -->";
+	}
+
+}

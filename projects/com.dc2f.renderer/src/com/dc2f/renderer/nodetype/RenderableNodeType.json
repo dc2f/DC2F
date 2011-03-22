@@ -1,5 +1,5 @@
 {
-	'class': 'com.dc2f.nodetype.renderable.RenderableNodeType',
+	'class': 'com.dc2f.renderer.nodetype.RenderableNodeType',
 	'attributes': {
 		'renderconfiguration': {
 			'type': 'ListOfNodes',

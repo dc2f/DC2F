@@ -2,6 +2,7 @@ package com.dc2f.datastore;
 
 import java.util.logging.Logger;
 
+import com.dc2f.datastore.impl.filejson.SimpleJsonNode;
 import com.dc2f.datastore.nodetypedefinition.KeyValuePair;
 import com.dc2f.datastore.nodetypedefinition.MapNode;
 
@@ -24,15 +25,40 @@ public abstract class BaseNodeType implements NodeType {
 		if (nodeTypeInfo == null) {
 			logger.severe("node type was not initialized! {" + this.getClass().getName() + "}");
 		}
-		Boolean b = (Boolean) nodeTypeInfo.getProperty("freeattributes");
-		if (b != null && b.booleanValue()) {
-			final String valueType = (String)nodeTypeInfo.getProperty("valuetype");
-			final String valueNodeType = (String) nodeTypeInfo.getProperty("valuenodetype");
-			return new Node() {
-				
+		final Node attrDefinitions = (Node) nodeTypeInfo.getProperty("attributes");
+		final Boolean freeattributes = (Boolean) nodeTypeInfo.getProperty("freeattributes");
+		final String valueType = (String)nodeTypeInfo.getProperty("valuetype");
+		final String valueNodeType = (String) nodeTypeInfo.getProperty("valuenodetype");
+		
+		
+		if (attrDefinitions == null) {
+			logger.severe("Node has no attribute defintions {" + this
+					+ "} (class:" + this.getClass().getName() + "}");
+		}
+		
+		Node tmpParentAttrDefinitions = null;
+		if (nodeTypeInfo.getParentNodeType() != null) {
+			NodeType parent = nodeTypeInfo.getParentNodeType();
+			tmpParentAttrDefinitions = parent.getAttributeDefinitions();
+		}
+		final Node parentAttrDefinitions = tmpParentAttrDefinitions;
+
+
+		return new Node() {
+
 				@Override
 				public Object getProperty(String propertyName) {
-					return new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType));
+					if (freeattributes != null && freeattributes.booleanValue()) {
+						return new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType));
+					}
+					Object def = null;
+					if (attrDefinitions != null) {
+						def = attrDefinitions.getProperty(propertyName);
+					}
+					if (def == null && parentAttrDefinitions != null) {
+						return parentAttrDefinitions.getProperty(propertyName);
+					}
+					return def;
 				}
 				
 				@Override
@@ -52,13 +78,11 @@ public abstract class BaseNodeType implements NodeType {
 					// TODO Auto-generated method stub
 					return null;
 				}
+				
+				@Override
+				public String toString() {
+					return "{(" + BaseNodeType.this + ")" + String.valueOf(attrDefinitions) + " parent:(" + nodeTypeInfo.getParentNodeType() + ")" + String.valueOf(parentAttrDefinitions) + "}";
+				}
 			};
-		}
-		Node attrDefinitions = (Node) nodeTypeInfo.getProperty("attributes");
-		if (attrDefinitions == null) {
-			logger.severe("Node has no attribute defintions {" + this
-					+ "} (class:" + this.getClass().getName() + "}");
-		}
-		return attrDefinitions;
 	}
 }
