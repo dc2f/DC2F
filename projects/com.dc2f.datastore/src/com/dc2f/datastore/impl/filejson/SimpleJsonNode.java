@@ -90,6 +90,7 @@ public class SimpleJsonNode implements Node {
 		
 		// FIXME do this the "clean way"
 		if (obj instanceof String && ("class".equals(propertyName) || "type".equals(propertyName))) {
+		//if (obj instanceof String && ("class".equals(propertyName) )) {
 			return obj;
 		}
 		

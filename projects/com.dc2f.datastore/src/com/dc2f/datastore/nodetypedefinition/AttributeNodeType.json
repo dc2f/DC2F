@@ -1,4 +1,7 @@
 {
-	'freeattributes': true,
-	'valuetype': 'String',
+	'attributes': {
+		'type': { 'type': 'String', },
+		'typeofsubnodes': { 'type': 'String', },
+		'typeofnode': { 'type': 'String', },
+	},
 }
