@@ -2,7 +2,7 @@
 	'class': 'com.dc2f.renderer.nodetype.template.HtmlTemplate',
 	
 	'attributes': {
-		'source': { type: 'String', },
+		'source': { type: 'clob', },
 		'context': {
 			'type': 'Node',
 			'typeofnode': 'classpath:com/dc2f/renderer/nodetype/template/Context',

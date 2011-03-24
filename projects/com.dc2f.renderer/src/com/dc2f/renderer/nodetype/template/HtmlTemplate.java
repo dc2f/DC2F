@@ -24,36 +24,14 @@ public class HtmlTemplate extends TemplateNodeType {
 		// of the context.
 
 		Pattern placeholderLookup = Pattern.compile("\\$([A-Za-z0-9]+)");
+		logger.info("rendering template with source {" + source + "}");
 		Matcher matcher = placeholderLookup.matcher(source);
 
 		StringBuffer sb = new StringBuffer(source.length());
+		Context contextNodeType = (Context) context.getNodeType();
 		while (matcher.find()) {
 			String var = matcher.group(1);
-			Node value = (Node) context.getProperty(var);
-
-			String replacement = "";
-			if (value != null) {
-				if (value.getNodeType() instanceof ContextRendererNodeType) {
-					
-					String ref = (String) value.getProperty("ref");
-					// FIXME we need to do some cool property lookup right here..
-					Object renderValue = null;
-					if (ref.startsWith(".@")) {
-						renderValue = request.getNode().getProperty(ref.substring(2));
-					}
-					
-					replacement = ((ContextRendererNodeType) value.getNodeType()).renderNode(
-							request, renderValue);
-					if (replacement == null) {
-						replacement = "";
-					}
-				} else {
-					replacement = "" + value.getNodeType();
-				}
-			} else {
-				logger.severe("Unable to resolve context variable {" + var
-						+ "}");
-			}
+			String replacement = String.valueOf(contextNodeType.resolveFromContext(context, request, var));
 			matcher.appendReplacement(sb, replacement);
 		}
 		matcher.appendTail(sb);

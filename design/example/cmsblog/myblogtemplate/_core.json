@@ -1,61 +1,24 @@
 {
-	'nodetype': 'classpath:com/dc2f/nodetype/HtmlTemplate',
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
-	'source': '
-<html>
-  <head>
-    <title>$title</title>
-    <meta name="description"></meta>
-  </head>
-  <body>
-    <h1>$title</h1>
-    <div id="content">
-      $content
-    </div>
-    <div id="navigation">
-      $navigation
-    </div>
-  </body>
-</html>
-',
 	'context': {
-		'project': {
-			'nodetype': '/.dc2f/nodetype/Reference',
-			'refcontext': 'project', /* relative to project, node or repository */
-			'ref': '.' /* the same as 'ref': '/' (?) */
-		},
-		'node': {
-			'nodetype': '/.dc2f/nodetype/Reference',
-			'refcontext': 'node', /* relative to project, node or repository */
-			'ref': '.' /* the same as 'ref': '/' (?) */
-		},
 		'content': {
-			'nodetype': '/.dc2f/nodetype/RenderReference',
-			'refcontext': 'node', /* relative to project, node or repository */
-			'ref': '.' /* the same as 'ref': '/' (?) */
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'request',
+			'ref': 'content',
 		},
 		'navigation': {
-			'nodetype': '/.dc2f/nodetype/RenderReference',
-			'refcontext': 'project', /* relative to project, node or repository */
-			'ref': 'navigation' /* the same as 'ref': '/' (?) */
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'project',
+			'ref': 'navigation',
+			
 		},
 		'title': {
-			/* "inherits" context from parent */
-			'nodetype': '/.dc2f/nodetype/JavascriptExpression', /* java expression language */
-			//'expression': 'if(node.title) { node.title + ' | ' + project.title } else { project.title }',
-			'expression': 'if(node.title) { return node.title + ' | ' + project.title } else { return project.title }',
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'explicit',
+			'value': 'hehe',
 		},
 	}
 
 }
-
-/*
-
-	'source': '
-<html>
-  <head><title>My cool blog</title></head>
-  <body></body>
-</html>
-'
-*/
 

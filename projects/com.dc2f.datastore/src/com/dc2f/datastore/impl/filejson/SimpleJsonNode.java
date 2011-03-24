@@ -1,6 +1,7 @@
 package com.dc2f.datastore.impl.filejson;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -83,10 +84,6 @@ public class SimpleJsonNode implements Node {
 	@Override
 	public Object getProperty(String propertyName) {
 		Object obj = internalGetProperty(propertyName);
-		if (obj == null) {
-			// FIXME check if property is required?!
-			return null;
-		}
 		
 		// FIXME do this the "clean way"
 		if (obj instanceof String && ("class".equals(propertyName) || "type".equals(propertyName))) {
@@ -111,11 +108,18 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return repository.getNode(ref);
+		} if ("clob".equals(attributeType) && obj == null) {
+			obj = ((SimpleFileContentRepository)repository).loadRepositoryFile(new File(path, propertyName + ".clob.property"));
 		}
 
 		if (obj instanceof String) {
 			return obj;
 		}
+		if (obj == null) {
+			// FIXME check if property is required?!
+			return null;
+		}
+
 
 		if ("Node".equals(attributeType)) {
 

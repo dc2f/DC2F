@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>$title</title>
+    <meta name="description"></meta>
+  </head>
+  <body>
+    <h1>$title</h1>
+    <div id="content">
+      $content
+    </div>
+    <div id="navigation">
+      $navigation
+    </div>
+  </body>
+</html>

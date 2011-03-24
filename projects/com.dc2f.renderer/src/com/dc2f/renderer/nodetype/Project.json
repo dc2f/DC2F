@@ -1,5 +1,6 @@
 {
-	'class': 'com.dc2f.nodetype.renderable.Project',
+	'class': 'com.dc2f.renderer.nodetype.Project',
+	'extends': 'classpath:com/dc2f/renderer/nodetype/RenderableNodeType',
 	
 	'attributes': {
 		'label': {

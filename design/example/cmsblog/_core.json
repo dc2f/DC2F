@@ -1,5 +1,6 @@
 {
-	'nodetype':	'classpath:com/dc2f/nodetype/Project', /* tries to load Project.json from classpath, if it fails it asks all other file managers */
+	'nodetype':	'classpath:com/dc2f/renderer/nodetype/Project', 
+	'_comment': '/* tries to load Project.json from classpath, if it fails it asks all other file managers */',
 	
 	'domains': [ 'mycoolblog.com', 'blog.dc2f.com' ],
 	'renderconfiguration':
@@ -7,12 +8,12 @@
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
-				'template': 'myblogtemplate', /* or './myblogtemplate' */
+				'template': 'myblogtemplate',
 			},
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
-				'template': 'mymobileblogtemplate', /* or './myblogtemplate' */
+				'template': 'mymobileblogtemplate',
 			},
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',

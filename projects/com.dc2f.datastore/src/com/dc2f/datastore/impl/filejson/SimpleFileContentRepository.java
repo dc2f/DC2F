@@ -46,6 +46,15 @@ public class SimpleFileContentRepository implements ContentRepository {
 		return null;
 	}
 	
+	protected String loadRepositoryFile(File file) {
+		try {
+			return loadFile(new FileInputStream(new File(crdir, file.getPath())));
+		} catch (FileNotFoundException e) {
+			logger.log(Level.SEVERE, "Error while loading file {" + file.getAbsolutePath() + "}", e);
+			return null;
+		}
+	}
+	
 	protected JSONObject loadJSON(File f) {
 		try {
 			return loadJSON(new FileInputStream(f));
@@ -121,6 +130,15 @@ public class SimpleFileContentRepository implements ContentRepository {
 			logger.log(Level.SEVERE, "Error while creating instance for node type {" + nodeTypeInfo + "}", e);
 			return null;
 		}
+	}
+
+	@Override
+	public Node getParentNode(Node node) {
+		logger.info("Getting parent for node {" + node.getPath() + "}");
+		if ("/".equals(node.getPath())) {
+			return null;
+		}
+		return getNode(new File(node.getPath()).getParent());
 	}
 
 }

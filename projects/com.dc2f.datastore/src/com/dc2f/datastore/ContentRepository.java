@@ -12,6 +12,8 @@ public interface ContentRepository {
 	Node getNode(String path);
 	
 	NodeType getNodeType(String path);
+
+	Node getParentNode(Node node);
 	
 	/* Node[] filterNode() */
 	

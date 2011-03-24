@@ -1,5 +1,7 @@
 {
 	'attributes': {
-		'ref': { 'type': 'String', }
+		'ref': { 'type': 'String', },
+		'refcontext': { 'type': 'String', },
+		'value': { 'type': 'String', },
 	},
 }

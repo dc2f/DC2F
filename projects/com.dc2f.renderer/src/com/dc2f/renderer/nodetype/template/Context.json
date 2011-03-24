@@ -1,4 +1,5 @@
 {
+	'class': 'com.dc2f.renderer.nodetype.template.Context',
 	'freeattributes': true,
 	'valuetype': 'Node',
 }
