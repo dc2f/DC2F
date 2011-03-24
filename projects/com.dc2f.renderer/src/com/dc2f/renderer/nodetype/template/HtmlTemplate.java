@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import com.dc2f.datastore.Node;
 import com.dc2f.renderer.ContentRenderRequest;
-import com.dc2f.renderer.nodetype.ContextRendererNodeType;
 
 public class HtmlTemplate extends TemplateNodeType {
 	private static final Logger logger = Logger.getLogger(HtmlTemplate.class
@@ -14,7 +13,6 @@ public class HtmlTemplate extends TemplateNodeType {
 
 	@Override
 	public String renderTemplate(ContentRenderRequest request, Node template) {
-		Node node = request.getNode();
 		String source = (String) template.getProperty("source");
 		Node context = (Node) template.getProperty("context");
 

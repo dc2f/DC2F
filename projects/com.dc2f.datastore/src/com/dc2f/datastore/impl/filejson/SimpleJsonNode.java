@@ -1,7 +1,6 @@
 package com.dc2f.datastore.impl.filejson;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
