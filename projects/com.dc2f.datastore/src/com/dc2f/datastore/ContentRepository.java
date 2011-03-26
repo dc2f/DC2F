@@ -17,4 +17,9 @@ public interface ContentRepository {
 	
 	/* Node[] filterNode() */
 	
+	/**
+	 * close the repository/transaction, if the repository is writable this will also commit the changes
+	 */
+	void close();
+	
 }

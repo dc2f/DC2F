@@ -141,4 +141,10 @@ public class SimpleFileContentRepository implements ContentRepository {
 		return getNode(new File(node.getPath()).getParent());
 	}
 
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
