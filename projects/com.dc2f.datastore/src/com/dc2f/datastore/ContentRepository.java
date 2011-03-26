@@ -22,4 +22,9 @@ public interface ContentRepository {
 	 */
 	void close();
 	
+	/**
+	 * @return <code>true</code> if the repository supports transactions, otherwhise return <code>false</code>.
+	 */
+	boolean supportsTransaction();
+	
 }

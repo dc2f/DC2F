@@ -147,4 +147,9 @@ public class SimpleFileContentRepository implements ContentRepository {
 		
 	}
 
+	@Override
+	public boolean supportsTransaction() {
+		return false;
+	}
+
 }
