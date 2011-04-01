@@ -34,6 +34,10 @@ public class SimpleFileContentRepository implements ContentRepository {
 		this.crdir = crdir;
 	}
 	
+	protected File getCrdir() {
+		return crdir;
+	}
+	
 	protected String loadFile(InputStream inputStream) {
 		try {
 			InputStreamReader reader = new InputStreamReader(inputStream, CHARSET);
