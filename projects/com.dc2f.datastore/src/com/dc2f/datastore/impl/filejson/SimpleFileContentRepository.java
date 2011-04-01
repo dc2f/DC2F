@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,8 @@ import com.dc2f.datastore.NodeType;
 public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
 	private static final int BUFFER_SIZE = 1024;
+	
+	private static final Charset CHARSET = Charset.forName("UTF-8");
 
 	private File crdir;
 
@@ -33,7 +36,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 	
 	protected String loadFile(InputStream inputStream) {
 		try {
-			InputStreamReader reader = new InputStreamReader(inputStream);
+			InputStreamReader reader = new InputStreamReader(inputStream, CHARSET);
 			StringBuilder builder = new StringBuilder();//(int) f.length());
 			int c;
 			for (char[] buf = new char[BUFFER_SIZE] ; (c = reader.read(buf, 0, BUFFER_SIZE)) > 0 ; ) {
