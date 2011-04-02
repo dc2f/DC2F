@@ -11,6 +11,11 @@ import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.nodetype.RenderableNodeType;
 import com.dc2f.renderer.nodetype.template.TemplateNodeType;
 
+/**
+ * TODO: rename to NodeRenderer (or TemplateAwareRenderer ? something like that)
+ * 
+ * @author herbert
+ */
 public class WebRenderer implements NodeRenderer {
 	private static final Logger logger = Logger.getLogger(WebRenderer.class.getName());
 	
@@ -18,7 +23,7 @@ public class WebRenderer implements NodeRenderer {
 
 	public void renderNode(ContentRenderRequest request,
 			ContentRenderResponse response) {
-		String ret = internalRenderNode(request, response, request.getNode(), null);
+		String ret = internalRenderNode(request, response);
 		try {
 			response.getWriter().write(ret);
 		} catch (IOException e) {
@@ -26,7 +31,28 @@ public class WebRenderer implements NodeRenderer {
 		}
 
 	}
+
+	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response) {
+		for (Node node : request.getNodesInPath()) {
+			if (node.getNodeType() instanceof RenderableNodeType) {
+				RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
+				Node renderConfig = nodeType.getRenderConfiguration(node, RENDER_TYPE);
+				
+				Node templateNode = (Node) renderConfig.getProperty("template");
+				if (templateNode.getNodeType() instanceof TemplateNodeType) {
+					request.pushNodeContext(node);
+					try {
+						return ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
+					} finally {
+						request.popNodeContext();
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
+	/*
 	protected String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response, Node node, String content) {
 		if (node.getNodeType() instanceof RenderableNodeType) {
 			RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
@@ -34,12 +60,13 @@ public class WebRenderer implements NodeRenderer {
 			
 			Node templateNode = (Node) renderConfig.getProperty("template");
 			if (templateNode.getNodeType() instanceof TemplateNodeType) {
-				String ret = ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
+				String ret = null;
+				//String ret = ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
 
 				Node wrapperNode = (Node) renderConfig.getProperty("wrappertemplate");
-				request.setAttribute("content", ret);
+				//request.setAttribute("content", ret);
 				if (wrapperNode == null) {
-					// Walk up the tree to find a render configuraiton ..
+					// Walk up the tree to find a render configuration ..
 					Node parentNode = node;
 					while ((parentNode = request.getContentRepository()
 							.getParentNode(parentNode)) != null) {
@@ -63,5 +90,6 @@ public class WebRenderer implements NodeRenderer {
 		}
 		return null;
 	}
+	*/
 
 }

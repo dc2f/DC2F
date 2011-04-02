@@ -8,11 +8,11 @@
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
-				'template': 'myblogtemplate',
+				'template': 'cmsblog/myblogtemplate',
 			},
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
-				'rendertype': 'com.dc2f.rendertype.web',
+				'rendertype': 'com.dc2f.rendertype.web.mobile',
 				'template': 'mymobileblogtemplate',
 			},
 			{

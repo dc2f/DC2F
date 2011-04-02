@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -139,6 +140,17 @@ public class SimpleFileContentRepository implements ContentRepository {
 			return null;
 		}
 		return getNode(new File(node.getPath()).getParent());
+	}
+
+	@Override
+	public Node[] getNodesInPath(String path) {
+		ArrayList<Node> ret = new ArrayList<Node>();
+		Node node = getNode(path);
+		while (node != null) {
+			ret.add(0, node);
+			node = this.getParentNode(node);
+		}
+		return ret.toArray(new Node[ret.size()]);
 	}
 
 }

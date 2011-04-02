@@ -57,10 +57,10 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	}
 
 	
-	@Override
-	public String toString() {
-		return "{SimpleJsonNodeTypeInfo:" + jsonObject.toString() + "}";
-	}
+//	@Override
+//	public String toString() {
+//		return "{SimpleJsonNodeTypeInfo:" + jsonObject.toString() + "}";
+//	}
 
 	@Override
 	public NodeType getParentNodeType() {

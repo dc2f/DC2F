@@ -1,5 +1,6 @@
 package com.dc2f.renderer.nodetype;
 
+import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
 import com.dc2f.renderer.ContentRenderRequest;
 
@@ -11,5 +12,5 @@ import com.dc2f.renderer.ContentRenderRequest;
  */
 public interface ContextRendererNodeType extends NodeType {
 	public String renderNode(ContentRenderRequest request,
-			Object value);
+			Node context, Object value);
 }

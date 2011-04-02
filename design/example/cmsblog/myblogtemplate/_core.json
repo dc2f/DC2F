@@ -3,10 +3,16 @@
 
 	'context': {
 		'content': {
-			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
-			'refcontext': 'request',
-			'ref': 'content',
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
 		},
+		
+		
+		
+		
+		
+		
 		'navigation': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'project',

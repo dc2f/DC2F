@@ -24,6 +24,8 @@ public class Context extends BaseNodeType {
 					// FIXME we need to do some cool property lookup right here..
 					if (ref.startsWith(".@")) {
 						renderValue = request.getNode().getProperty(ref.substring(2));
+					} else if (ref.equals(".")) {
+						renderValue = request.getNode();
 					}
 				} else {
 					if (refContextProperty != null) {
@@ -37,7 +39,7 @@ public class Context extends BaseNodeType {
 				}
 				
 				replacement = ((ContextRendererNodeType) value.getNodeType()).renderNode(
-						request, renderValue);
+						request, context, renderValue);
 				if (replacement == null) {
 					replacement = "";
 				}

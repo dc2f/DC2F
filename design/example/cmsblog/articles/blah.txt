@@ -1,3 +1,4 @@
+# website template
 <html>
   <head>
     <title>$title</title>
@@ -6,7 +7,6 @@
   <body>
     <h1>$title</h1>
     <div id="content">
-        <h1>my content</h1>
       $content
     </div>
     <div id="navigation">
@@ -14,3 +14,19 @@
     </div>
   </body>
 </html>
+
+
+
+# sublog1 template
+<h1>Sub Blog 1</h1>
+<div class="blogentry">
+  $content
+</div>
+
+
+
+# article template:
+<div class="article">
+	$image
+	<div class="body">$body</div>
+</div>

@@ -41,7 +41,7 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, node), new ContentRenderResponse() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog/articles/my-first-article")), new ContentRenderResponse() {
 			
 			public Writer getWriter() {
 				return writer;

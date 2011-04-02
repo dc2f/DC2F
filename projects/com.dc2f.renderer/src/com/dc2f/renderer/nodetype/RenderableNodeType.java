@@ -11,12 +11,15 @@ public class RenderableNodeType extends BaseNodeType {
 	private static final Logger logger = Logger.getLogger(RenderableNodeType.class.getName());
 	
 	@SuppressWarnings("unchecked")
-	public Node getRenderConfiguration(String renderType) {
+	public Node getRenderConfiguration(Node node, String renderType) {
 		NodeTypeInfo info = this.getNodeTypeInfo();
 		List<Node> config = (List<Node>) info.getProperty("renderconfiguration");
-		for (Node node : config) {
-			if (renderType.equals(node.getProperty("rendertype"))) {
-				return node;
+		if (config == null) {
+			config = (List<Node>) node.getProperty("renderconfiguration");
+		}
+		for (Node confignode : config) {
+			if (renderType.equals(confignode.getProperty("rendertype"))) {
+				return confignode;
 			}
 		}
 		logger.warning("Unable to find render configuration for type {" + renderType + "} available: {" +config.toString() + "}");

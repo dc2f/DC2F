@@ -22,7 +22,7 @@ public abstract class BaseNodeType implements NodeType {
 	@Override
 	public Node getAttributeDefinitions() {
 		if (nodeTypeInfo == null) {
-			logger.severe("node type was not initialized! {" + this.getClass().getName() + "}");
+			logger.severe("node type was not initialized! {" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 		}
 		final Node attrDefinitions = (Node) nodeTypeInfo.getProperty("attributes");
 		final Boolean freeattributes = (Boolean) nodeTypeInfo.getProperty("freeattributes");
@@ -32,7 +32,7 @@ public abstract class BaseNodeType implements NodeType {
 		
 		if (attrDefinitions == null) {
 			logger.severe("Node has no attribute defintions {" + this
-					+ "} (class:" + this.getClass().getName() + "}");
+					+ "} (class:" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 		}
 		
 		Node tmpParentAttrDefinitions = null;

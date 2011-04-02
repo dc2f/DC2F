@@ -174,7 +174,16 @@ public class SimpleJsonNode implements Node {
 	
 	@Override
 	public String toString() {
-		return "{SimpleJsonNode:" + jsonObject.toString() + "}";
+		return "{SimpleJsonNode:" + getPath() + "}";
+		//return "{SimpleJsonNode:" + jsonObject.toString() + "}";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof SimpleJsonNode) {
+			return getPath().equals(((SimpleJsonNode)obj).getPath());
+		}
+		return super.equals(obj);
 	}
 
 }
