@@ -16,8 +16,8 @@ import com.dc2f.renderer.nodetype.template.TemplateNodeType;
  * 
  * @author herbert
  */
-public class WebRenderer implements NodeRenderer {
-	private static final Logger logger = Logger.getLogger(WebRenderer.class.getName());
+public class TemplateRenderer implements NodeRenderer {
+	private static final Logger logger = Logger.getLogger(TemplateRenderer.class.getName());
 	
 	private static final String RENDER_TYPE = "com.dc2f.rendertype.web";
 

@@ -7,7 +7,7 @@ public class DefaultRendererProvider implements NodeRendererProvider {
 
 	public NodeRenderer getNodeRenderer(String renderTypeName) {
 		if("com.dc2f.renderer.web".equals(renderTypeName)) {
-			return new WebRenderer();
+			return new TemplateRenderer();
 		}
 		return null;
 	}

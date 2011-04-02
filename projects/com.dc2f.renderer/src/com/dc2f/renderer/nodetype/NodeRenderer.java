@@ -8,7 +8,7 @@ import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
-import com.dc2f.renderer.impl.WebRenderer;
+import com.dc2f.renderer.impl.TemplateRenderer;
 import com.dc2f.renderer.nodetype.template.HtmlTemplate;
 
 public class NodeRenderer extends BaseNodeType implements
@@ -35,7 +35,7 @@ public class NodeRenderer extends BaseNodeType implements
 				nodePath.add(0, node);
 			}
 			ContentRenderRequestImpl newRequest = new ContentRenderRequestImpl(request.getContentRepository(), nodePath.toArray(new Node[nodePath.size()]));
-			return WebRenderer.internalRenderNode(newRequest, null);
+			return TemplateRenderer.internalRenderNode(newRequest, null);
 		}
 		return "we need to render " + value;
 	}
