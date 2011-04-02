@@ -1,5 +1,6 @@
 package com.dc2f.renderer.nodetype.template;
 
+import java.net.URI;
 import java.util.logging.Logger;
 
 import com.dc2f.datastore.BaseNodeType;
@@ -18,21 +19,23 @@ public class Context extends BaseNodeType {
 			if (value.getNodeType() instanceof ContextRendererNodeType) {
 				
 				String refContextProperty = (String) value.getProperty("refcontext");
+				if (refContextProperty == null) {
+					refContextProperty = "renderednode";
+				}
 				Object renderValue = null;
 				String ref = (String) value.getProperty("ref");
-				if (refContextProperty == null || refContextProperty.equals("node")) {
+				if (refContextProperty.equals("node")) {
 					// FIXME we need to do some cool property lookup right here..
 					if (ref.startsWith(".@")) {
 						renderValue = request.getNode().getProperty(ref.substring(2));
 					} else if (ref.equals(".")) {
 						renderValue = request.getNode();
 					}
+				} else if (refContextProperty.equals("request")) {
+					renderValue = request.getAttribute(ref);
+				} else if (refContextProperty.equals("renderednode")) {
+					renderValue = request.getContentRepository().resolveNode(request.getCurrentNodeContext(), ref);
 				} else {
-					if (refContextProperty != null) {
-						if (refContextProperty.equals("request")) {
-							renderValue = request.getAttribute(ref);
-						}
-					}
 					if (renderValue == null) {
 						renderValue = value.getProperty("value");
 					}

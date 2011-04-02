@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -151,6 +153,16 @@ public class SimpleFileContentRepository implements ContentRepository {
 			node = this.getParentNode(node);
 		}
 		return ret.toArray(new Node[ret.size()]);
+	}
+
+	@Override
+	public Node resolveNode(Node currentNodeContext, String ref) {
+		try {
+			return getNode(new URI(currentNodeContext.getPath() + "/").resolve(ref).toString());
+		} catch (URISyntaxException e) {
+			logger.log(Level.SEVERE, "Error while resolving ref {" + ref + "}", e);
+			return null;
+		}
 	}
 
 }

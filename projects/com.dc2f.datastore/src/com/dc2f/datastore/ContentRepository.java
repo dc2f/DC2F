@@ -20,6 +20,8 @@ public interface ContentRepository {
 	NodeType getNodeType(String path);
 
 	Node getParentNode(Node node);
+
+	Node resolveNode(Node currentNodeContext, String ref);
 	
 	/* Node[] filterNode() */
 	

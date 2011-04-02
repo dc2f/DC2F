@@ -6,13 +6,13 @@
 	'context': {
 		'image': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
-			'context': 'node',
+			'refcontext': 'node',
 			'ref': '.@image',
 			'size': '500x300',
 		},
 		'body': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
-			'context': 'node',
+			'refcontext': 'node',
 			'ref': '.@body',
 		},
 	},

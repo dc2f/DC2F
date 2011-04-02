@@ -14,8 +14,8 @@
 		
 		
 		'navigation': {
-			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
-			'refcontext': 'project',
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'renderednode',
 			'ref': 'navigation',
 			
 		},

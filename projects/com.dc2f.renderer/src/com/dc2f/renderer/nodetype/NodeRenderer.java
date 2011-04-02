@@ -9,6 +9,7 @@ import com.dc2f.datastore.Node;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
 import com.dc2f.renderer.impl.WebRenderer;
+import com.dc2f.renderer.nodetype.template.HtmlTemplate;
 
 public class NodeRenderer extends BaseNodeType implements
 		ContextRendererNodeType {
@@ -18,6 +19,11 @@ public class NodeRenderer extends BaseNodeType implements
 		ContentRepository repository = request.getContentRepository();
 		context = request.getCurrentNodeContext();
 		if (value instanceof Node) {
+			Node valueNode = (Node) value;
+			if (valueNode.getNodeType() instanceof HtmlTemplate) {
+				return ((HtmlTemplate)valueNode.getNodeType()).renderTemplate(request, valueNode);
+			}
+			
 			List<Node> nodePath = new ArrayList<Node>();
 			// FIXME: This is a stupid way to find the node path :(
 			Node node = (Node) value;
