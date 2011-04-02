@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,8 @@ import com.dc2f.datastore.NodeType;
 public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
 	private static final int BUFFER_SIZE = 1024;
+	
+	private static final Charset CHARSET = Charset.forName("UTF-8");
 
 	private File crdir;
 
@@ -34,9 +37,13 @@ public class SimpleFileContentRepository implements ContentRepository {
 		this.crdir = crdir;
 	}
 	
+	protected File getCrdir() {
+		return crdir;
+	}
+	
 	protected String loadFile(InputStream inputStream) {
 		try {
-			InputStreamReader reader = new InputStreamReader(inputStream);
+			InputStreamReader reader = new InputStreamReader(inputStream, CHARSET);
 			StringBuilder builder = new StringBuilder();//(int) f.length());
 			int c;
 			for (char[] buf = new char[BUFFER_SIZE] ; (c = reader.read(buf, 0, BUFFER_SIZE)) > 0 ; ) {
@@ -163,6 +170,16 @@ public class SimpleFileContentRepository implements ContentRepository {
 			logger.log(Level.SEVERE, "Error while resolving ref {" + ref + "}", e);
 			return null;
 		}
+	}
+
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean supportsTransaction() {
+		return false;
 	}
 
 }
