@@ -9,7 +9,7 @@
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
-				'template': 'cmsblog/myblogtemplate',
+				'template': '/cmsblog/templates/myblogtemplate',
 			},
 
 		{
