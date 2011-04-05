@@ -1,6 +1,7 @@
 package com.dc2f.renderer.nodetype.template;
 
-import java.net.URI;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.dc2f.datastore.BaseNodeType;
@@ -13,6 +14,13 @@ public class Context extends BaseNodeType {
 	
 	public Object resolveFromContext(Node context, ContentRenderRequest request, String propertyName) {
 		Node value = (Node) context.getProperty(propertyName);
+		if (value == null) {
+			List<Node> stack = request.getRenderContextStack();
+			for (Iterator<Node> i = stack.iterator() ; i.hasNext() && value == null ; ) {
+				Node ctx = i.next();
+				value = (Node) ctx.getProperty(propertyName);
+			}
+		}
 
 		String replacement = "";
 		if (value != null) {
@@ -34,7 +42,11 @@ public class Context extends BaseNodeType {
 				} else if (refContextProperty.equals("request")) {
 					renderValue = request.getAttribute(ref);
 				} else if (refContextProperty.equals("renderednode")) {
-					renderValue = request.getContentRepository().resolveNode(request.getCurrentNodeContext(), ref);
+					if (ref.startsWith(".@")) {
+						renderValue = request.getCurrentNodeContext().getProperty(ref.substring(2));
+					} else {
+						renderValue = request.getContentRepository().resolveNode(request.getCurrentNodeContext(), ref);
+					}
 				} else {
 					if (renderValue == null) {
 						renderValue = value.getProperty("value");
@@ -42,7 +54,7 @@ public class Context extends BaseNodeType {
 				}
 				
 				replacement = ((ContextRendererNodeType) value.getNodeType()).renderNode(
-						request, context, renderValue);
+						value, request, context, renderValue);
 				if (replacement == null) {
 					replacement = "";
 				}

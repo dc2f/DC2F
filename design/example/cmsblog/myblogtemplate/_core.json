@@ -8,6 +8,13 @@
 			'ref': '.',
 		},
 		
+		'breadcrumbs': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+			'renderSubtype': 'breadcrumbs',
+			'rootNode': '/cmsblog',
+		},
 		
 		
 		

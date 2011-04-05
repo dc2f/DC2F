@@ -1,4 +1,14 @@
 {
 	'class': 'com.dc2f.renderer.nodetype.NodeRenderer',
 	'extends': 'classpath:com/dc2f/renderer/nodetype/ContextRendererNodeType',
+	
+	
+	'attributes': {
+		'renderSubtype': {
+			'type': 'String',
+		},
+		'rootNode': {
+			'type': 'NodeReference',
+		},
+	},
 }

@@ -9,6 +9,9 @@
         <h1>my content</h1>
       $content
     </div>
+    <div id="breadcrumbs">
+      <ul>$breadcrumbs</ul>
+    </div>
     <div id="navigation">
       $navigation
     </div>

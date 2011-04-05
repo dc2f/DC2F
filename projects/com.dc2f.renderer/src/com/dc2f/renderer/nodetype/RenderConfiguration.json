@@ -1,11 +1,16 @@
 {
 	'attributes': {
 		'rendertype': { 'type': 'String', },
+		'variant': { 'type': 'String', },
 		'template': { 'type': 'NodeReference' },
 		'wrappertemplate': {
 			'type': 'NodeReference',
 			'required': false,
 			'_comment': 'Defines a Template Node which should be used to wrap the current page. By default we look at all parents to the root to find a suitable render configuration.'
+		},
+		'addtocontext': {
+			'type': 'Node',
+			'typeofnode': 'classpath:com/dc2f/renderer/nodetype/template/Context',
 		},
 	},
 }

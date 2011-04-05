@@ -11,6 +11,6 @@ import com.dc2f.renderer.ContentRenderRequest;
  * @author herbert
  */
 public interface ContextRendererNodeType extends NodeType {
-	public String renderNode(ContentRenderRequest request,
+	public String renderNode(Node configNode, ContentRenderRequest request,
 			Node context, Object value);
 }

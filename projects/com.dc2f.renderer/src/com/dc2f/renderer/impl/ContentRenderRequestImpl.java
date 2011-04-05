@@ -17,6 +17,7 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	private Node[] nodePath;
 	private List<Node> nodeStack;
 	private List<Node> nodeContextStack = new LinkedList<Node>();
+	public List<Node> renderContextStack = new LinkedList<Node>();
 
 	public ContentRenderRequestImpl(ContentRepository contentRepository, Node[] nodePath) {
 		this.contentRepository = contentRepository;
@@ -66,5 +67,19 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	
 	public Node getCurrentNodeContext() {
 		return nodeContextStack.get(0);
+	}
+
+	@Override
+	public Node popRenderContext() {
+		return renderContextStack.remove(0);
+	}
+
+	@Override
+	public void pushRenderContext(Node addToContext) {
+		renderContextStack.add(0, addToContext);
+	}
+	
+	public List<Node> getRenderContextStack() {
+		return renderContextStack;
 	}
 }

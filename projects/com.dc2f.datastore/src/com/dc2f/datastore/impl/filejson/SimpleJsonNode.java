@@ -16,6 +16,7 @@ import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.DefaultNodeType;
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
+import com.dc2f.datastore.exception.UnknownPropertyException;
 
 public class SimpleJsonNode implements Node {
 	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
@@ -91,8 +92,11 @@ public class SimpleJsonNode implements Node {
 		}
 		
 		Node attrDefinitions = getNodeType().getAttributeDefinitions();
-		logger.info(this.getName() + ": Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
+		logger.finest(this.getName() + ": Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
 		Node attrDefinition = (Node) attrDefinitions.getProperty(propertyName);
+		if (attrDefinition == null) {
+			throw new UnknownPropertyException("Unknown property {" + propertyName + "} for {" + getNodeType() + "}", null);
+		}
 		String attributeType = (String) attrDefinition.getProperty("type");
 		
 		if ("NodeReference".equals(attributeType) && obj instanceof String) {

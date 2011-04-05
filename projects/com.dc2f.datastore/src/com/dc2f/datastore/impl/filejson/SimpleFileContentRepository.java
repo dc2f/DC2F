@@ -153,6 +153,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 
 	@Override
 	public Node[] getNodesInPath(String path) {
+		// FIXME: this is a very lazy way to find the nodes in the path.. we should split the path and walk through it.. (what if one node has more than one parent, or there are "symlinks", etc. in the path)
 		ArrayList<Node> ret = new ArrayList<Node>();
 		Node node = getNode(path);
 		while (node != null) {

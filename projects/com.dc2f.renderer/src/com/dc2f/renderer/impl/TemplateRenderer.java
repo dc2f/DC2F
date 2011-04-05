@@ -19,11 +19,11 @@ import com.dc2f.renderer.nodetype.template.TemplateNodeType;
 public class TemplateRenderer implements NodeRenderer {
 	private static final Logger logger = Logger.getLogger(TemplateRenderer.class.getName());
 	
-	private static final String RENDER_TYPE = "com.dc2f.rendertype.web";
+	public static final String RENDER_TYPE = "com.dc2f.rendertype.web";
 
 	public void renderNode(ContentRenderRequest request,
 			ContentRenderResponse response) {
-		String ret = internalRenderNode(request, response);
+		String ret = internalRenderNode(request, response, null);
 		try {
 			response.getWriter().write(ret);
 		} catch (IOException e) {
@@ -32,18 +32,29 @@ public class TemplateRenderer implements NodeRenderer {
 
 	}
 
-	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response) {
+	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response, String[] acceptedVariants) {
+		return internalRenderNode(request, response, RENDER_TYPE, acceptedVariants);
+	}
+	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response, String renderType, String[] acceptedVariants) {
 		for (Node node : request.getNodesInPath()) {
 			if (node.getNodeType() instanceof RenderableNodeType) {
 				RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
-				Node renderConfig = nodeType.getRenderConfiguration(node, RENDER_TYPE);
+				Node renderConfig = nodeType.getRenderConfiguration(node, renderType, acceptedVariants);
+				
+				if (renderConfig == null) {
+					logger.warning("No render configuration found for renderType {" + renderType + "}");
+					return null;
+				}
 				
 				Node templateNode = (Node) renderConfig.getProperty("template");
+				Node addToContext = (Node) renderConfig.getProperty("addtocontext");
 				if (templateNode.getNodeType() instanceof TemplateNodeType) {
 					request.pushNodeContext(node);
+					request.pushRenderContext(addToContext);
 					try {
 						return ((TemplateNodeType) templateNode.getNodeType()).renderTemplate(request, templateNode);
 					} finally {
+						request.popRenderContext();
 						request.popNodeContext();
 					}
 				}

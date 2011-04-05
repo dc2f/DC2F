@@ -84,4 +84,9 @@ public abstract class BaseNodeType implements NodeType {
 				}
 			};
 	}
+	
+	@Override
+	public String toString() {
+		return "{NodeType:"+getNodeTypeInfo()+"}";
+	}
 }
