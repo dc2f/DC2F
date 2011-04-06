@@ -97,7 +97,7 @@ public class NodeTypeDocGenerator {
 			if (file.isDirectory()) {
 				findNodeTypes(nodeTypes, rootDir, file);
 			} else if (file.isFile() && file.getName().endsWith(".json")) {
-				nodeTypes.add("classpath:" + file.getCanonicalPath().replace(rootDir.getCanonicalPath(), "").replace(".json",""));
+				nodeTypes.add("classpath:" + file.getCanonicalPath().replace(rootDir.getCanonicalPath() + "/", "").replace(".json",""));
 			}
 		}
 	}

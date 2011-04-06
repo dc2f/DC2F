@@ -28,9 +28,26 @@
 	</xsl:template>
 	
 	<xsl:template match="nodetype">
-		<h1><xsl:value-of select="@name" /></h1>
-		<xsl:if test="@extends"><p>extends <xsl:value-of select="@extends" /></p></xsl:if>
+		<xsl:element name="h1">
+			<xsl:attribute name="id"><xsl:value-of select="@path" /></xsl:attribute>
+			<xsl:value-of select="@name" />
+		</xsl:element>
+		<xsl:if test="@extends"><p>extends <xsl:element name="a"><xsl:attribute name="href">#<xsl:value-of select="@extends" /></xsl:attribute><xsl:value-of select="@extends" /></xsl:element></p></xsl:if>
 		<p><xsl:value-of select="@comment" /></p>
+		<xsl:variable name="test" select="@path" />
+		<xsl:if test="count(//nodetype[@extends=$test]) > 0">
+			Subtypes:
+			<ul>
+				<xsl:for-each select="//nodetype[@extends=$test]">
+					<li>
+						<xsl:element name="a">
+							<xsl:attribute name="href">#<xsl:value-of select="@path" /></xsl:attribute>
+							<xsl:value-of select="@name" />
+						</xsl:element>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</xsl:if>
 		<xsl:if test="count(property) > 0">
 			<h2>Properties</h2>
 			<table>
