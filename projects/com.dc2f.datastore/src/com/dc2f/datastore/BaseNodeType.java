@@ -20,7 +20,7 @@ public abstract class BaseNodeType implements NodeType {
 	}
 	
 	@Override
-	public Node getAttributeDefinitions() {
+	public AttributesDefinition getAttributeDefinitions() {
 		if (nodeTypeInfo == null) {
 			logger.severe("node type was not initialized! {" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 		}
@@ -35,18 +35,23 @@ public abstract class BaseNodeType implements NodeType {
 					+ "} (class:" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 		}
 		
-		Node tmpParentAttrDefinitions = null;
+		AttributesDefinition tmpParentAttrDefinitions = null;
 		if (nodeTypeInfo.getParentNodeType() != null) {
 			NodeType parent = nodeTypeInfo.getParentNodeType();
 			tmpParentAttrDefinitions = parent.getAttributeDefinitions();
 		}
-		final Node parentAttrDefinitions = tmpParentAttrDefinitions;
+		final AttributesDefinition parentAttrDefinitions = tmpParentAttrDefinitions;
 
 
-		return new Node() {
-
-				@Override
-				public Object getProperty(String propertyName) {
+		return new AttributesDefinition() {
+			
+			@Override
+			public String[] getAttributeNames() {
+				return nodeTypeInfo.getAttributeNames();
+			}
+			
+			@Override
+			public Node getAttributeDefinition(String propertyName) {
 					if (freeattributes != null && freeattributes.booleanValue()) {
 						return new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType));
 					}
@@ -55,28 +60,11 @@ public abstract class BaseNodeType implements NodeType {
 						def = attrDefinitions.getProperty(propertyName);
 					}
 					if (def == null && parentAttrDefinitions != null) {
-						return parentAttrDefinitions.getProperty(propertyName);
+						return (Node) parentAttrDefinitions.getAttributeDefinition(propertyName);
 					}
-					return def;
+					return (Node) def;
 				}
 				
-				@Override
-				public String getPath() {
-					// TODO Auto-generated method stub
-					return null;
-				}
-				
-				@Override
-				public NodeType getNodeType() {
-					// TODO Auto-generated method stub
-					return null;
-				}
-				
-				@Override
-				public String getName() {
-					// TODO Auto-generated method stub
-					return null;
-				}
 				
 				@Override
 				public String toString() {

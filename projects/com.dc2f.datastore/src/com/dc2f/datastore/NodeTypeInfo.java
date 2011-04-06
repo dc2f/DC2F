@@ -8,6 +8,7 @@ package com.dc2f.datastore;
 public interface NodeTypeInfo extends Node {
 	public String getName();
 	public Object getProperty(String propertyName);
+	public String[] getAttributeNames();
 	public String getPath();
 	
 	public NodeType getParentNodeType();

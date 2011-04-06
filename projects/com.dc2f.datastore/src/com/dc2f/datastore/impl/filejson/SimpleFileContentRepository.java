@@ -91,7 +91,11 @@ public class SimpleFileContentRepository implements ContentRepository {
 			if (appendFileName != null) {
 				path = path + "/" + appendFileName;
 			}
-			InputStream stream = this.getClass().getResourceAsStream("/" + path.substring("classpath:".length()));
+			path = path.substring("classpath:".length());
+			if (!path.startsWith("/")) {
+				path = "/" + path;
+			}
+			InputStream stream = this.getClass().getResourceAsStream(path);
 			if (stream == null) {
 				logger.severe("Unable to find resource in classpath: " + path + " === " + path.substring("classpath:".length()));
 				return null;

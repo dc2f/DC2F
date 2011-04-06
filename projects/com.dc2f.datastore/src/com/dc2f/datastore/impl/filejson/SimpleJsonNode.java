@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dc2f.datastore.AttributesDefinition;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.DefaultNodeType;
 import com.dc2f.datastore.Node;
@@ -31,6 +32,10 @@ public class SimpleJsonNode implements Node {
 		this.path = path;
 		this.jsonObject = jsonObject;
 		this.nodeType = nodeType;
+	}
+	
+	public JSONObject getJsonObject() {
+		return jsonObject;
 	}
 
 	@Override
@@ -91,9 +96,9 @@ public class SimpleJsonNode implements Node {
 			return obj;
 		}
 		
-		Node attrDefinitions = getNodeType().getAttributeDefinitions();
+		AttributesDefinition attrDefinitions = getNodeType().getAttributeDefinitions();
 		logger.finest(this.getName() + ": Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
-		Node attrDefinition = (Node) attrDefinitions.getProperty(propertyName);
+		Node attrDefinition = (Node) attrDefinitions.getAttributeDefinition(propertyName);
 		if (attrDefinition == null) {
 			throw new UnknownPropertyException("Unknown property {" + propertyName + "} for {" + getNodeType() + "}", null);
 		}

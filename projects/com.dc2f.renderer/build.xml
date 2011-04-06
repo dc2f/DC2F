@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="doc">
+    <target name="doc">
+        <xslt style="src/com/dc2f/renderer/doc/tohtml.xsl" in="target/xmldoc.xml" out="target/doc.html"></xslt>
+    </target>
+</project>

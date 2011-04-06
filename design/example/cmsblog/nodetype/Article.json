@@ -14,13 +14,11 @@
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 			'rendertype': 'com.dc2f.rendertype.web',
 			'template': 'articletemplate',
-			'wrappertemplate': '/cmsblog/myblogtemplate',
 		},
 		{
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 			'rendertype': 'com.dc2f.rendertype.web.breadcrumbs',
 			'template': '/cmsblog/templates/breadcrumbstemplate',
-			'wrappertemplate': '/cmsblog/myblogtemplate',
 			'addtocontext': {
 				'title': {
 					'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',

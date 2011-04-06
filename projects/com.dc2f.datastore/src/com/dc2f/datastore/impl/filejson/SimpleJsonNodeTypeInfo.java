@@ -66,4 +66,13 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	public NodeType getParentNodeType() {
 		return parentNodeType;
 	}
+
+	@Override
+	public String[] getAttributeNames() {
+		SimpleJsonNode attributes = (SimpleJsonNode) getProperty("attributes");
+		if (attributes != null) {
+			return JSONObject.getNames(attributes.getJsonObject());
+		}
+		return null;
+	}
 }

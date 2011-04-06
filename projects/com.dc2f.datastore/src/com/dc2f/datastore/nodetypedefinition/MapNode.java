@@ -7,7 +7,7 @@ import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
 
 public class MapNode implements Node {
-	private Map<String, Object> internalMap;
+	protected Map<String, Object> internalMap;
 	
 	public MapNode(KeyValuePair... entries) {
 		internalMap = new HashMap<String, Object>(entries.length);

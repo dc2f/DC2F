@@ -15,5 +15,5 @@ public interface NodeType {
 
 	public void init(NodeTypeInfo nodeTypeInfo);
 	
-	public Node getAttributeDefinitions();
+	public AttributesDefinition getAttributeDefinitions();
 }
