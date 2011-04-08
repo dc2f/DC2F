@@ -1,10 +1,11 @@
 {
 	'class': 'com.dc2f.renderer.nodetype.NodeRenderer',
 	'extends': 'classpath:com/dc2f/renderer/nodetype/ContextRendererNodeType',
-	
+	'_comment': 'Renders a given node with it\'s template - by default with the rendertype: com.dc2f.rendertype.web',
 	
 	'attributes': {
 		'renderSubtype': {
+			'_comment': 'Allows customization for the rendertype (it is appended to the default render type.)',
 			'type': 'String',
 		},
 		'rootNode': {

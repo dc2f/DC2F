@@ -26,8 +26,13 @@
 				p {
 					margin-left: 1em;
 				}
+				p.extends {
+					margin-top: -1em;
+					font-size: 0.8em;
+				}
 				section.nodetype {
 					border: 5px solid #ddd;
+					border-radius: 10px;
 					padding: 1em;
 					margin: 1em;
 					margin-top: 2em;
@@ -65,8 +70,8 @@
 				<xsl:attribute name="id"><xsl:value-of select="@path" /></xsl:attribute>
 				<xsl:value-of select="@name" />
 			</xsl:element>
-			<xsl:if test="@extends"><p>extends <xsl:element name="a"><xsl:attribute name="href">#<xsl:value-of select="@extends" /></xsl:attribute><xsl:value-of select="@extends" /></xsl:element></p></xsl:if>
-			<p><xsl:value-of select="@comment" /></p>
+			<xsl:if test="@extends"><p class="extends">extends <xsl:element name="a"><xsl:attribute name="href">#<xsl:value-of select="@extends" /></xsl:attribute><xsl:value-of select="@extends" /></xsl:element></p></xsl:if>
+			<p class="comment"><xsl:value-of select="@comment" /></p>
 			<xsl:variable name="test" select="@path" />
 			<xsl:if test="count(//nodetype[@extends=$test]) > 0">
 				Subtypes:
@@ -82,7 +87,7 @@
 				</ul>
 			</xsl:if>
 			<xsl:if test="count(property) > 0">
-				<h3>Properties</h3>
+				<h3>Attributes</h3>
 				<table>
 					<thead>
 						<tr>
@@ -101,7 +106,16 @@
 	<xsl:template match="property">
 		<tr>
 			<td><xsl:value-of select="@name" /></td>
-			<td><xsl:value-of select="@type" /></td>
+			<td>
+				<xsl:value-of select="@type" />
+				<xsl:if test="@typeofsubnodes != ''">
+					<xsl:variable name="test" select="@typeofsubnodes" />
+					(<xsl:element name="a">
+						<xsl:attribute name="href">#<xsl:value-of select="@typeofsubnodes" /></xsl:attribute>
+						<xsl:value-of select="//nodetype[@path=$test]/@name" />
+					</xsl:element>)
+				</xsl:if>
+			</td>
 			<td><xsl:value-of select="@comment" /></td>
 		</tr>
 	</xsl:template>

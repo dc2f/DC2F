@@ -71,6 +71,7 @@ public class NodeTypeDocGenerator {
 					Node attrDef = attributesDef.getAttributeDefinition(attributeName);
 					attrElement.setAttribute("name", attributeName);
 					attrElement.setAttribute("type", (String) attrDef.getProperty("type"));
+					attrElement.setAttribute("typeofsubnodes", (String) attrDef.getProperty("typeofsubnodes"));
 					attrElement.setAttribute("comment", (String) attrDef.getProperty("_comment"));
 					nodeTypeElement.appendChild(attrElement);
 				}
