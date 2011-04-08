@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:output method="html" encoding="UTF-8" />
+	<xsl:output method="html" encoding="UTF-8" indent="yes" />
 
 	<!-- simply copy the message to the result tree -->
 	<xsl:template match="/">
@@ -30,7 +30,7 @@
 					margin-top: -1em;
 					font-size: 0.8em;
 				}
-				section.nodetype {
+				article.nodetype {
 					border: 5px solid #ddd;
 					border-radius: 10px;
 					padding: 1em;
@@ -65,9 +65,10 @@
 	</xsl:template>
 	
 	<xsl:template match="nodetype">
-		<section class="nodetype">
+		<xsl:element name="article">
+			<xsl:attribute name="id"><xsl:value-of select="@path" /></xsl:attribute>
+			<xsl:attribute name="class">nodetype</xsl:attribute>
 			<xsl:element name="h2">
-				<xsl:attribute name="id"><xsl:value-of select="@path" /></xsl:attribute>
 				<xsl:value-of select="@name" />
 			</xsl:element>
 			<xsl:if test="@extends"><p class="extends">extends <xsl:element name="a"><xsl:attribute name="href">#<xsl:value-of select="@extends" /></xsl:attribute><xsl:value-of select="@extends" /></xsl:element></p></xsl:if>
@@ -101,7 +102,7 @@
 					</tbody>
 				</table>
 			</xsl:if>
-		</section>
+		</xsl:element>
 	</xsl:template>
 	<xsl:template match="property">
 		<tr>
