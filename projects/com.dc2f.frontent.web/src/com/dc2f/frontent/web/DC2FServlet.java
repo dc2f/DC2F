@@ -57,7 +57,7 @@ public class DC2FServlet implements Servlet {
 			System.out.println("Please specify a crdir :) ( -Dcrdir=xxx)");
 		}
 		ContentRepository cr = new SimpleFileContentRepository(crdir);
-		ServletURLMapper mapper = new ServletURLMapper(cr);
+		ServletURLMapper mapper = new ServletURLMapper(cr, getServletConfig());
 		Node node = mapper.getNode(request);
 		logger.info("We got a node: {" + node + "}");
 		

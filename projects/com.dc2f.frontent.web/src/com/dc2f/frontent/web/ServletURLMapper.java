@@ -1,5 +1,6 @@
 package com.dc2f.frontent.web;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,10 +12,13 @@ public class ServletURLMapper implements URLMapper {
 
 	private ContentRepository contentRepository;
 	
+	private ServletConfig servletConfig;
+	
 	private String defaultProjectPath = "/cmsblog/";
 	
-	public ServletURLMapper(ContentRepository cr) {
+	public ServletURLMapper(ContentRepository cr, ServletConfig config) {
 		contentRepository = cr;
+		servletConfig = config;
 	}
 	/**
 	 * Try to load a node for the given servlet request.
@@ -36,7 +40,16 @@ public class ServletURLMapper implements URLMapper {
 
 	@Override
 	public String getRenderURL(Node node) {
-		throw new RuntimeException("This method is not yet implemented.");
+		String servletURL = servletConfig.getServletContext().getContextPath();
+		String nodePath = node.getPath();
+		if (nodePath.startsWith(defaultProjectPath)) {
+			nodePath = nodePath.substring(defaultProjectPath.length());
+		}
+		return servletURL + nodePath;
+	}
+	
+	private String beautifyURL(String url) {
+		return url.replaceAll("/{2,}", "/");
 	}
 
 }
