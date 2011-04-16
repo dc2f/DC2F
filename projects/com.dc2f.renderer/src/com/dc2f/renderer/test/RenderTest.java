@@ -34,14 +34,15 @@ public class RenderTest {
 		}
 		ContentRepository cr = new SimpleFileContentRepository(crdir);
 		
-		Node node = cr.getNode("/cmsblog/articles/my-first-article");
-		logger.info("We got a node: {" + node + "}");
+		//Node node = cr.getNode("/cmsblog/articles/my-first-article");
+//		Node node = cr.getNode("/cmsblog");
+//		logger.info("We got a node: {" + node + "}");
 		
 		
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog/articles/my-first-article")), new ContentRenderResponse() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog")), new ContentRenderResponse() {
 			
 			public Writer getWriter() {
 				return writer;

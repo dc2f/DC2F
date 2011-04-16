@@ -1,0 +1,15 @@
+{
+	'class': 'com.dc2f.renderer.nodetype.list.OverviewNodeType',
+	'extends': 'classpath:com/dc2f/renderer/nodetype/ContextRendererNodeType',
+	'_comment': 'Renders a list of nodes with the rendertype: com.dc2f.rendertype.web.overview',
+	
+	'attributes': {
+		'renderSubtype': {
+			'_comment': 'Allows customization for the rendertype (it is appended to the default render type.)',
+			'type': 'String',
+		},
+		'sortBy': {
+			'_comment': 'The property node of the children which should be used for sorting',
+		},
+	},
+}

@@ -10,20 +10,21 @@
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web',
 				'template': '/cmsblog/templates/myblogtemplate',
+				'index': '/cmsblog/startpage',
 			},
 
-		{
-			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
-			'rendertype': 'com.dc2f.rendertype.web.breadcrumbs',
-			'template': '/cmsblog/templates/breadcrumbstemplate',
-			'addtocontext': {
-				'title': {
-					'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
-					'_commentxxrefcontext': 'node',
-					'ref': '.@label',
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web.breadcrumbs',
+				'template': '/cmsblog/templates/breadcrumbstemplate',
+				'addtocontext': {
+					'title': {
+						'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+						'_commentxxrefcontext': 'node',
+						'ref': '.@label',
+					},
 				},
 			},
-		},
 
 
 

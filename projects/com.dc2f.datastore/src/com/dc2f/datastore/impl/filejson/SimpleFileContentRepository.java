@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -185,6 +186,21 @@ public class SimpleFileContentRepository implements ContentRepository {
 	@Override
 	public boolean supportsTransaction() {
 		return false;
+	}
+
+	@Override
+	public Node[] getChildren(Node node) {
+		File[] files = new File(crdir, node.getPath()).listFiles();
+		List<Node> children = new ArrayList<Node>(files.length);
+		for(File file : files) {
+			if (file.isDirectory()) {
+				Node child = getNode(node.getPath() + "/" + file.getName());
+				if (child != null) {
+					children.add(child);
+				}
+			}
+		}
+		return children.toArray(new Node[children.size()]);
 	}
 
 }

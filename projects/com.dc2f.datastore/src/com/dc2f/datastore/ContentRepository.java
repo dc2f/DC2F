@@ -23,6 +23,11 @@ public interface ContentRepository {
 
 	Node resolveNode(Node currentNodeContext, String ref);
 	
+	/**
+	 * Returns all direct children of the current node.
+	 */
+	Node[] getChildren(Node node);
+	
 	/* Node[] filterNode() */
 	
 	/**

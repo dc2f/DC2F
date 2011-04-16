@@ -1,0 +1,12 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': 'This is the overview over all articles :D<ul>$articleoverview</ul>',
+	'context': {
+		'articleoverview': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/list/OverviewNodeType',
+			'ref': '/cmsblog/articles',
+		},
+	},
+}

@@ -1,0 +1,24 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<li>$title</li>',
+	'context': {
+		'image': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
+			'refcontext': 'node',
+			'ref': '.@image',
+			'size': '500x300',
+		},
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@title',
+		},
+		'body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+	},
+}
