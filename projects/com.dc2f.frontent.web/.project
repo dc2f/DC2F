@@ -3,6 +3,10 @@
 	<name>DC2F_webapp</name>
 	<comment></comment>
 	<projects>
+		<project>com.dc2f.datastore</project>
+		<project>com.dc2f.renderer</project>
+		<project>com.dc2f.nodetype</project>
+		<project>com.dc2f.core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
