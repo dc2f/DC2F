@@ -2,7 +2,7 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<li>$title</li>',
+	'source': '<li><a href="$articleurl">$title</a></li>',
 	'context': {
 		'image': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
@@ -19,6 +19,11 @@
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'node',
 			'ref': '.@body',
+		},
+		'articleurl': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'refcontext': 'node',
+			'ref': '.',
 		},
 	},
 }

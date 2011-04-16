@@ -43,7 +43,14 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog")), new ContentRenderResponse() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog"), new URLMapper() {
+
+			@Override
+			public String getRenderURL(Node node) {
+				return node.getPath();
+			}
+			
+		}), new ContentRenderResponse() {
 			
 			public Writer getWriter() {
 				return writer;
@@ -51,18 +58,6 @@ public class RenderTest {
 			
 			public OutputStream getOutputStream() {
 				return stream;
-			}
-
-			@Override
-			public URLMapper getURLMapper() {
-				return new URLMapper() {
-
-					@Override
-					public String getRenderURL(Node node) {
-						return node.getPath();
-					}
-					
-				};
 			}
 		});
 		

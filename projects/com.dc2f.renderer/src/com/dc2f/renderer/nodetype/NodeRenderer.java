@@ -53,7 +53,7 @@ public class NodeRenderer extends BaseNodeType implements
 				renderType = renderType + "." + renderSubtype;
 			}
 			
-			ContentRenderRequest newRequest = new ContentRenderRequestImpl(request.getContentRepository(), nodePath.toArray(new Node[nodePath.size()]));
+			ContentRenderRequest newRequest = new ContentRenderRequestImpl(request.getContentRepository(), nodePath.toArray(new Node[nodePath.size()]), request.getURLMapper());
 			return TemplateRenderer.internalRenderNode(newRequest, null, renderType, null);
 		}
 		return "we need to render " + value;

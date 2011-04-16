@@ -9,6 +9,7 @@ import java.util.Map;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
 import com.dc2f.renderer.ContentRenderRequest;
+import com.dc2f.renderer.url.URLMapper;
 
 public class ContentRenderRequestImpl implements ContentRenderRequest {
 
@@ -18,11 +19,13 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	private List<Node> nodeStack;
 	private List<Node> nodeContextStack = new LinkedList<Node>();
 	public List<Node> renderContextStack = new LinkedList<Node>();
+	private URLMapper urlMapper;
 
-	public ContentRenderRequestImpl(ContentRepository contentRepository, Node[] nodePath) {
+	public ContentRenderRequestImpl(ContentRepository contentRepository, Node[] nodePath, URLMapper urlMapper) {
 		this.contentRepository = contentRepository;
 		this.nodePath = nodePath;
 		this.nodeStack = Arrays.asList(nodePath);
+		this.urlMapper = urlMapper;
 	}
 
 	@Override
@@ -81,5 +84,10 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	
 	public List<Node> getRenderContextStack() {
 		return renderContextStack;
+	}
+
+	@Override
+	public URLMapper getURLMapper() {
+		return urlMapper;
 	}
 }

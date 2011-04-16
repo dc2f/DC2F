@@ -5,6 +5,7 @@ import java.util.List;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
 import com.dc2f.renderer.ContentRenderRequest;
+import com.dc2f.renderer.url.URLMapper;
 
 public class ContentRenderRequestWrapper implements ContentRenderRequest {
 	
@@ -81,6 +82,12 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 	@Override
 	public Object setAttribute(String key, Object value) {
 		return wrappedRequest.setAttribute(key, value);
+	}
+
+
+	@Override
+	public URLMapper getURLMapper() {
+		return wrappedRequest.getURLMapper();
 	}
 
 }

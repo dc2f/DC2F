@@ -1,0 +1,4 @@
+{
+	'class': 'com.dc2f.renderer.nodetype.url.NodeURLRenderer',
+	'extends': 'classpath:com/dc2f/renderer/nodetype/ContextRendererNodeType',
+}
