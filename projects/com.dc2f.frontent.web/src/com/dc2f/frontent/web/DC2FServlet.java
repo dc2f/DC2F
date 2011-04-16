@@ -19,6 +19,7 @@ import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
+import com.dc2f.renderer.url.URLMapper;
 
 public class DC2FServlet implements Servlet {
 
@@ -64,7 +65,7 @@ public class DC2FServlet implements Servlet {
 		Writer writer = response.getWriter();
 		
 		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog/articles/my-first-article")),
-					new ServletRenderResponse(writer, null));
+					new ServletRenderResponse(writer, null, mapper));
 		
 		logger.info("We rendered something: " + writer.toString());
 	}
@@ -75,9 +76,12 @@ public class DC2FServlet implements Servlet {
 		
 		private OutputStream outputStream;
 		
-		public ServletRenderResponse(Writer wr, OutputStream os) {
+		private URLMapper urlMapper;
+		
+		public ServletRenderResponse(Writer wr, OutputStream os, URLMapper mapper) {
 			writer = wr;
 			outputStream = os;
+			urlMapper = mapper;
 		}
 		
 		@Override
@@ -88,6 +92,11 @@ public class DC2FServlet implements Servlet {
 		@Override
 		public Writer getWriter() {
 			return writer;
+		}
+
+		@Override
+		public URLMapper getURLMapper() {
+			return urlMapper;
 		}
 		
 	}

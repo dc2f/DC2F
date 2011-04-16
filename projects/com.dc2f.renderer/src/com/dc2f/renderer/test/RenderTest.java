@@ -15,6 +15,7 @@ import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
+import com.dc2f.renderer.url.URLMapper;
 
 public class RenderTest {
 	private static final Logger logger = Logger.getLogger(RenderTest.class.getName());
@@ -50,6 +51,18 @@ public class RenderTest {
 			
 			public OutputStream getOutputStream() {
 				return stream;
+			}
+
+			@Override
+			public URLMapper getURLMapper() {
+				return new URLMapper() {
+
+					@Override
+					public String getRenderURL(Node node) {
+						return node.getPath();
+					}
+					
+				};
 			}
 		});
 		
