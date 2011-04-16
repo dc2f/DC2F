@@ -40,4 +40,6 @@ public interface ContentRepository {
 	 */
 	boolean supportsTransaction();
 	
+	public <T extends CRAdapter> T getAdapter(Class<T> adapterInterface);
+	
 }

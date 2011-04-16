@@ -17,9 +17,11 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dc2f.datastore.CRAdapter;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
+import com.dc2f.datastore.adapters.XPathSearchAdapter;
 
 public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
@@ -201,6 +203,15 @@ public class SimpleFileContentRepository implements ContentRepository {
 			}
 		}
 		return children.toArray(new Node[children.size()]);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends CRAdapter> T getAdapter(Class<T> adapterInterface) {
+		if (adapterInterface.isAssignableFrom(XPathSearchAdapter.class)) {
+			return (T) new SimpleXPathSearchAdapter(this);
+		}
+		return null;
 	}
 
 }
