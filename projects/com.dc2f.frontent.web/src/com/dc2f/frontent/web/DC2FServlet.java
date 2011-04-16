@@ -1,7 +1,5 @@
 package com.dc2f.frontent.web;
 
-import java.io.ByteArrayOutputStream;
-import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -54,14 +52,13 @@ public class DC2FServlet implements Servlet {
 			throws ServletException, IOException {
 		NodeRendererFactory factory = NodeRendererFactory.getInstance();
 		NodeRenderer renderer = factory.getRenderer("com.dc2f.renderer.web");
-		
 		File crdir = new File(System.getProperty("crdir", "../../design/example"));
 		if (crdir == null || !crdir.exists()) {
 			System.out.println("Please specify a crdir :) ( -Dcrdir=xxx)");
 		}
 		ContentRepository cr = new SimpleFileContentRepository(crdir);
-		
-		Node node = cr.getNode("/cmsblog/articles/my-first-article");
+		ServletURLMapper mapper = new ServletURLMapper(cr);
+		Node node = mapper.getNode(request);
 		logger.info("We got a node: {" + node + "}");
 		
 		Writer writer = response.getWriter();
