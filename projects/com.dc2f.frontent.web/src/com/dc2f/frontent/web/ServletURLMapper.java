@@ -14,7 +14,7 @@ public class ServletURLMapper implements URLMapper {
 	
 	private ServletConfig servletConfig;
 	
-	private String defaultProjectPath = "/cmsblog/";
+	private String defaultProjectPath = "/cmsblog";
 	
 	public ServletURLMapper(ContentRepository cr, ServletConfig config) {
 		contentRepository = cr;
