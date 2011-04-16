@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.NodeType;
 import com.dc2f.datastore.NodeTypeInfo;
+import com.dc2f.datastore.exception.ClassNotFoundForNodeTypeException;
 import com.dc2f.datastore.nodetypedefinition.NodeTypeDefinition;
 
 public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeInfo {
@@ -32,12 +33,12 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 				return (Class<T>) Class.forName(className);
 			} catch (ClassNotFoundException e) {
 				logger.log(Level.SEVERE, "Unable to find class for node type {" + this + "}", e);
+				throw new ClassNotFoundForNodeTypeException("Unable to find class for node type {" + this + "}", e);
 			}
 		} else {
 			logger.finer("Requested class for node type without defined class: {" + this + "}");
 			return (Class<T>) NodeType.DEFAULT_NODETYPE;
 		}
-		return null;
 	}
 
 	@Override

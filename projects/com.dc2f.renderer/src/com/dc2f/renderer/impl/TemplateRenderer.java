@@ -1,6 +1,7 @@
 package com.dc2f.renderer.impl;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +50,17 @@ public class TemplateRenderer implements NodeRenderer {
 				Node templateNode = (Node) renderConfig.getProperty("template");
 				Node addToContext = (Node) renderConfig.getProperty("addtocontext");
 				if (templateNode.getNodeType() instanceof TemplateNodeType) {
+					
+					if (node.equals(request.getNode())) {
+						// If the node to be rendered is the same as we would be rendering, check if an 'index' property is set.
+						Node indexNode = (Node) renderConfig.getProperty("index");
+						if (indexNode != null) {
+							Node[] newNodePath = Arrays.copyOf(request.getNodesInPath(), request.getNodesInPath().length + 1);
+							newNodePath[newNodePath.length-1] = indexNode;
+							request = new ContentRenderRequestWrapper(request, newNodePath);
+						}
+					}
+					
 					request.pushNodeContext(node);
 					request.pushRenderContext(addToContext);
 					try {

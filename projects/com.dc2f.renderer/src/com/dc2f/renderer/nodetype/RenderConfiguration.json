@@ -7,5 +7,9 @@
 			'type': 'Node',
 			'typeofnode': 'classpath:com/dc2f/renderer/nodetype/template/Context',
 		},
+		'index': {
+			'_comment': 'If this node is rendered directly and this attribute is set, the referenced node will be rendered instead of this node.',
+			'type': 'NodeReference',
+		},
 	},
 }
