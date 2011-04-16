@@ -2,18 +2,71 @@
   <head>
     <title>$title</title>
     <meta name="description"></meta>
+    <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #e7e7e7;
+  color: #000;
+  font-family: 'roid Serif', arial, serif;
+  width: 60em;
+  margin: 0 auto;
+}
+.header {
+  border-bottom: 0.1em solid #a7a7a7;
+  margin-bottom: 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Amaranth', arial, serif;
+}
+h1 {
+  font-size: 36pt;
+  letter-spacing: 10px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+}
+h2 {
+  margin-bottom: 0.5em;
+}
+.section {
+  margin-bottom: 0.5em;
+}
+
+.linklist {
+  margin-top: 0.5em;
+}
+
+ul {
+  margin-left: 1em;
+}
+.breadcrumb ul {
+  margin: 0;
+}
+.breadcrumb ul li {
+  display: inline;
+}
+
+    </style>
   </head>
   <body>
-    <h1>$title</h1>
+    <div class="header">
+      <h1>$title</h1>
+    </div>
+    <div class="breadcrumb">
+      <ul>
+        $breadcrumbs
+      </ul>
+    </div>
     <div id="content">
-        <h1>my content</h1>
       $content
     </div>
-    <div id="breadcrumbs">
-      <ul>$breadcrumbs</ul>
-    </div>
-    <div id="navigation">
+    <!-- div id="navigation">
       $navigation
-    </div>
+    </div -->
   </body>
 </html>
