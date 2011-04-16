@@ -2,7 +2,7 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<li>$title</li>$subelements',
+	'source': '<li><a href="$link">$title</a></li>$subelements',
 	'context': {
 
 		'subelements': {
@@ -10,6 +10,10 @@
 			'refcontext': 'node',
 			'ref': '.',
 			'renderSubtype': 'breadcrumbs',
+		},
+		'link': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '.',
 		},
 	},
 }

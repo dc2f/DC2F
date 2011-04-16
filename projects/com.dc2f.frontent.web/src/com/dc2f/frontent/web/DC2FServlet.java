@@ -64,6 +64,8 @@ public class DC2FServlet implements Servlet {
 		
 		Writer writer = response.getWriter();
 		
+		System.out.println(cr.getNodesInPath(node.getPath()));
+		
 		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath(node.getPath()), mapper),
 					new ServletRenderResponse(writer, null));
 		

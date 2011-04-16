@@ -33,6 +33,9 @@ public class ServletURLMapper implements URLMapper {
 			if (pathFromServlet.startsWith(webappPath)) {
 				pathFromServlet = pathFromServlet.substring(webappPath.length());
 			}
+			if ("/".equals(pathFromServlet)) {
+				return contentRepository.getNode(defaultProjectPath);
+			}
 			return contentRepository.getNode(defaultProjectPath + pathFromServlet);
 		}
 		return null;
