@@ -2,7 +2,7 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<li>&gt; <a href="$link">$title</a></li> $subelements',
+	'source': '<li><a href="$link">$title</a></li> $subelements',
 	'context': {
 
 		'subelements': {

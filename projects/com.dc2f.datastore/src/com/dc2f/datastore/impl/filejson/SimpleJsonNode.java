@@ -28,6 +28,10 @@ public class SimpleJsonNode implements Node {
 	private NodeType nodeType;
 
 	public SimpleJsonNode(ContentRepository repository, String path, JSONObject jsonObject, NodeType nodeType) {
+		// "normalize" path :)
+		if (path != null && path.endsWith("/") && !"/".equals(path)) {
+			path = path.replaceAll("/+$", "");
+		}
 		this.repository = repository;
 		this.path = path;
 		this.jsonObject = jsonObject;

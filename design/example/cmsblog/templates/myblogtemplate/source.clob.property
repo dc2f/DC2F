@@ -12,7 +12,7 @@
 body {
   background-color: #e7e7e7;
   color: #000;
-  font-family: 'roid Serif', arial, serif;
+  font-family: 'Droid Serif', arial, serif;
   width: 60em;
   margin: 0 auto;
 }
@@ -42,13 +42,37 @@ h2 {
 }
 
 ul {
-  margin-left: 1em;
+	margin-left: 1em;
 }
-.breadcrumb ul {
-  margin: 0;
+.breadcrumbs {
+	margin-bottom: 3em;
+	font-size: smaller;
 }
-.breadcrumb ul li {
-  display: inline;
+.breadcrumbs ul {
+	margin: 0;
+}
+.breadcrumbs ul li {
+	display: block;
+	float: left;
+	margin-left: 1em;
+}
+.breadcrumbs ul li:after {
+	content: ' >> ';
+	margin-left: 1em;
+}
+.breadcrumbs ul li:last-child:after {
+	content: '';
+}
+.breadcrumbs ul li:last-child a {
+	color: #000;
+	text-decoration: none;
+}
+.breadcrumbs a {
+	color: #f00;
+	text-decoration: none;
+}
+#content {
+	clear: both;
 }
 
     </style>
@@ -57,7 +81,7 @@ ul {
     <div class="header">
       <h1>$title</h1>
     </div>
-    <div class="breadcrumb">
+    <div class="breadcrumbs">
       <ul>
         $breadcrumbs
       </ul>
