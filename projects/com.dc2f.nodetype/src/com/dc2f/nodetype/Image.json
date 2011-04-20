@@ -1,16 +1,9 @@
 {
+	'extends': 'classpath:com/dc2f/nodetype/File',
 
 	'attributes': {
 		'alt': {
 			'type': 'String',
-			'required': true,
-		},
-		'filename': {
-			'type': 'String',
-			'required': true,
-		},
-		'data': {
-			'type': 'blob',
 			'required': true,
 		},
 	},

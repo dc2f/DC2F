@@ -3,4 +3,5 @@
 
 	'filename': 'myfirstarticleimage.png',
 	'alt': 'Dies ist mein erstes bild!',
+	'mimeType': 'image/jpeg',
 }

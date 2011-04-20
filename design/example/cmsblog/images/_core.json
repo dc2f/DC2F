@@ -1,0 +1,5 @@
+{
+	'nodetype': 'classpath:com/dc2f/nodetype/Node',
+	
+	'subtype': [ '/cmsblog/nodetype/Article' ]
+}
