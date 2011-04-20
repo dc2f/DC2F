@@ -59,6 +59,11 @@ public class RenderTest {
 			public OutputStream getOutputStream() {
 				return stream;
 			}
+
+			@Override
+			public void setMimeType(String mimeType) {
+				logger.info("Setting mimeType to {" + mimeType + "}");
+			}
 		});
 		
 		logger.info("We rendered something: " + writer.toString());

@@ -120,8 +120,10 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return repository.getNode(ref);
-		} if ("clob".equals(attributeType) && obj == null) {
+		} else if ("clob".equals(attributeType) && obj == null) {
 			obj = ((SimpleFileContentRepository)repository).loadRepositoryFile(new File(path, propertyName + ".clob.property"));
+		} else if ("blob".equals(attributeType) && obj == null) {
+			return ((SimpleFileContentRepository)repository).getInputStreamForRepositoryFile(new File(path, propertyName + ".blob.property"));
 		}
 
 		if (obj instanceof String) {

@@ -31,6 +31,10 @@
 			'refcontext': 'explicit',
 			'value': 'hehe',
 		},
+		'basecss': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/cmsblog/templates/myblogtemplate/basecss',
+		},
 	}
 
 }

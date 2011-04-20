@@ -14,12 +14,12 @@ import javax.servlet.ServletResponse;
 
 import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.Node;
+import com.dc2f.datastore.exception.DC2FRuntimeException;
 import com.dc2f.datastore.impl.filejson.SimpleFileContentRepository;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
-import com.dc2f.renderer.url.URLMapper;
 
 public class DC2FServlet implements Servlet {
 
@@ -62,35 +62,39 @@ public class DC2FServlet implements Servlet {
 		Node node = mapper.getNode(request);
 		logger.info("We got a node: {" + node + "}");
 		
-		Writer writer = response.getWriter();
-		
-		System.out.println(cr.getNodesInPath(node.getPath()));
-		
 		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath(node.getPath()), mapper),
-					new ServletRenderResponse(writer, null));
-		
-		logger.info("We rendered something: " + writer.toString());
+					new ServletRenderResponse(response));
 	}
 	
 	private class ServletRenderResponse implements ContentRenderResponse {
 
-		private Writer writer;
-		
-		private OutputStream outputStream;
+		private ServletResponse response;
 
-		public ServletRenderResponse(Writer wr, OutputStream os) {
-			writer = wr;
-			outputStream = os;
+		public ServletRenderResponse(ServletResponse response) {
+			this.response = response;
 		}
-		
+
 		@Override
 		public OutputStream getOutputStream() {
-			return outputStream;
+			try {
+				return response.getOutputStream();
+			} catch (IOException e) {
+				throw new DC2FRuntimeException("Error while getting output stream", e);
+			}
 		}
 
 		@Override
 		public Writer getWriter() {
-			return writer;
+			try {
+				return response.getWriter();
+			} catch (IOException e) {
+				throw new DC2FRuntimeException("Error while getting writer", e);
+			}
+		}
+
+		@Override
+		public void setMimeType(String mimeType) {
+			response.setContentType(mimeType);
 		}
 		
 	}

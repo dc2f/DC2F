@@ -68,6 +68,15 @@ public class SimpleFileContentRepository implements ContentRepository {
 		}
 	}
 	
+	protected FileInputStream getInputStreamForRepositoryFile(File file) {
+		try {
+			return new FileInputStream(new File(crdir, file.getPath()));
+		} catch (FileNotFoundException e) {
+			logger.log(Level.SEVERE, "Error while loading file {" + file.getAbsolutePath() + "}", e);
+			return null;
+		}
+	}
+	
 	protected JSONObject loadJSON(File f) {
 		try {
 			return loadJSON(new FileInputStream(f));

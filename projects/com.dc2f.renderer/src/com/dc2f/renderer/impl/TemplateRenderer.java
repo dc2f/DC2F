@@ -1,11 +1,15 @@
 package com.dc2f.renderer.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dc2f.datastore.Node;
+import com.dc2f.datastore.NodeType;
+import com.dc2f.nodetype.BinaryNodeType;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
@@ -24,6 +28,26 @@ public class TemplateRenderer implements NodeRenderer {
 
 	public void renderNode(ContentRenderRequest request,
 			ContentRenderResponse response) {
+		Node node = request.getNode();
+		NodeType nodeType = node.getNodeType();
+		if (nodeType instanceof BinaryNodeType) {
+			BinaryNodeType binary = (BinaryNodeType) nodeType;
+			OutputStream outputStream = response.getOutputStream();
+			response.setMimeType(binary.getMimeType(node));
+			InputStream inputStream = ((BinaryNodeType) nodeType).getInputStream(node);
+			// FIXME what happens when inputStream is null?!?! (not found?)
+			byte[] buf = new byte[1024];
+			int c;
+			try {
+				while ((c = inputStream.read(buf)) > 0) {
+					outputStream.write(buf, 0, c);
+				}
+			} catch (IOException e) {
+				logger.log(Level.SEVERE, "Error while streaming binary stream.", e);
+			}
+			return;
+		}
+		
 		String ret = internalRenderNode(request, response, null);
 		try {
 			response.getWriter().write(ret);
