@@ -47,13 +47,12 @@ ul {
 .breadcrumbs ul li {
 	display: block;
 	float: left;
-	margin-left: 1em;
+	margin-left: 0.5em;
 }
-.breadcrumbs ul li:after {
+.breadcrumbs ul li:before {
 	content: ' >> ';
-	margin-left: 1em;
 }
-.breadcrumbs ul li:last-child:after {
+.breadcrumbs ul li:first-child:before {
 	content: '';
 }
 .breadcrumbs ul li:last-child a {
