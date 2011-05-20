@@ -5,11 +5,11 @@ package com.dc2f.datastore;
  * @author bigbear3001
  *
  */
-public interface ChangableNode extends Node {
+public interface ChangeableNode extends Node {
 	/**
 	 * Set an attribute of the node
 	 * @param attributeName - name of the property to set
-	 * @param attributeValue - value to set to the propery
+	 * @param attributeValue - value to set to the attribute
 	 */
 	public void set(String attributeName, Object attributeValue);
 }

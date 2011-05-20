@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.dc2f.datastore.ChangeableNode;
 import com.dc2f.datastore.ContentRepositoryException;
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.WritableContentRepository;
@@ -13,7 +14,7 @@ import com.dc2f.datastore.WritableContentRepository;
 public class WritableFileContentRepository extends SimpleFileContentRepository
 		implements WritableContentRepository {
 
-	private Set<Node> writeBuffer = Collections.synchronizedSet(new HashSet<Node>());
+	private Set<ChangeableNode> writeBuffer = Collections.synchronizedSet(new HashSet<ChangeableNode>());
 	
 	public WritableFileContentRepository(File crdir)
 			throws FileNotFoundException {
@@ -22,12 +23,12 @@ public class WritableFileContentRepository extends SimpleFileContentRepository
 	}
 	
 	public void close() {
-		for(Node node : writeBuffer) {
+		for(ChangeableNode node : writeBuffer) {
 			writeNodeToRepository(node);
 		}
 	}
 
-	private void writeNodeToRepository(Node node) {
+	private void writeNodeToRepository(ChangeableNode node) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -38,7 +39,7 @@ public class WritableFileContentRepository extends SimpleFileContentRepository
 	}
 
 	@Override
-	public void writeNode(Node node) throws ContentRepositoryException {
+	public void saveNode(ChangeableNode node) throws ContentRepositoryException {
 		writeBuffer.add(node);
 	}
 

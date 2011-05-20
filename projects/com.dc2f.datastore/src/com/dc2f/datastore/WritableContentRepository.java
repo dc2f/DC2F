@@ -7,7 +7,7 @@ public interface WritableContentRepository extends ContentRepository {
 	 * @param node - {@link Node} to write into the ContentRepository
 	 * @throws ContentRepositoryException in case the node cannot be written into the transaction
 	 */
-	void writeNode(Node node) throws ContentRepositoryException;
+	void saveNode(ChangeableNode node) throws ContentRepositoryException;
 	
 	/**
 	 * execute a rollback of the transaction so nothing is actually written to the filesystem.
