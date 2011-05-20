@@ -15,9 +15,7 @@ public class ChangableJsonNode extends SimpleJsonNode implements ChangableNode {
 	}
 
 	@Override
-	public void setProperty(String propertyName, Object propertyValue) {
-		// TODO Auto-generated method stub
-
+	public void set(String propertyName, Object propertyValue) {
 	}
 
 }

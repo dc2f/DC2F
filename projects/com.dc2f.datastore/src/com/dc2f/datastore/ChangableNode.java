@@ -7,9 +7,9 @@ package com.dc2f.datastore;
  */
 public interface ChangableNode extends Node {
 	/**
-	 * Set the property of the node
-	 * @param propertyName - name of the property to set
-	 * @param propertyValue - value to set to the propery
+	 * Set an attribute of the node
+	 * @param attributeName - name of the property to set
+	 * @param attributeValue - value to set to the propery
 	 */
-	public void setProperty(String propertyName, Object propertyValue);
+	public void set(String attributeName, Object attributeValue);
 }

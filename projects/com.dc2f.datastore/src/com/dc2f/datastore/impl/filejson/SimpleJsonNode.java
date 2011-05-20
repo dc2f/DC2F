@@ -56,25 +56,6 @@ public class SimpleJsonNode implements Node {
 	public String getPath() {
 		return path;
 	}
-
-	/*
-	@Override
-	public Object getProperty(String propertyName) {
-		Object obj;
-		try {
-			obj = jsonObject.get(propertyName);
-		} catch (JSONException e) {
-			logger.log(Level.SEVERE, "Error while getting property {" + propertyName
-					+ "} of node {" + path + "}", e);
-			return null;
-		}
-		if (obj instanceof String) {
-			return obj;
-		}
-		logger.severe("FIXME: Not Implemented: Unable to convert property {" + path + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "}");
-		return null;
-	}
-	*/
 	
 	protected Object internalGet(String attributeName) {
 		try {

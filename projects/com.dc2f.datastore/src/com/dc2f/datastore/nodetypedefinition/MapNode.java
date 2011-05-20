@@ -32,8 +32,8 @@ public class MapNode implements Node {
 	}
 
 	@Override
-	public Object get(String propertyName) {
-		return internalMap.get(propertyName);
+	public Object get(String attributeName) {
+		return internalMap.get(attributeName);
 	}
 	
 	@Override
