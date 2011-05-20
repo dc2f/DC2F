@@ -24,7 +24,7 @@ public class NodeRenderer extends BaseNodeType implements
 				return ((HtmlTemplate)valueNode.getNodeType()).renderTemplate(request, valueNode);
 			}
 			
-			Node rootNode = (Node) configNode.getProperty("rootNode");
+			Node rootNode = (Node) configNode.get("rootNode");
 			if (rootNode != null) {
 				context = rootNode;
 			}
@@ -47,7 +47,7 @@ public class NodeRenderer extends BaseNodeType implements
 				nodePath.add(0, rootNode);
 			}
 			
-			String renderSubtype = (String) configNode.getProperty("renderSubtype");
+			String renderSubtype = (String) configNode.get("renderSubtype");
 			String renderType = TemplateRenderer.RENDER_TYPE;
 			if (renderSubtype != null) {
 				renderType = renderType + "." + renderSubtype;

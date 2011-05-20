@@ -24,10 +24,10 @@ public abstract class BaseNodeType implements NodeType {
 		if (nodeTypeInfo == null) {
 			logger.severe("node type was not initialized! {" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 		}
-		final Node attrDefinitions = (Node) nodeTypeInfo.getProperty("attributes");
-		final Boolean freeattributes = (Boolean) nodeTypeInfo.getProperty("freeattributes");
-		final String valueType = (String)nodeTypeInfo.getProperty("valuetype");
-		final String valueNodeType = (String) nodeTypeInfo.getProperty("valuenodetype");
+		final Node attrDefinitions = (Node) nodeTypeInfo.get("attributes");
+		final Boolean freeattributes = (Boolean) nodeTypeInfo.get("freeattributes");
+		final String valueType = (String)nodeTypeInfo.get("valuetype");
+		final String valueNodeType = (String) nodeTypeInfo.get("valuenodetype");
 		
 		
 		if (attrDefinitions == null) {
@@ -57,7 +57,7 @@ public abstract class BaseNodeType implements NodeType {
 					}
 					Object def = null;
 					if (attrDefinitions != null) {
-						def = attrDefinitions.getProperty(propertyName);
+						def = attrDefinitions.get(propertyName);
 					}
 					if (def == null && parentAttrDefinitions != null) {
 						return (Node) parentAttrDefinitions.getAttributeDefinition(propertyName);

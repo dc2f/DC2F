@@ -27,7 +27,7 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	
 	@SuppressWarnings("unchecked")
 	public <T extends NodeType> Class<T> getNodeTypeClass() {
-		String className = (String) getProperty("class");
+		String className = (String) get("class");
 		if (className != null) {
 			try {
 				return (Class<T>) Class.forName(className);
@@ -42,7 +42,7 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	}
 
 	@Override
-	protected Object internalGetProperty(String propertyName) {
+	protected Object internalGet(String propertyName) {
 		try {
 			return jsonObject.get(propertyName);
 		} catch (JSONException e) {
@@ -51,7 +51,7 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 						+ "} of node type {" + getPath() + "}", e);
 			}
 			if (parentNodeType != null && parentNodeType.getNodeTypeInfo() instanceof SimpleJsonNodeTypeInfo) {
-				return ((SimpleJsonNodeTypeInfo)parentNodeType.getNodeTypeInfo()).internalGetProperty(propertyName);
+				return ((SimpleJsonNodeTypeInfo)parentNodeType.getNodeTypeInfo()).internalGet(propertyName);
 			}
 			return null;
 		}
@@ -70,7 +70,7 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 
 	@Override
 	public String[] getAttributeNames() {
-		SimpleJsonNode attributes = (SimpleJsonNode) getProperty("attributes");
+		SimpleJsonNode attributes = (SimpleJsonNode) get("attributes");
 		if (attributes != null) {
 			return JSONObject.getNames(attributes.getJsonObject());
 		}

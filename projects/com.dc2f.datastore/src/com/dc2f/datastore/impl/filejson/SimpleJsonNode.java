@@ -17,7 +17,7 @@ import com.dc2f.datastore.ContentRepository;
 import com.dc2f.datastore.DefaultNodeType;
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
-import com.dc2f.datastore.exception.UnknownPropertyException;
+import com.dc2f.datastore.exception.UnknownAttributeException;
 
 public class SimpleJsonNode implements Node {
 	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
@@ -76,12 +76,12 @@ public class SimpleJsonNode implements Node {
 	}
 	*/
 	
-	protected Object internalGetProperty(String propertyName) {
+	protected Object internalGet(String attributeName) {
 		try {
-			return jsonObject.get(propertyName);
+			return jsonObject.get(attributeName);
 		} catch (JSONException e) {
-			if (jsonObject.has(propertyName)) {
-				logger.log(Level.SEVERE, "Error while getting property {" + propertyName
+			if (jsonObject.has(attributeName)) {
+				logger.log(Level.SEVERE, "Error while getting attribute {" + attributeName
 						+ "} of node type {" + path + "}", e);
 			}
 			return null;
@@ -91,22 +91,22 @@ public class SimpleJsonNode implements Node {
 	
 	
 	@Override
-	public Object getProperty(String propertyName) {
-		Object obj = internalGetProperty(propertyName);
+	public Object get(String attributeName) {
+		Object obj = internalGet(attributeName);
 		
 		// FIXME do this the "clean way"
-		if (obj instanceof String && ("class".equals(propertyName) || "type".equals(propertyName))) {
+		if (obj instanceof String && ("class".equals(attributeName) || "type".equals(attributeName))) {
 		//if (obj instanceof String && ("class".equals(propertyName) )) {
 			return obj;
 		}
 		
 		AttributesDefinition attrDefinitions = getNodeType().getAttributeDefinitions();
-		logger.finest(this.getName() + ": Getting property {" + propertyName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
-		Node attrDefinition = (Node) attrDefinitions.getAttributeDefinition(propertyName);
+		logger.finest(this.getName() + ": Getting attribute {" + attributeName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
+		Node attrDefinition = (Node) attrDefinitions.getAttributeDefinition(attributeName);
 		if (attrDefinition == null) {
-			throw new UnknownPropertyException("Unknown property {" + propertyName + "} for {" + getNodeType() + "}", null);
+			throw new UnknownAttributeException("Unknown attribute {" + attributeName + "} for {" + getNodeType() + "}", null);
 		}
-		String attributeType = (String) attrDefinition.getProperty("type");
+		String attributeType = (String) attrDefinition.get("type");
 		
 		if ("NodeReference".equals(attributeType) && obj instanceof String) {
 			String ref = (String) obj;
@@ -121,9 +121,9 @@ public class SimpleJsonNode implements Node {
 			}
 			return repository.getNode(ref);
 		} else if ("clob".equals(attributeType) && obj == null) {
-			obj = ((SimpleFileContentRepository)repository).loadRepositoryFile(new File(path, propertyName + ".clob.property"));
+			obj = ((SimpleFileContentRepository)repository).loadRepositoryFile(new File(path, attributeName + ".clob.property"));
 		} else if ("blob".equals(attributeType) && obj == null) {
-			return ((SimpleFileContentRepository)repository).getInputStreamForRepositoryFile(new File(path, propertyName + ".blob.property"));
+			return ((SimpleFileContentRepository)repository).getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
 		}
 
 		if (obj instanceof String) {
@@ -144,7 +144,7 @@ public class SimpleJsonNode implements Node {
 			}
 			
 			if (currentSubNodeType == null) {
-				String typeofnode = (String) attrDefinition.getProperty("typeofnode");
+				String typeofnode = (String) attrDefinition.get("typeofnode");
 				if (typeofnode != null) {
 					currentSubNodeType = repository.getNodeType(typeofnode);
 				}
@@ -155,7 +155,7 @@ public class SimpleJsonNode implements Node {
 			return new SimpleJsonNode(repository, path, (JSONObject) obj, currentSubNodeType);
 		} else if ("ListOfNodes".equals(attributeType)) {
 			JSONArray array = (JSONArray) obj;
-			String typeofsubnodes = (String) attrDefinition.getProperty("typeofsubnodes");
+			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
 			NodeType subNodeType = null;
 			if (typeofsubnodes != null) {
 				subNodeType = repository.getNodeType(typeofsubnodes);
@@ -182,8 +182,8 @@ public class SimpleJsonNode implements Node {
 			}
 			return null;
 		}
-		logger.info("getting property " + propertyName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
-		logger.severe("FIXME: Not Implemented: Unable to convert property {" + propertyName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "}");
+		logger.info("getting property " + attributeName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
+		logger.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "}");
 		return null;
 	}
 	

@@ -32,7 +32,7 @@ public class MapNode implements Node {
 	}
 
 	@Override
-	public Object getProperty(String propertyName) {
+	public Object get(String propertyName) {
 		return internalMap.get(propertyName);
 	}
 	

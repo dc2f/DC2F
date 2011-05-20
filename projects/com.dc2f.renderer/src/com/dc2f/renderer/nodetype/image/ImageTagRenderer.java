@@ -17,7 +17,7 @@ public class ImageTagRenderer extends BaseNodeType implements
 		logger.info("need to render image tag for image {" + value + "}");
 		Node img = (Node) value;
 		// FIXME some kind of escaping - PLEASE
-		return "<img src=\""+request.getURLMapper().getRenderURL(img)+"\" alt=\""+img.getProperty("alt")+"\" /><!-- DEBUG:" + img + " -->";
+		return "<img src=\""+request.getURLMapper().getRenderURL(img)+"\" alt=\""+img.get("alt")+"\" /><!-- DEBUG:" + img + " -->";
 	}
 
 }

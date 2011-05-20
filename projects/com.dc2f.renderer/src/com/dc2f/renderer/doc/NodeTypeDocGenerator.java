@@ -54,11 +54,11 @@ public class NodeTypeDocGenerator {
 		for(String nodeTypeName : nodeTypes) {
 			NodeType nodeType = cr.getNodeType(nodeTypeName);
 			System.out.println("nodeType: " + nodeType);
-			System.out.println(" comment: " + nodeType.getNodeTypeInfo().getProperty("_comment"));
+			System.out.println(" comment: " + nodeType.getNodeTypeInfo().get("_comment"));
 			Element nodeTypeElement = doc.createElement("nodetype");
 			nodeTypeElement.setAttribute("name", nodeType.getNodeTypeInfo().getName());
 			nodeTypeElement.setAttribute("path", nodeType.getNodeTypeInfo().getPath());
-			nodeTypeElement.setAttribute("comment", (String) nodeType.getNodeTypeInfo().getProperty("_comment"));
+			nodeTypeElement.setAttribute("comment", (String) nodeType.getNodeTypeInfo().get("_comment"));
 			NodeType parent = nodeType.getNodeTypeInfo().getParentNodeType();
 			if (parent != null && parent.getNodeTypeInfo() != null) {
 				nodeTypeElement.setAttribute("extends", parent.getNodeTypeInfo().getPath());
@@ -70,9 +70,9 @@ public class NodeTypeDocGenerator {
 					Element attrElement = doc.createElement("property");
 					Node attrDef = attributesDef.getAttributeDefinition(attributeName);
 					attrElement.setAttribute("name", attributeName);
-					attrElement.setAttribute("type", (String) attrDef.getProperty("type"));
-					attrElement.setAttribute("typeofsubnodes", (String) attrDef.getProperty("typeofsubnodes"));
-					attrElement.setAttribute("comment", (String) attrDef.getProperty("_comment"));
+					attrElement.setAttribute("type", (String) attrDef.get("type"));
+					attrElement.setAttribute("typeofsubnodes", (String) attrDef.get("typeofsubnodes"));
+					attrElement.setAttribute("comment", (String) attrDef.get("_comment"));
 					nodeTypeElement.appendChild(attrElement);
 				}
 			}

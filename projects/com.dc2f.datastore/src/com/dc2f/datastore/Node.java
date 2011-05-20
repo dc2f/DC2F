@@ -25,8 +25,8 @@ public interface Node {
 	
 	
 	/**
-	 * returns a property for this node.
+	 * returns an attribute for this node.
 	 */
-	Object getProperty(String propertyName);
+	Object get(String attributeName);
 	
 }

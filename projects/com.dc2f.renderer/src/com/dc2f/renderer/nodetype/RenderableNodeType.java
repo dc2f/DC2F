@@ -24,13 +24,13 @@ public class RenderableNodeType extends BaseNodeType {
 			Arrays.sort(acceptedVariants);
 		}
 		NodeTypeInfo info = this.getNodeTypeInfo();
-		List<Node> config = (List<Node>) info.getProperty("renderconfiguration");
+		List<Node> config = (List<Node>) info.get("renderconfiguration");
 		if (config == null) {
-			config = (List<Node>) node.getProperty("renderconfiguration");
+			config = (List<Node>) node.get("renderconfiguration");
 		}
 		for (Node confignode : config) {
-			if (renderType.equals(confignode.getProperty("rendertype"))) {
-				String nodeVariant = (String) confignode.getProperty("variant");
+			if (renderType.equals(confignode.get("rendertype"))) {
+				String nodeVariant = (String) confignode.get("variant");
 				if (nodeVariant == null || Arrays.binarySearch(acceptedVariants, nodeVariant) > 0) {
 					return confignode;
 				}

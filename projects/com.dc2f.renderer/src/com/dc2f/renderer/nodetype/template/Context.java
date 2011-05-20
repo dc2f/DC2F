@@ -13,12 +13,12 @@ public class Context extends BaseNodeType {
 	private static final Logger logger = Logger.getLogger(Context.class.getName());
 	
 	public Object resolveFromContext(Node context, ContentRenderRequest request, String propertyName) {
-		Node value = (Node) context.getProperty(propertyName);
+		Node value = (Node) context.get(propertyName);
 		if (value == null) {
 			List<Node> stack = request.getRenderContextStack();
 			for (Iterator<Node> i = stack.iterator() ; i.hasNext() && value == null ; ) {
 				Node ctx = i.next();
-				value = (Node) ctx.getProperty(propertyName);
+				value = (Node) ctx.get(propertyName);
 			}
 		}
 
@@ -26,16 +26,16 @@ public class Context extends BaseNodeType {
 		if (value != null) {
 			if (value.getNodeType() instanceof ContextRendererNodeType) {
 				
-				String refContextProperty = (String) value.getProperty("refcontext");
+				String refContextProperty = (String) value.get("refcontext");
 				if (refContextProperty == null) {
 					refContextProperty = "renderednode";
 				}
 				Object renderValue = null;
-				String ref = (String) value.getProperty("ref");
+				String ref = (String) value.get("ref");
 				if (refContextProperty.equals("node")) {
 					// FIXME we need to do some cool property lookup right here..
 					if (ref.startsWith(".@")) {
-						renderValue = request.getNode().getProperty(ref.substring(2));
+						renderValue = request.getNode().get(ref.substring(2));
 					} else if (ref.equals(".")) {
 						renderValue = request.getNode();
 					}
@@ -43,7 +43,7 @@ public class Context extends BaseNodeType {
 					renderValue = request.getAttribute(ref);
 				} else if (refContextProperty.equals("renderednode")) {
 					if (ref.startsWith(".@")) {
-						renderValue = request.getCurrentNodeContext().getProperty(ref.substring(2));
+						renderValue = request.getCurrentNodeContext().get(ref.substring(2));
 					} else {
 						renderValue = request.getContentRepository().resolveNode(request.getCurrentNodeContext(), ref);
 					}
@@ -51,7 +51,7 @@ public class Context extends BaseNodeType {
 					renderValue = this.resolveFromContext(context, request, ref);
 				} else {
 					if (renderValue == null) {
-						renderValue = value.getProperty("value");
+						renderValue = value.get("value");
 					}
 				}
 				

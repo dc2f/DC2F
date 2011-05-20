@@ -13,8 +13,8 @@ public class HtmlTemplate extends TemplateNodeType {
 
 	@Override
 	public String renderTemplate(ContentRenderRequest request, Node template) {
-		String source = (String) template.getProperty("source");
-		Node context = (Node) template.getProperty("context");
+		String source = (String) template.get("source");
+		Node context = (Node) template.get("context");
 
 		// For now we simply look for all placeholders and then fetch them from
 		// the context

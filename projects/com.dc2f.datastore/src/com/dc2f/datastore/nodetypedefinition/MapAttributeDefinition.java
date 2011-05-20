@@ -10,7 +10,7 @@ public class MapAttributeDefinition extends MapNode implements AttributesDefinit
 
 	@Override
 	public Node getAttributeDefinition(String propertyName) {
-		return (Node) getProperty(propertyName);
+		return (Node) get(propertyName);
 	}
 
 	@Override

@@ -8,11 +8,11 @@ import com.dc2f.datastore.Node;
 public class File extends BaseNodeType implements BinaryNodeType {
 
 	public InputStream getInputStream(Node node) {
-		return (InputStream) node.getProperty("data");
+		return (InputStream) node.get("data");
 	}
 
 	public String getMimeType(Node node) {
-		return (String) node.getProperty("mimeType");
+		return (String) node.get("mimeType");
 	}
 
 

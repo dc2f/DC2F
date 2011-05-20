@@ -71,13 +71,13 @@ public class TemplateRenderer implements NodeRenderer {
 					return null;
 				}
 				
-				Node templateNode = (Node) renderConfig.getProperty("template");
-				Node addToContext = (Node) renderConfig.getProperty("addtocontext");
+				Node templateNode = (Node) renderConfig.get("template");
+				Node addToContext = (Node) renderConfig.get("addtocontext");
 				if (templateNode.getNodeType() instanceof TemplateNodeType) {
 					
 					if (node.equals(request.getNode())) {
 						// If the node to be rendered is the same as we would be rendering, check if an 'index' property is set.
-						Node indexNode = (Node) renderConfig.getProperty("index");
+						Node indexNode = (Node) renderConfig.get("index");
 						if (indexNode != null) {
 							Node[] newNodePath = Arrays.copyOf(request.getNodesInPath(), request.getNodesInPath().length + 1);
 							newNodePath[newNodePath.length-1] = indexNode;
