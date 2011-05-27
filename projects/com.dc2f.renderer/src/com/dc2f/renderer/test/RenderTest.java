@@ -6,11 +6,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.Collections;
 import java.util.logging.Logger;
 
 import com.dc2f.datastore.ContentRepository;
+import com.dc2f.datastore.ContentRepositoryFactory;
 import com.dc2f.datastore.Node;
-import com.dc2f.datastore.impl.filejson.SimpleFileContentRepository;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;
@@ -33,7 +34,8 @@ public class RenderTest {
 			System.out.println("Please specify a crdir :) ( -Dcrdir=xxx)");
 			System.exit(1);
 		}
-		ContentRepository cr = new SimpleFileContentRepository(crdir);
+		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
+		//ContentRepository cr = new SimpleFileContentRepository(crdir);
 		
 		//Node node = cr.getNode("/cmsblog/articles/my-first-article");
 //		Node node = cr.getNode("/cmsblog");

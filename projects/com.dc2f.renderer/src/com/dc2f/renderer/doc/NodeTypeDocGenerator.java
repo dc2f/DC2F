@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,16 +16,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
 import com.dc2f.datastore.AttributesDefinition;
 import com.dc2f.datastore.ContentRepository;
+import com.dc2f.datastore.ContentRepositoryFactory;
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.NodeType;
-import com.dc2f.datastore.impl.filejson.SimpleFileContentRepository;
 
 public class NodeTypeDocGenerator {
 	public static void main(String[] args) throws IOException, Exception {
@@ -40,7 +39,8 @@ public class NodeTypeDocGenerator {
 		System.out.println("nodeTypes: " + nodeTypes);
 		
 		// initialize Json Repository
-		ContentRepository cr = new SimpleFileContentRepository(new File(repositoryRoot));
+		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)repositoryRoot));
+		//ContentRepository cr = new SimpleFileContentRepository(new File(repositoryRoot));
 		
 		
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
