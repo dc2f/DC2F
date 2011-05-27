@@ -1,4 +1,4 @@
-package com.dc2f.datastore.impl.filejson;
+package com.dc2f.datastore.filejson;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

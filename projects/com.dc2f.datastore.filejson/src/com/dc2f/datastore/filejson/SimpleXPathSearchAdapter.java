@@ -1,4 +1,4 @@
-package com.dc2f.datastore.impl.filejson;
+package com.dc2f.datastore.filejson;
 
 import com.dc2f.datastore.Node;
 import com.dc2f.datastore.adapters.XPathSearchAdapter;

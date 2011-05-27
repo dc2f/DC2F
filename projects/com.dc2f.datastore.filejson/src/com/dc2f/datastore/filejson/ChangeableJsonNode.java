@@ -1,4 +1,4 @@
-package com.dc2f.datastore.impl.filejson;
+package com.dc2f.datastore.filejson;
 
 import org.json.JSONObject;
 
