@@ -3,9 +3,9 @@ package com.dc2f.renderer.nodetype;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dc2f.datastore.BaseNodeType;
-import com.dc2f.datastore.ContentRepository;
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.BaseNodeType;
+import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.impl.ContentRenderRequestImpl;
 import com.dc2f.renderer.impl.TemplateRenderer;

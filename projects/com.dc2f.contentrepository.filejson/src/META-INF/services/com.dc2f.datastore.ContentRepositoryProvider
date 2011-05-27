@@ -1,1 +1,1 @@
-com.dc2f.datastore.filejson.SimpleJsonContentRepositoryProvider
+com.dc2f.contentrepository.filejson.SimpleJsonContentRepositoryProvider

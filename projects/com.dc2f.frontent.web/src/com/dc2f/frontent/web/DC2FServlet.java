@@ -13,11 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.dc2f.datastore.ContentRepository;
-import com.dc2f.datastore.ContentRepositoryFactory;
-import com.dc2f.datastore.Node;
-import com.dc2f.datastore.exception.DC2FRuntimeException;
-import com.dc2f.datastore.filejson.SimpleFileContentRepository;
+import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.ContentRepositoryFactory;
+import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.exception.DC2FRuntimeException;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;

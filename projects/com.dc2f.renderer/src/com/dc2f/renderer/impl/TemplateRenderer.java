@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.dc2f.datastore.Node;
-import com.dc2f.datastore.NodeType;
+import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.NodeType;
 import com.dc2f.nodetype.BinaryNodeType;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.ContentRenderResponse;

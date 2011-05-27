@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderRequest;
 
 public class HtmlTemplate extends TemplateNodeType {

@@ -2,7 +2,7 @@ package com.dc2f.nodetype;
 
 import java.io.InputStream;
 
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.Node;
 
 /**
  * Interface of all node types which might contain some binary data.

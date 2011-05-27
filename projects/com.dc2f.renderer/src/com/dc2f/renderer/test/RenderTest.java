@@ -9,9 +9,9 @@ import java.io.Writer;
 import java.util.Collections;
 import java.util.logging.Logger;
 
-import com.dc2f.datastore.ContentRepository;
-import com.dc2f.datastore.ContentRepositoryFactory;
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.ContentRepositoryFactory;
+import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderResponse;
 import com.dc2f.renderer.NodeRenderer;
 import com.dc2f.renderer.NodeRendererFactory;

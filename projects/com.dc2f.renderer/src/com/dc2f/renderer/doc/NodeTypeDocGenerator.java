@@ -19,11 +19,11 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.dc2f.datastore.AttributesDefinition;
-import com.dc2f.datastore.ContentRepository;
-import com.dc2f.datastore.ContentRepositoryFactory;
-import com.dc2f.datastore.Node;
-import com.dc2f.datastore.NodeType;
+import com.dc2f.contentrepository.AttributesDefinition;
+import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.ContentRepositoryFactory;
+import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.NodeType;
 
 public class NodeTypeDocGenerator {
 	public static void main(String[] args) throws IOException, Exception {

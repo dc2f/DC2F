@@ -4,8 +4,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.dc2f.datastore.ContentRepository;
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.url.URLMapper;
 
 public class ServletURLMapper implements URLMapper {

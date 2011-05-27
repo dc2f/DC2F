@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.dc2f.datastore.BaseNodeType;
-import com.dc2f.datastore.Node;
-import com.dc2f.datastore.NodeTypeInfo;
+import com.dc2f.contentrepository.BaseNodeType;
+import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.NodeTypeInfo;
 
 public class RenderableNodeType extends BaseNodeType {
 	private static final Logger logger = Logger.getLogger(RenderableNodeType.class.getName());

@@ -2,8 +2,8 @@ package com.dc2f.nodetype;
 
 import java.io.InputStream;
 
-import com.dc2f.datastore.BaseNodeType;
-import com.dc2f.datastore.Node;
+import com.dc2f.contentrepository.BaseNodeType;
+import com.dc2f.contentrepository.Node;
 
 public class File extends BaseNodeType implements BinaryNodeType {
 
