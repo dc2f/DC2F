@@ -8,7 +8,6 @@ import java.util.Set;
 
 import com.dc2f.datastore.ChangeableNode;
 import com.dc2f.datastore.ContentRepositoryException;
-import com.dc2f.datastore.Node;
 import com.dc2f.datastore.WritableContentRepository;
 
 public class WritableFileContentRepository extends SimpleFileContentRepository
