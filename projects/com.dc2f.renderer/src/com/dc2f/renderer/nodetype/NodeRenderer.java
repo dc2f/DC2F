@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dc2f.contentrepository.BaseNodeType;
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderRequest;
@@ -16,7 +17,7 @@ public class NodeRenderer extends BaseNodeType implements
 
 	@Override
 	public String renderNode(Node configNode, ContentRenderRequest request, Node context, Object value) {
-		ContentRepository repository = request.getContentRepository();
+		CRAccess crAccess = request.getContentRepositoryTransaction();
 		context = request.getCurrentNodeContext();
 		if (value instanceof Node) {
 			Node valueNode = (Node) value;
@@ -37,7 +38,7 @@ public class NodeRenderer extends BaseNodeType implements
 				// nothing more to render ..
 				return null;
 			}
-			while ((node = repository.getParentNode(node)) != null) {
+			while ((node = crAccess.getParentNode(node)) != null) {
 				if (node.equals(context)) {
 					break;
 				}
@@ -53,7 +54,7 @@ public class NodeRenderer extends BaseNodeType implements
 				renderType = renderType + "." + renderSubtype;
 			}
 			
-			ContentRenderRequest newRequest = new ContentRenderRequestImpl(request.getContentRepository(), nodePath.toArray(new Node[nodePath.size()]), request.getURLMapper());
+			ContentRenderRequest newRequest = new ContentRenderRequestImpl(request.getContentRepository(), request.getContentRepositoryTransaction(), nodePath.toArray(new Node[nodePath.size()]), request.getURLMapper());
 			return TemplateRenderer.internalRenderNode(newRequest, null, renderType, null);
 		}
 		return "we need to render " + value;

@@ -13,9 +13,9 @@ public class NodeTypeDefinition extends BaseNodeType {
 				new KeyValuePair(
 						"attributes", new MapNode(
 								new KeyValuePair("type", "Node"),
-								new KeyValuePair("typeofnode", "classpath:com/dc2f/datastore/nodetypedefinition/AttributesNodeType")
+								new KeyValuePair("typeofnode", "classpath:com/dc2f/contentrepository/nodetypedefinition/AttributesNodeType")
 								/*,
-								new KeyValuePair("typeofnode", "classpath:com/dc2f/datastore/DefaultNodeType")*/) ),
+								new KeyValuePair("typeofnode", "classpath:com/dc2f/contentrepository/DefaultNodeType")*/) ),
 				new KeyValuePair("class", new MapNode(new KeyValuePair("type", "String"))),
 				new KeyValuePair("freeattributes", new MapNode(new KeyValuePair("type", "Boolean"))),
 				new KeyValuePair("valuetype", new MapNode(new KeyValuePair("type", "String"))),

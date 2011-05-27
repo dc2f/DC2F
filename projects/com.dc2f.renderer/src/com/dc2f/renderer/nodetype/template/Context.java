@@ -45,7 +45,7 @@ public class Context extends BaseNodeType {
 					if (ref.startsWith(".@")) {
 						renderValue = request.getCurrentNodeContext().get(ref.substring(2));
 					} else {
-						renderValue = request.getContentRepository().resolveNode(request.getCurrentNodeContext(), ref);
+						renderValue = request.getContentRepositoryTransaction().resolveNode(request.getCurrentNodeContext(), ref);
 					}
 				} else if (refContextProperty.equals("context")) {
 					renderValue = this.resolveFromContext(context, request, ref);

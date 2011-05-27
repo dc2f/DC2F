@@ -9,6 +9,8 @@ import java.io.Writer;
 import java.util.Collections;
 import java.util.logging.Logger;
 
+import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.CRSession;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.ContentRepositoryFactory;
 import com.dc2f.contentrepository.Node;
@@ -35,6 +37,8 @@ public class RenderTest {
 			System.exit(1);
 		}
 		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
+		CRSession conn = cr.authenticate(null);
+		BranchAccess craccess = conn.openTransaction(null);
 		//ContentRepository cr = new SimpleFileContentRepository(crdir);
 		
 		//Node node = cr.getNode("/cmsblog/articles/my-first-article");
@@ -45,7 +49,7 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath("/cmsblog"), new URLMapper() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath("/cmsblog"), new URLMapper() {
 
 			@Override
 			public String getRenderURL(Node node) {

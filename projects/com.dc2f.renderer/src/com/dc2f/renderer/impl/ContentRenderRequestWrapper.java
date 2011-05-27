@@ -2,6 +2,7 @@ package com.dc2f.renderer.impl;
 
 import java.util.List;
 
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderRequest;
@@ -24,8 +25,8 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 	}
 
 	@Override
-	public ContentRepository getContentRepository() {
-		return wrappedRequest.getContentRepository();
+	public CRAccess getContentRepositoryTransaction() {
+		return wrappedRequest.getContentRepositoryTransaction();
 	}
 
 	@Override
@@ -88,6 +89,12 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 	@Override
 	public URLMapper getURLMapper() {
 		return wrappedRequest.getURLMapper();
+	}
+
+
+	@Override
+	public ContentRepository getContentRepository() {
+		return wrappedRequest.getContentRepository();
 	}
 
 }

@@ -1,7 +1,7 @@
 package com.dc2f.contentrepository;
 
 /**
- * Information about a node type which is defined in the datastore.
+ * Information about a node type which is defined in the content repository.
  * 
  * @author herbert
  */

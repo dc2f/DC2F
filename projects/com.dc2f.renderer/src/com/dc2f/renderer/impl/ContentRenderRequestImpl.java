@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.ContentRenderRequest;
@@ -20,9 +21,11 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	private List<Node> nodeContextStack = new LinkedList<Node>();
 	public List<Node> renderContextStack = new LinkedList<Node>();
 	private URLMapper urlMapper;
+	private CRAccess crAccess;
 
-	public ContentRenderRequestImpl(ContentRepository contentRepository, Node[] nodePath, URLMapper urlMapper) {
+	public ContentRenderRequestImpl(ContentRepository contentRepository, CRAccess crAccess, Node[] nodePath, URLMapper urlMapper) {
 		this.contentRepository = contentRepository;
+		this.crAccess = crAccess;
 		this.nodePath = nodePath;
 		this.nodeStack = Arrays.asList(nodePath);
 		this.urlMapper = urlMapper;
@@ -41,8 +44,8 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	}
 
 	@Override
-	public ContentRepository getContentRepository() {
-		return contentRepository;
+	public CRAccess getContentRepositoryTransaction() {
+		return crAccess;
 	}
 
 	@Override
@@ -89,5 +92,10 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	@Override
 	public URLMapper getURLMapper() {
 		return urlMapper;
+	}
+
+	@Override
+	public ContentRepository getContentRepository() {
+		return contentRepository;
 	}
 }

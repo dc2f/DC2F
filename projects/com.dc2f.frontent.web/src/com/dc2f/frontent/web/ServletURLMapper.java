@@ -4,20 +4,20 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import com.dc2f.contentrepository.ContentRepository;
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.url.URLMapper;
 
 public class ServletURLMapper implements URLMapper {
 
-	private ContentRepository contentRepository;
-	
 	private ServletConfig servletConfig;
 	
 	private String defaultProjectPath = "/cmsblog";
+
+	private CRAccess crAccess;
 	
-	public ServletURLMapper(ContentRepository cr, ServletConfig config) {
-		contentRepository = cr;
+	public ServletURLMapper(CRAccess crAccess, ServletConfig config) {
+		this.crAccess = crAccess;
 		servletConfig = config;
 	}
 	/**
@@ -34,9 +34,9 @@ public class ServletURLMapper implements URLMapper {
 				pathFromServlet = pathFromServlet.substring(webappPath.length());
 			}
 			if ("/".equals(pathFromServlet)) {
-				return contentRepository.getNode(defaultProjectPath);
+				return crAccess.getNode(defaultProjectPath);
 			}
-			return contentRepository.getNode(defaultProjectPath + pathFromServlet);
+			return crAccess.getNode(defaultProjectPath + pathFromServlet);
 		}
 		return null;
 	}

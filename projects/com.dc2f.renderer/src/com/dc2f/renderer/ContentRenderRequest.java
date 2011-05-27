@@ -2,6 +2,7 @@ package com.dc2f.renderer;
 
 import java.util.List;
 
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.renderer.url.URLMapper;
@@ -15,7 +16,7 @@ public interface ContentRenderRequest {
 	
 	public Node popFromNodeStack();
 
-	public ContentRepository getContentRepository();
+	public CRAccess getContentRepositoryTransaction();
 
 	public Object setAttribute(String key, Object value);
 
@@ -27,4 +28,5 @@ public interface ContentRenderRequest {
 	public Node popRenderContext();
 	public List<Node> getRenderContextStack();
 	public URLMapper getURLMapper();
+	public ContentRepository getContentRepository();
 }

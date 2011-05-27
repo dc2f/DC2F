@@ -20,6 +20,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.dc2f.contentrepository.AttributesDefinition;
+import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.CRSession;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.ContentRepositoryFactory;
 import com.dc2f.contentrepository.Node;
@@ -40,6 +42,8 @@ public class NodeTypeDocGenerator {
 		
 		// initialize Json Repository
 		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)repositoryRoot));
+		CRSession conn = cr.authenticate(null);
+		BranchAccess transaction = conn.openTransaction(null);
 		//ContentRepository cr = new SimpleFileContentRepository(new File(repositoryRoot));
 		
 		
@@ -52,7 +56,7 @@ public class NodeTypeDocGenerator {
 		
 
 		for(String nodeTypeName : nodeTypes) {
-			NodeType nodeType = cr.getNodeType(nodeTypeName);
+			NodeType nodeType = transaction.getNodeType(nodeTypeName);
 			System.out.println("nodeType: " + nodeType);
 			System.out.println(" comment: " + nodeType.getNodeTypeInfo().get("_comment"));
 			Element nodeTypeElement = doc.createElement("nodetype");

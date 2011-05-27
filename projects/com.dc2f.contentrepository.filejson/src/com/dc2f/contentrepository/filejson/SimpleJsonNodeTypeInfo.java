@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.contentrepository.NodeTypeInfo;
 import com.dc2f.contentrepository.exception.ClassNotFoundForNodeTypeException;
@@ -19,8 +18,8 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 
 	private NodeType parentNodeType;
 
-	public SimpleJsonNodeTypeInfo(ContentRepository repository, NodeType parentNodeType, String path, JSONObject jsonObject) {
-		super(repository, path, jsonObject, parentNodeType != null ? parentNodeType : new NodeTypeDefinition());
+	public SimpleJsonNodeTypeInfo(SimpleBranchAccess simpleBranchAccess, NodeType parentNodeType, String path, JSONObject jsonObject) {
+		super(simpleBranchAccess, path, jsonObject, parentNodeType != null ? parentNodeType : new NodeTypeDefinition());
 		this.parentNodeType = parentNodeType != null ? parentNodeType : new NodeTypeDefinition();
 		this.jsonObject = jsonObject;
 	}

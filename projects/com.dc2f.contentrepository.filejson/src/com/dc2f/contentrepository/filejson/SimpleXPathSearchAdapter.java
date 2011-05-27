@@ -6,7 +6,7 @@ import com.dc2f.contentrepository.adapters.XPathSearchAdapter;
 public class SimpleXPathSearchAdapter implements XPathSearchAdapter {
 
 	public SimpleXPathSearchAdapter(
-			SimpleFileContentRepository simpleFileContentRepository) {
+			SimpleBranchAccess simpleBranchAccess) {
 		// TODO Auto-generated constructor stub
 	}
 

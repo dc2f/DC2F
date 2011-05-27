@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.CRSession;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.ContentRepositoryFactory;
 import com.dc2f.contentrepository.Node;
@@ -59,12 +61,14 @@ public class DC2FServlet implements Servlet {
 			System.out.println("Please specify a crdir :) ( -Dcrdir=xxx)");
 		}
 		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
+		CRSession conn = cr.authenticate(null);
+		BranchAccess craccess = conn.openTransaction(null);
 		//ContentRepository cr = new SimpleFileContentRepository(crdir);
-		ServletURLMapper mapper = new ServletURLMapper(cr, getServletConfig());
+		ServletURLMapper mapper = new ServletURLMapper(craccess, getServletConfig());
 		Node node = mapper.getNode(request);
 		logger.info("We got a node: {" + node + "}");
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, cr.getNodesInPath(node.getPath()), mapper),
+		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath(node.getPath()), mapper),
 					new ServletRenderResponse(response));
 	}
 	

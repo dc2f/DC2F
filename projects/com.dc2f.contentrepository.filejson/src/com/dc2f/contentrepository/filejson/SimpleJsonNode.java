@@ -22,17 +22,17 @@ import com.dc2f.contentrepository.exception.UnknownAttributeException;
 public class SimpleJsonNode implements Node {
 	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
 
-	private ContentRepository repository;
+	private SimpleBranchAccess branchAccess;
 	private String path;
 	private JSONObject jsonObject;
 	private NodeType nodeType;
 
-	public SimpleJsonNode(ContentRepository repository, String path, JSONObject jsonObject, NodeType nodeType) {
+	public SimpleJsonNode(SimpleBranchAccess branchAccess, String path, JSONObject jsonObject, NodeType nodeType) {
 		// "normalize" path :)
 		if (path != null && path.endsWith("/") && !"/".equals(path)) {
 			path = path.replaceAll("/+$", "");
 		}
-		this.repository = repository;
+		this.branchAccess = branchAccess;
 		this.path = path;
 		this.jsonObject = jsonObject;
 		this.nodeType = nodeType;
@@ -100,11 +100,11 @@ public class SimpleJsonNode implements Node {
 					e.printStackTrace();
 				}
 			}
-			return repository.getNode(ref);
+			return branchAccess.getNode(ref);
 		} else if ("clob".equals(attributeType) && obj == null) {
-			obj = ((SimpleFileContentRepository)repository).loadRepositoryFile(new File(path, attributeName + ".clob.property"));
+			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(path, attributeName + ".clob.property"));
 		} else if ("blob".equals(attributeType) && obj == null) {
-			return ((SimpleFileContentRepository)repository).getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
+			return branchAccess.getContentRepository().getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
 		}
 
 		if (obj instanceof String) {
@@ -121,25 +121,25 @@ public class SimpleJsonNode implements Node {
 			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;
 			if (subNodeTypeName != null) {
-				currentSubNodeType = repository.getNodeType(subNodeTypeName);
+				currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
 			}
 			
 			if (currentSubNodeType == null) {
 				String typeofnode = (String) attrDefinition.get("typeofnode");
 				if (typeofnode != null) {
-					currentSubNodeType = repository.getNodeType(typeofnode);
+					currentSubNodeType = branchAccess.getNodeType(typeofnode);
 				}
 			}
 			if (currentSubNodeType == null) {
 				currentSubNodeType = new DefaultNodeType();
 			}
-			return new SimpleJsonNode(repository, path, (JSONObject) obj, currentSubNodeType);
+			return new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
 		} else if ("ListOfNodes".equals(attributeType)) {
 			JSONArray array = (JSONArray) obj;
 			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
 			NodeType subNodeType = null;
 			if (typeofsubnodes != null) {
-				subNodeType = repository.getNodeType(typeofsubnodes);
+				subNodeType = branchAccess.getNodeType(typeofsubnodes);
 			}
 			List<Node> ret = new ArrayList<Node>();
 			for (int i = 0 ; i < array.length() ; i++) {
@@ -148,9 +148,9 @@ public class SimpleJsonNode implements Node {
 					String subNodeTypeName = arrayobj.optString("nodetype", null);
 					NodeType currentSubNodeType = subNodeType;
 					if (subNodeTypeName != null) {
-						currentSubNodeType = repository.getNodeType(subNodeTypeName);
+						currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
 					}
-					ret.add(new SimpleJsonNode(repository, path, arrayobj, currentSubNodeType));
+					ret.add(new SimpleJsonNode(branchAccess, path, arrayobj, currentSubNodeType));
 				} catch (JSONException e) {
 					logger.log(Level.SEVERE, "Error while converting property into ListOfNodes", e);
 				}
