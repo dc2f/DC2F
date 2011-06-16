@@ -14,13 +14,13 @@
   
   <servlet-mapping>
     <servlet-name>DC2FNavigationServlet</servlet-name>
-    <url-pattern>/mywebapp/navigation</url-pattern>
+    <url-pattern>/dc2f/navigation</url-pattern>
   </servlet-mapping>
   
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>MyWebApp.html</welcome-file>
+    <welcome-file>DC2F.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
