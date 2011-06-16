@@ -1,0 +1,2 @@
+serviceClass: com.dc2f.backend.client.services.DC2FNavigationService
+path: 01588D367C34D0DC0B48037BE464F80E.gwt.rpc
