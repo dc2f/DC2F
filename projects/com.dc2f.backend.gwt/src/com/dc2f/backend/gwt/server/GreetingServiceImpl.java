@@ -1,7 +1,7 @@
-package com.dc2f.backend.server;
+package com.dc2f.backend.gwt.server;
 
-import com.dc2f.backend.client.services.GreetingService;
-import com.dc2f.backend.shared.FieldVerifier;
+import com.dc2f.backend.gwt.client.services.GreetingService;
+import com.dc2f.backend.gwt.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**

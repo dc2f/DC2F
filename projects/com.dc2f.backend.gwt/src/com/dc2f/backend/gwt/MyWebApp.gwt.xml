@@ -15,7 +15,7 @@
 	<!-- inherits name='com.dc2f.contentrepository.shared' / -->
 
 	<!-- Specify the app entry point class.                         -->
-	<entry-point class='com.dc2f.backend.client.DC2FBackend' />
+	<entry-point class='com.dc2f.backend.gwt.client.DC2FBackend' />
 
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client' />

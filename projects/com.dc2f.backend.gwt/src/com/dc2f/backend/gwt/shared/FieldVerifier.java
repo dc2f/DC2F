@@ -1,4 +1,4 @@
-package com.dc2f.backend.shared;
+package com.dc2f.backend.gwt.shared;
 
 /**
  * <p>

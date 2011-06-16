@@ -1,9 +1,9 @@
-package com.dc2f.backend.client;
+package com.dc2f.backend.gwt.client;
 
 import java.util.List;
 
-import com.dc2f.backend.client.services.DC2FNavigationServiceAsync;
-import com.dc2f.backend.shared.Node;
+import com.dc2f.backend.gwt.client.services.DC2FNavigationServiceAsync;
+import com.dc2f.backend.gwt.shared.Node;
 import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;

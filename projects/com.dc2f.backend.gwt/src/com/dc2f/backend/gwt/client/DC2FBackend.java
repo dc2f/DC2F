@@ -1,9 +1,9 @@
-package com.dc2f.backend.client;
+package com.dc2f.backend.gwt.client;
 
-import com.dc2f.backend.client.services.DC2FNavigationService;
-import com.dc2f.backend.client.services.DC2FNavigationServiceAsync;
-import com.dc2f.backend.client.services.GreetingService;
-import com.dc2f.backend.client.services.GreetingServiceAsync;
+import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
+import com.dc2f.backend.gwt.client.services.DC2FNavigationServiceAsync;
+import com.dc2f.backend.gwt.client.services.GreetingService;
+import com.dc2f.backend.gwt.client.services.GreetingServiceAsync;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

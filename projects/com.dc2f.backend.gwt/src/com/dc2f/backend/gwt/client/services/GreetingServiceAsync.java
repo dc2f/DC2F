@@ -1,4 +1,4 @@
-package com.dc2f.backend.client.services;
+package com.dc2f.backend.gwt.client.services;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

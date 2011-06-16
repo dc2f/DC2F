@@ -1,12 +1,12 @@
-package com.dc2f.backend.server;
+package com.dc2f.backend.gwt.server;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import com.dc2f.backend.client.services.DC2FNavigationService;
-import com.dc2f.backend.shared.Node;
+import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
+import com.dc2f.backend.gwt.shared.Node;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.CRSession;
 import com.dc2f.contentrepository.ContentRepository;

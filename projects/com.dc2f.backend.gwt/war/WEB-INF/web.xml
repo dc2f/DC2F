@@ -6,19 +6,10 @@
 <web-app>
   
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.dc2f.backend.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/mywebapp/greet</url-pattern>
-  </servlet-mapping>
   
   <servlet>
     <servlet-name>DC2FNavigationServlet</servlet-name>
-    <servlet-class>com.dc2f.backend.server.DC2FNavigationServiceImpl</servlet-class>
+    <servlet-class>com.dc2f.backend.gwt.server.DC2FNavigationServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
