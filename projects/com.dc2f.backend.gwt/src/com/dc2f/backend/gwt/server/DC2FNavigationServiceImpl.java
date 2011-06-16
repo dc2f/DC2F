@@ -23,13 +23,7 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 	BranchAccess craccess;
 
 	public DC2FNavigationServiceImpl() {
-		//NodeRendererFactory factory = NodeRendererFactory.getInstance();
-		//NodeRenderer renderer = factory.getRenderer("com.dc2f.renderer.web");
-		File crdir = new File(System.getProperty("crdir", "/Users/bigbear3001/Documents/dc2f/design/example"));
-		//ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
-		ContentRepository cr = new SimpleJsonContentRepositoryProvider().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
-		CRSession conn = cr.authenticate(null);
-		craccess = conn.openTransaction(null);
+		craccess = DC2FAccessManager.getAccess();
 	}
 	
 	public List<Node> getNodesForPath(String path) {

@@ -61,7 +61,7 @@ public class LazyTree extends Tree {
 			path = givenPath;
 		}
 		
-		String getPath() {
+		public String getPath() {
 			return path;
 		}
 	}

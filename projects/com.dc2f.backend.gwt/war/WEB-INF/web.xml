@@ -17,6 +17,15 @@
     <url-pattern>/dc2f/navigation</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>DC2FContentServlet</servlet-name>
+    <servlet-class>com.dc2f.backend.gwt.server.DC2FContentServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DC2FContentServlet</servlet-name>
+    <url-pattern>/dc2f/content</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
