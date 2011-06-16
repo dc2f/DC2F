@@ -1,2 +1,0 @@
-serviceClass: com.dc2f.backend.client.GreetingService
-path: 9D4D1687F7D88BA53B674453C5F91EC8.gwt.rpc
