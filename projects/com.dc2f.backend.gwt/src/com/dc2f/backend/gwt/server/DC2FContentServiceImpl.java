@@ -22,7 +22,14 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		ContentNode node = new ContentNode();
 		node.setName(dc2fNode.getName());
 		node.setPath(dc2fNode.getPath());
+		node.setNodeType(dc2fNode.getNodeType().toString());
+		for(String attributeName : dc2fNode.getNodeType().getAttributeDefinitions().getAttributeNames()) {
+			Object attributeValue = dc2fNode.get(attributeName);
+			if (attributeValue instanceof String) {
+				node.set(attributeName, (String) attributeValue);
+			}
+		}
 		return node;
 	}
-	
+
 }

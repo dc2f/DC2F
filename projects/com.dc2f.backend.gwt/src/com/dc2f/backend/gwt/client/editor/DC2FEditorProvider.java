@@ -2,6 +2,7 @@ package com.dc2f.backend.gwt.client.editor;
 
 import com.dc2f.backend.gwt.client.LazyTree;
 import com.dc2f.backend.gwt.client.LazyTree.LazyTreeItem;
+import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.google.gwt.core.client.GWT;
@@ -19,7 +20,7 @@ public class DC2FEditorProvider extends Composite {
 
 	ContentNode actualNode;
 	
-	DC2FContentServiceAsync contentService = GWT.create(DC2FContentServiceAsync.class);
+	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
 	
 	public DC2FEditorProvider() {
 		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");

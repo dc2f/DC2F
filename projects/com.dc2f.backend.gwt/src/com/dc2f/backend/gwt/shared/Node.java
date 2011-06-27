@@ -12,6 +12,8 @@ public class Node implements Serializable {
 	String name;
 	
 	String path;
+
+	private String nodeType;
 	
 	public void setName(String givenName) {
 		name = givenName;
@@ -27,6 +29,14 @@ public class Node implements Serializable {
 
 	public String getPath() {
 		return path;
+	}
+	
+	public void setNodeType(String givenNodeType) {
+		nodeType = givenNodeType;
+	}
+	
+	public String getNodeType() {
+		return nodeType;
 	}
 
 }
