@@ -1,0 +1,15 @@
+{
+	'class': 'com.dc2f.nodetype.File',
+
+	'attributes': {
+		'timestamp': {
+			'type': 'Long',
+			'required': true,
+		},
+		'offset': {
+			'type': 'Integer',
+			'required': true,
+		}
+	},
+
+}
