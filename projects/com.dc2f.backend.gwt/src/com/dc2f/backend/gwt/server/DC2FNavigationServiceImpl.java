@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
 import com.dc2f.backend.gwt.shared.Node;
 import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.NodeType;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements DC2FNavigationService {
@@ -27,7 +28,10 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 			Node node = new Node();
 			node.setName(dc2fNode.getName());
 			node.setPath(dc2fNode.getPath());
-			node.setNodeType(dc2fNode.getNodeType().toString());
+			NodeType type = dc2fNode.getNodeType();
+			if (type != null) {
+				node.setNodeType(type.toString());
+			}
 			nodes.add(node);
 		}
 		return nodes;

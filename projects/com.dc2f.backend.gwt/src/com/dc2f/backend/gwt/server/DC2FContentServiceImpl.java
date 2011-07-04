@@ -3,6 +3,7 @@ package com.dc2f.backend.gwt.server;
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.NodeType;
 
 public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements DC2FContentService {
 
@@ -22,13 +23,17 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		ContentNode node = new ContentNode();
 		node.setName(dc2fNode.getName());
 		node.setPath(dc2fNode.getPath());
-		node.setNodeType(dc2fNode.getNodeType().toString());
-		for(String attributeName : dc2fNode.getNodeType().getAttributeDefinitions().getAttributeNames()) {
-			Object attributeValue = dc2fNode.get(attributeName);
-			if (attributeValue instanceof String) {
-				node.set(attributeName, (String) attributeValue);
+		NodeType type = dc2fNode.getNodeType();
+		if (type != null) {
+			node.setNodeType(type.toString());
+			for(String attributeName : type.getAttributeDefinitions().getAttributeNames()) {
+				Object attributeValue = dc2fNode.get(attributeName);
+				if (attributeValue instanceof String) {
+					node.set(attributeName, (String) attributeValue);
+				}
 			}
 		}
+		
 		return node;
 	}
 
