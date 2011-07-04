@@ -46,19 +46,24 @@ public class SimpleBranchAccess implements BranchAccess {
 	@Override
 	public NodeType getNodeType(String path) {
 		JSONObject jsonObject = cr.loadJSONFromPath(path + ".json", null);
-		String extendsNodeType = jsonObject.optString("extends", null);
-		NodeType parentNodeType = null;
-		if (extendsNodeType != null) {
-			parentNodeType = getNodeType(extendsNodeType);
-		}
-		SimpleJsonNodeTypeInfo nodeTypeInfo = new SimpleJsonNodeTypeInfo(this, parentNodeType, path, jsonObject);
-		Class<NodeType> nodeTypeClass = nodeTypeInfo.getNodeTypeClass();
-		try {
-			NodeType nodeType = nodeTypeClass.newInstance();
-			nodeType.init(nodeTypeInfo);
-			return nodeType;
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Error while creating instance for node type {" + nodeTypeInfo + "}", e);
+		if (jsonObject != null) {
+			String extendsNodeType = jsonObject.optString("extends", null);
+			NodeType parentNodeType = null;
+			if (extendsNodeType != null) {
+				parentNodeType = getNodeType(extendsNodeType);
+			}
+			SimpleJsonNodeTypeInfo nodeTypeInfo = new SimpleJsonNodeTypeInfo(this, parentNodeType, path, jsonObject);
+			Class<NodeType> nodeTypeClass = nodeTypeInfo.getNodeTypeClass();
+			try {
+				NodeType nodeType = nodeTypeClass.newInstance();
+				nodeType.init(nodeTypeInfo);
+				return nodeType;
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Error while creating instance for node type {" + nodeTypeInfo + "}", e);
+				return null;
+			}
+		} else {
+			logger.log(Level.FINE, "Cannot get node type for path " + path);
 			return null;
 		}
 	}
