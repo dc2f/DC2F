@@ -5,7 +5,7 @@
 		'image': { 'type': 'NodeReference', 'nodetype': 'classpath:com/dc2f/nodetype/Image' },
 		'title': { 'type': 'String', },
 		'body': { 'type': 'String',  },
-		'date': { 'nodetype': 'classpath:com/dc2f/nodetype/Date' },
+		'date': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/nodetype/Date' },
 	},
 
 
