@@ -1,6 +1,8 @@
 package com.dc2f.backend.gwt.client.editor;
 
 import com.dc2f.backend.gwt.shared.ContentNode;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -11,7 +13,8 @@ public class AttributeEditor extends Editor {
 
 	VerticalPanel attributeList = new VerticalPanel();
 	
-	public AttributeEditor() {
+	public AttributeEditor(DC2FEditorProvider editorProvider) {
+		super(editorProvider);
 		setName("Attribute Editor");
 		final DockPanel main = new DockPanel();
 		main.add(attributeList, DockPanel.CENTER);
@@ -28,6 +31,7 @@ public class AttributeEditor extends Editor {
 			attributePanel.add(attributeLabel);
 			TextBox attributeValue = new TextBox();
 			attributeValue.setText(node.get(attributeName));
+			attributeValue.addChangeHandler(getChangeHandler(attributeName));
 			attributePanel.add(attributeValue);
 			attributeList.add(attributePanel);
 		}

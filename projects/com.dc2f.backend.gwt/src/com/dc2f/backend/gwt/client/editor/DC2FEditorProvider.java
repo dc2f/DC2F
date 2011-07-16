@@ -9,6 +9,7 @@ import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -26,17 +27,26 @@ public class DC2FEditorProvider extends Composite {
 	
 	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
 	
-	HorizontalPanel buttonList;
+	HorizontalPanel editorList;
 	
 	DockPanel main;
 
 	private Widget lastMainWidget;
 	
+	private Button closeButton = new Button("close");
+	
+	private Button saveButton = new Button("save");
+	
 	public DC2FEditorProvider() {
 		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
-		buttonList = new HorizontalPanel();
+		editorList = new HorizontalPanel();
 		main = new DockPanel();
-		main.add(buttonList, DockPanel.NORTH);
+		main.add(editorList, DockPanel.NORTH);
+		HorizontalPanel statusButtonList = new HorizontalPanel();
+		statusButtonList.add(closeButton);
+		saveButton.setEnabled(false);
+		statusButtonList.add(saveButton);
+		main.add(statusButtonList, DockPanel.SOUTH);
 		initWidget(main);
 	}
 	
@@ -69,20 +79,20 @@ public class DC2FEditorProvider extends Composite {
 	
 	public void refreshEditors() {
 		//Check old editors for compatiblity
-		for(Widget editButton : buttonList) {
+		for(Widget editButton : editorList) {
 			
 		}
 		//Add new editors for this article
 		for(Editor editor : getAvailableEditors()) {
 			final Button editButton = new Button(editor.getName());
-			editor.bindToButton(editButton, this);
-			buttonList.add(editButton);
+			editor.bindToButton(editButton);
+			editorList.add(editButton);
 		}
 	}
 	
 	private Collection<Editor> getAvailableEditors() {
 		Vector<Editor> editors = new Vector<Editor>();
-		Editor editor = new AttributeEditor();
+		Editor editor = new AttributeEditor(this);
 		editors.add(editor);
 		return editors;
 	}
@@ -93,6 +103,7 @@ public class DC2FEditorProvider extends Composite {
 
 	public void showEditor(Editor editor) {
 		setMain(editor);
+		saveButton.setEnabled(false);
 	}
 	
 	private Widget setMain(Widget widget) {
@@ -103,6 +114,10 @@ public class DC2FEditorProvider extends Composite {
 		main.add(widget, DockPanel.CENTER);
 		lastMainWidget = widget;
 		return lastLastMainWidget;
+	}
+
+	protected void nodeHasChanged(ChangeEvent event) {
+		saveButton.setEnabled(true);
 	}
 
 }
