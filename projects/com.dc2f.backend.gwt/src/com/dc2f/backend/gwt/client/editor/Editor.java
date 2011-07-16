@@ -78,6 +78,14 @@ public abstract class Editor extends Composite {
 	 * @return change handler for this attribute
 	 */
 	protected ChangeHandler getChangeHandler(String attributeName) {
+		return getChangeHandler();
+	}
+	
+	/**
+	 * @return change handler to use when anything in the node has changed. if you know the specific changed attribute better use
+	 * {@link #getChangeHandler(String)}.
+	 */
+	protected ChangeHandler getChangeHandler() {
 		return new ChangeHandler() {
 			
 			@Override

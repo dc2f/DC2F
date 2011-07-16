@@ -91,9 +91,12 @@ public class DC2FEditorProvider extends Composite {
 	}
 	
 	private Collection<Editor> getAvailableEditors() {
+		//TODO better get this list dynamically
 		Vector<Editor> editors = new Vector<Editor>();
-		Editor editor = new AttributeEditor(this);
-		editors.add(editor);
+		Editor attributeEditor = new AttributeEditor(this);
+		editors.add(attributeEditor);
+		Editor sourceEditor = new SourceEditor(this);
+		editors.add(sourceEditor);
 		return editors;
 	}
 	
