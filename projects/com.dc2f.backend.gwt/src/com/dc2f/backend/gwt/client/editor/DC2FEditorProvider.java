@@ -85,7 +85,7 @@ public class DC2FEditorProvider extends Composite {
 		//Add new editors for this article
 		for(Editor editor : getAvailableEditors()) {
 			final Button editButton = new Button(editor.getName());
-			editor.bindToButton(editButton);
+			editor.loadEditorOnButtonClick(editButton);
 			editorList.add(editButton);
 		}
 	}

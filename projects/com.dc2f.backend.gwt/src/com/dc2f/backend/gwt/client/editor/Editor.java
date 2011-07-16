@@ -11,18 +11,25 @@ import com.google.gwt.user.client.ui.Composite;
 public abstract class Editor extends Composite {
 
 	/**
-	 * name of the editor
+	 * name of the editor.
 	 */
 	protected String name;
 	
+	/**
+	 * editor provider which is used to show the editor in the GUI.
+	 */
 	private DC2FEditorProvider editorProvider;
 
+	/**
+	 * initialize the new editor.
+	 * @param dc2fEditorProvider - editor provider to use when the editor is shown
+	 */
 	public Editor(DC2FEditorProvider dc2fEditorProvider) {
 		editorProvider = dc2fEditorProvider;
 	}
 	
 	/**
-	 * @return name of the editor
+	 * @return name of the editor.
 	 */
 	public String getName() {
 		return name;
@@ -36,7 +43,11 @@ public abstract class Editor extends Composite {
 		this.name = name;
 	}
 
-	public void bindToButton(Button button) {
+	/**
+	 * register this editor to open when the button is clicked.
+	 * @param button - button to open the editor
+	 */
+	public void loadEditorOnButtonClick(Button button) {
 		button.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -61,6 +72,11 @@ public abstract class Editor extends Composite {
 	 */
 	public abstract void loadNode(ContentNode node);
 	
+	/**
+	 * get a change handler for the given attribute
+	 * @param attributeName - name of the attribute to get the change handler for
+	 * @return change handler for this attribute
+	 */
 	protected ChangeHandler getChangeHandler(String attributeName) {
 		return new ChangeHandler() {
 			
