@@ -1,5 +1,8 @@
 package com.dc2f.backend.gwt.client.editor;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import com.dc2f.backend.gwt.client.LazyTree;
 import com.dc2f.backend.gwt.client.LazyTree.LazyTreeItem;
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
@@ -15,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TreeItem;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DC2FEditorProvider extends Composite {
 
@@ -22,14 +26,16 @@ public class DC2FEditorProvider extends Composite {
 	
 	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
 	
+	HorizontalPanel buttonList;
+	
+	DockPanel main;
+
+	private Widget lastMainWidget;
+	
 	public DC2FEditorProvider() {
 		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
-		final Button editButton = new Button("Edit");
-		final Button viewButton = new Button("View");
-		final HorizontalPanel buttonList = new HorizontalPanel();
-		buttonList.add(viewButton);
-		buttonList.add(editButton);
-		final DockPanel main = new DockPanel();
+		buttonList = new HorizontalPanel();
+		main = new DockPanel();
 		main.add(buttonList, DockPanel.NORTH);
 		initWidget(main);
 	}
@@ -59,9 +65,44 @@ public class DC2FEditorProvider extends Composite {
 		
 	}
 	
+	
+	
 	public void refreshEditors() {
-		// TODO Auto-generated method stub
-		
+		//Check old editors for compatiblity
+		for(Widget editButton : buttonList) {
+			
+		}
+		//Add new editors for this article
+		for(Editor editor : getAvailableEditors()) {
+			final Button editButton = new Button(editor.getName());
+			editor.bindToButton(editButton, this);
+			buttonList.add(editButton);
+		}
+	}
+	
+	private Collection<Editor> getAvailableEditors() {
+		Vector<Editor> editors = new Vector<Editor>();
+		Editor editor = new AttributeEditor();
+		editors.add(editor);
+		return editors;
+	}
+	
+	protected ContentNode getActualNode() {
+		return actualNode;
+	}
+
+	public void showEditor(Editor editor) {
+		setMain(editor);
+	}
+	
+	private Widget setMain(Widget widget) {
+		Widget lastLastMainWidget = null;
+		if (lastMainWidget != null) {
+			main.remove(lastMainWidget);
+		}
+		main.add(widget, DockPanel.CENTER);
+		lastMainWidget = widget;
+		return lastLastMainWidget;
 	}
 
 }
