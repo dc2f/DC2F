@@ -12,4 +12,6 @@ public interface DC2FContentServiceAsync {
 
 	void getNodesForPath(String path, AsyncCallback<List<Node>> callback);
 
+	void saveNode(ContentNode actualNode, AsyncCallback<ContentNode> callback);
+
 }

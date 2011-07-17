@@ -11,6 +11,8 @@ import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -49,6 +51,13 @@ public class DC2FEditorProvider extends Composite {
 		statusButtonList.add(closeButton);
 		saveButton.setEnabled(false);
 		statusButtonList.add(saveButton);
+		saveButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				save();
+			}
+		});
 		main.add(statusButtonList, DockPanel.SOUTH);
 		initWidget(main);
 		
@@ -60,6 +69,20 @@ public class DC2FEditorProvider extends Composite {
 		availableEditors.add(sourceEditor);
 	}
 	
+	protected void save() {
+		// TODO Auto-generated method stub
+		contentService.saveNode(actualNode, new AsyncCallback<ContentNode>() {
+			public void onSuccess(ContentNode result) {
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+
 	public void bindToNavigation(LazyTree navigation) {
 		navigation.addSelectionHandler(new SelectionHandler<TreeItem>() {
 			public void onSelection(SelectionEvent<TreeItem> event) {

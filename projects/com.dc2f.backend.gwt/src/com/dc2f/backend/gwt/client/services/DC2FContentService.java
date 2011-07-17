@@ -11,4 +11,6 @@ public interface DC2FContentService extends RemoteService {
 	ContentNode getNodeForPath(String Path);
 
 	List<Node> getNodesForPath(String path);
+
+	ContentNode saveNode(ContentNode actualNode);
 }

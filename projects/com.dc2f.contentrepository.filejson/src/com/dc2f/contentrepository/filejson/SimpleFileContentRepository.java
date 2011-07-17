@@ -6,10 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.dc2f.contentrepository.Authentication;
-import com.dc2f.contentrepository.CRAdapter;
 import com.dc2f.contentrepository.CRSession;
 import com.dc2f.contentrepository.ContentRepository;
-import com.dc2f.contentrepository.Node;
-import com.dc2f.contentrepository.NodeType;
-import com.dc2f.contentrepository.adapters.XPathSearchAdapter;
 
 public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
