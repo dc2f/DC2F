@@ -1,6 +1,7 @@
 package com.dc2f.backend.gwt.client.editor;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.LazyTree;
@@ -37,6 +38,8 @@ public class DC2FEditorProvider extends Composite {
 	
 	private Button saveButton = new Button("save");
 	
+	private Vector<Editor> availableEditors; 
+	
 	public DC2FEditorProvider() {
 		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
 		editorList = new HorizontalPanel();
@@ -48,6 +51,13 @@ public class DC2FEditorProvider extends Composite {
 		statusButtonList.add(saveButton);
 		main.add(statusButtonList, DockPanel.SOUTH);
 		initWidget(main);
+		
+		//TODO better get this list dynamically
+		availableEditors = new Vector<Editor>();
+		Editor attributeEditor = new AttributeEditor(this);
+		availableEditors.add(attributeEditor);
+		Editor sourceEditor = new SourceEditor(this);
+		availableEditors.add(sourceEditor);
 	}
 	
 	public void bindToNavigation(LazyTree navigation) {
@@ -78,26 +88,38 @@ public class DC2FEditorProvider extends Composite {
 	
 	
 	public void refreshEditors() {
+		HashMap<String, Widget> editorButtons = new HashMap<String, Widget>(); 
 		//Check old editors for compatiblity
 		for(Widget editButton : editorList) {
-			
+			String name = ((Button) editButton).getText();
+			if(getEditor(name).isUsableFor(actualNode)) {
+				editorButtons.put(name, editButton);
+			} else {
+				editorList.remove(editButton);
+			}
 		}
 		//Add new editors for this article
 		for(Editor editor : getAvailableEditors()) {
-			final Button editButton = new Button(editor.getName());
-			editor.loadEditorOnButtonClick(editButton);
-			editorList.add(editButton);
+			String name = editor.getName();
+			if(editor.isUsableFor(actualNode) && !editorButtons.containsKey(name)) {
+				final Button editButton = new Button(name);
+				editor.loadEditorOnButtonClick(editButton);
+				editorList.add(editButton);
+			}
 		}
 	}
 	
+	private Editor getEditor(String name) {
+		for(Editor editor : getAvailableEditors()) {
+			if(editor.getName().equals(name)) {
+				return editor;
+			}
+		}
+		return null;
+	}
+
 	private Collection<Editor> getAvailableEditors() {
-		//TODO better get this list dynamically
-		Vector<Editor> editors = new Vector<Editor>();
-		Editor attributeEditor = new AttributeEditor(this);
-		editors.add(attributeEditor);
-		Editor sourceEditor = new SourceEditor(this);
-		editors.add(sourceEditor);
-		return editors;
+		return availableEditors;
 	}
 	
 	protected ContentNode getActualNode() {

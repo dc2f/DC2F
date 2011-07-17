@@ -96,4 +96,9 @@ public abstract class Editor extends Composite {
 		};
 	}
 
+	public boolean isUsableFor(ContentNode actualNode) {
+		// TODO add proper check for using this editor
+		return true;
+	}
+
 }
