@@ -2,8 +2,13 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<li><a href="$articleurl">$title</a></li>',
+	'source': '<li>$date <a href="$articleurl">$title</a></li>',
 	'context': {
+		'date': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/DateRenderer',
+			'refcontext': 'node',
+			'ref': '.@date',
+		},
 		'image': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
 			'refcontext': 'node',

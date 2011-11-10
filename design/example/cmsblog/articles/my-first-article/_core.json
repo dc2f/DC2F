@@ -3,7 +3,7 @@
 
 
 	'title': 'My first Article :)',
-	'date': 1234567890,
+	'date': { timestamp: 1234567890 },
 	'image': '/cmsblog/images/myfirstarticleimage',
 	'body': 'My first cool article, yeah!',
 
