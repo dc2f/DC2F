@@ -3,7 +3,7 @@
 
 	'attributes': {
 		'timestamp': {
-			'type': 'Integer',
+			'type': 'Long',
 			'required': true,
 		}
 	},

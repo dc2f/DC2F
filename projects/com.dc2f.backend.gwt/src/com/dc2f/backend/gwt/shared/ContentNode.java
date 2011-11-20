@@ -26,4 +26,9 @@ public class ContentNode extends Node {
 		return attributes.keySet();
 	}
 
+	public String getSource() {
+		// TODO get the source of the node
+		return "Cannot get source at the moment";
+	}
+
 }

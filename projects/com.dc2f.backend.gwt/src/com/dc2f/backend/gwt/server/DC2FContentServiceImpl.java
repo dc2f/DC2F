@@ -37,4 +37,14 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		return node;
 	}
 
+	@Override
+	public ContentNode saveNode(ContentNode node) {
+		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
+		for(String attributeName : node.getAttributeNames()) {
+			//dc2fNode.set(attributeName, node.get(attributeName));
+		}
+		//craccess.saveNode(dc2fNode);
+		return node;
+	}
+
 }
