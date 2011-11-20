@@ -16,7 +16,8 @@ public class DC2FAccessManager {
 	
 	public static BranchAccess getAccess() {
 		if (readAccess == null) {
-			File crdir = new File(System.getProperty("crdir", "/Users/bigbear3001/Documents/dc2f/design/example"));
+			//File crdir = new File(System.getProperty("crdir", "/Users/bigbear3001/Documents/dc2f/design/example"));
+			File crdir = new File(System.getProperty("crdir", "/Users/herbert/dev/dc2f/repository/design/example"));
 			//ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
 			ContentRepository cr = new JsonContentRepositoryProvider().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
 			CRSession conn = cr.authenticate(null);

@@ -18,14 +18,14 @@ public abstract class Editor extends Composite {
 	/**
 	 * editor provider which is used to show the editor in the GUI.
 	 */
-	private DC2FEditorProvider editorProvider;
+	private DC2FEditorProviderUIBinder editorProvider;
 
 	/**
 	 * initialize the new editor.
-	 * @param dc2fEditorProvider - editor provider to use when the editor is shown
+	 * @param dc2fEditorProviderUIBinder - editor provider to use when the editor is shown
 	 */
-	public Editor(DC2FEditorProvider dc2fEditorProvider) {
-		editorProvider = dc2fEditorProvider;
+	public Editor(DC2FEditorProviderUIBinder dc2fEditorProviderUIBinder) {
+		editorProvider = dc2fEditorProviderUIBinder;
 	}
 	
 	/**

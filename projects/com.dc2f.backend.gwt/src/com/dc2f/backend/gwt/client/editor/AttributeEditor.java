@@ -16,8 +16,8 @@ public class AttributeEditor extends Editor {
 	
 	VerticalPanel attributeList = new VerticalPanel();
 	
-	public AttributeEditor(DC2FEditorProvider editorProvider) {
-		super(editorProvider);
+	public AttributeEditor(DC2FEditorProviderUIBinder dc2fEditorProviderUIBinder) {
+		super(dc2fEditorProviderUIBinder);
 		setName("Attributes");
 		final DockPanel main = new DockPanel();
 		main.add(attributeList, DockPanel.CENTER);

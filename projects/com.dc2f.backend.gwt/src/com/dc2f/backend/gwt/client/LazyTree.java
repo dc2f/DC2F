@@ -77,7 +77,9 @@ public class LazyTree extends Tree {
 		public void onSuccess(T resultList) {
 			for(Node result : resultList) {
 				String name = result.getName();
-				if(name == null || "".equals(name))name = "---";
+				if(name == null || "".equals(name)) {
+					name = "---";
+				}
 				System.out.println("Got node " + name + " for path " + result.getPath() + ".");
 				final LazyTreeItem item = new LazyTreeItem(result.getPath(), name);
 				root.addItem(item);

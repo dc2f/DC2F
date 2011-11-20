@@ -8,8 +8,8 @@ public class SourceEditor extends Editor {
 
 	private TextArea editor;
 	
-	public SourceEditor(DC2FEditorProvider dc2fEditorProvider) {
-		super(dc2fEditorProvider);
+	public SourceEditor(DC2FEditorProviderUIBinder dc2fEditorProviderUIBinder) {
+		super(dc2fEditorProviderUIBinder);
 		setName("Source");
 		final DockPanel main = new DockPanel();
 		editor = new TextArea();
