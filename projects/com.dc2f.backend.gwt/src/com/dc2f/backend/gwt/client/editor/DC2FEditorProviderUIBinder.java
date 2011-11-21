@@ -29,6 +29,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Label;
 
 /**
  * @author herbert
@@ -50,6 +51,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 	@UiField Button saveButton;
 	@UiField HorizontalPanel editorList;
 	@UiField SimplePanel centerPanel;
+	@UiField Label selectionLabel;
 
 	interface DC2FEditorProviderUIBinderUiBinder extends
 			UiBinder<Widget, DC2FEditorProviderUIBinder> {
@@ -110,6 +112,10 @@ public class DC2FEditorProviderUIBinder extends Composite {
 			public void onSelection(SelectionEvent<TreeItem> event) {
 				LazyTreeItem item = (LazyTreeItem) event.getSelectedItem();
 				System.out.println("selected node " + item.getPath());
+				if (lastMainWidget != null) {
+					centerPanel.remove(lastMainWidget);
+				}
+				selectionLabel.setText("Selected Node: " + item.getPath());
 				contentService.getNodeForPath(item.getPath(), new AsyncCallback<ContentNode>() {
 					public void onSuccess(ContentNode result) {
 						actualNode = result;

@@ -7,6 +7,9 @@
 	<g:HTMLPanel>
 		<g:DockPanel>
 			<g:Dock direction="NORTH">
+				<g:Label text="Currently Editing: " ui:field="selectionLabel"/>
+			</g:Dock>
+			<g:Dock direction="NORTH">
 				<g:HorizontalPanel ui:field="editorList"/>
 			</g:Dock>
 			<g:Dock direction="SOUTH">

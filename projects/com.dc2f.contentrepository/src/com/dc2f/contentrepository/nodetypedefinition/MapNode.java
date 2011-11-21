@@ -1,6 +1,6 @@
 package com.dc2f.contentrepository.nodetypedefinition;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.dc2f.contentrepository.Node;
@@ -10,7 +10,7 @@ public class MapNode implements Node {
 	protected Map<String, Object> internalMap;
 	
 	public MapNode(KeyValuePair... entries) {
-		internalMap = new HashMap<String, Object>(entries.length);
+		internalMap = new LinkedHashMap<String, Object>(entries.length);
 		for (KeyValuePair entry : entries) {
 			internalMap.put(entry.getKey(), entry.getValue());
 		}

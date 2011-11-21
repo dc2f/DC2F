@@ -8130,3 +8130,116 @@ Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEdit
 Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321810693730_GenBundle
    Adding '1' new generated units
       Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811187777.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811187777.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html4()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811187777_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811191048.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811191048.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811191048_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811194546.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811194546.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811194546_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811208527.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811208527.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811208527_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811209898.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811209898.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811209898_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811213778.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811213778.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811213778_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811221488.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811221488.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811221488_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder.DC2FEditorProviderUIBinderUiBinder
+   Adding '3' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811232147.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811232147.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Removing invalidated units
+Rebinding com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder_DC2FEditorProviderUIBinderUiBinderImpl_designTime1321811232147_GenBundle
+   Adding '1' new generated units
+      Removing invalidated units

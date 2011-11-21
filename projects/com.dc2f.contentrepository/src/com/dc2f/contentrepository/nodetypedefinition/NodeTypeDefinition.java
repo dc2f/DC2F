@@ -2,7 +2,6 @@ package com.dc2f.contentrepository.nodetypedefinition;
 
 import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.BaseNodeType;
-import com.dc2f.contentrepository.Node;
 
 public class NodeTypeDefinition extends BaseNodeType {
 

@@ -28,7 +28,7 @@ public class AttributeEditor extends Editor {
 	public void loadNode(ContentNode node) {
 		loadedNode = node;
 		attributeList.clear();
-		for(String attributeName : node.getAttributeNames()) {
+		for(String attributeName : node.getNodeType().getAttributesDefinition().getAttributeNames()) {
 			HorizontalPanel attributePanel = new HorizontalPanel();
 			Label attributeLabel = new Label(attributeName);
 			attributePanel.add(attributeLabel);

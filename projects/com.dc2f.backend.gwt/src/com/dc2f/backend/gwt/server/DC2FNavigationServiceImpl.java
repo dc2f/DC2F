@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
+import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.Node;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.NodeType;
@@ -30,7 +31,7 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 			node.setPath(dc2fNode.getPath());
 			NodeType type = dc2fNode.getNodeType();
 			if (type != null) {
-				node.setNodeType(type.toString());
+				node.setNodeType(new DTONodeType(type.getNodeTypeInfo().getPath(), null));
 			}
 			nodes.add(node);
 		}
@@ -42,7 +43,7 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 		Node node = new Node();
 		node.setName(dc2fNode.getName());
 		node.setPath(dc2fNode.getPath());
-		node.setNodeType(dc2fNode.getNodeType().toString());
+		node.setNodeType(new DTONodeType(node.getNodeType().getPath(), null));
 		return node;
 		
 	}
