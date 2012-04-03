@@ -53,7 +53,6 @@ public class DC2FEditorProvider extends Composite {
 		statusButtonList.add(saveButton);
 		saveButton.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				save();
 			}
@@ -75,7 +74,6 @@ public class DC2FEditorProvider extends Composite {
 			public void onSuccess(ContentNode result) {
 			}
 
-			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				

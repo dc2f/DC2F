@@ -50,7 +50,6 @@ public abstract class Editor extends Composite {
 	public void loadEditorOnButtonClick(Button button) {
 		button.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				loadNode(editorProvider.getActualNode());
 				editorProvider.showEditor(getEditor());
@@ -88,7 +87,6 @@ public abstract class Editor extends Composite {
 	protected ChangeHandler getChangeHandler() {
 		return new ChangeHandler() {
 			
-			@Override
 			public void onChange(ChangeEvent event) {
 				editorProvider.nodeHasChanged(event);
 				

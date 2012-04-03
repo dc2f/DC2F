@@ -45,7 +45,6 @@ public class AttributeEditor extends Editor {
 		final ChangeHandler handler = super.getChangeHandler(attributeName);
 		return new ChangeHandler() {
 			
-			@Override
 			public void onChange(ChangeEvent event) {
 				ValueBoxBase<?> widget = (ValueBoxBase<?>) event.getSource();
 				String value = widget.getText();
