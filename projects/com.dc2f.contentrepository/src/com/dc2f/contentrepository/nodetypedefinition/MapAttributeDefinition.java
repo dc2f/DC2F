@@ -1,5 +1,6 @@
 package com.dc2f.contentrepository.nodetypedefinition;
 
+import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.Node;
 
@@ -9,8 +10,8 @@ public class MapAttributeDefinition extends MapNode implements AttributesDefinit
 	}
 
 	@Override
-	public Node getAttributeDefinition(String propertyName) {
-		return (Node) get(propertyName);
+	public AttributeDefinition getAttributeDefinition(String propertyName) {
+		return new AttributeDefinitionImpl((Node) get(propertyName));
 	}
 
 	@Override

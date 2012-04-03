@@ -2,6 +2,7 @@ package com.dc2f.contentrepository;
 
 import java.util.logging.Logger;
 
+import com.dc2f.contentrepository.nodetypedefinition.AttributeDefinitionImpl;
 import com.dc2f.contentrepository.nodetypedefinition.KeyValuePair;
 import com.dc2f.contentrepository.nodetypedefinition.MapNode;
 
@@ -54,18 +55,18 @@ public abstract class BaseNodeType implements NodeType {
 				}
 				
 				@Override
-				public Node getAttributeDefinition(String propertyName) {
+				public AttributeDefinition getAttributeDefinition(String propertyName) {
 						if (freeattributes != null && freeattributes.booleanValue()) {
-							return new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType));
+							return new AttributeDefinitionImpl(new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType)));
 						}
 						Object def = null;
 						if (attrDefinitions != null) {
 							def = attrDefinitions.get(propertyName);
 						}
 						if (def == null && parentAttrDefinitions != null) {
-							return (Node) parentAttrDefinitions.getAttributeDefinition(propertyName);
+							return new AttributeDefinitionImpl((Node) parentAttrDefinitions.getAttributeDefinition(propertyName));
 						}
-						return (Node) def;
+						return new AttributeDefinitionImpl((Node) def);
 					}
 					
 					

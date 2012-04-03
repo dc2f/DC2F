@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.dc2f.contentrepository.AttributeDefinition;
+import com.dc2f.contentrepository.AttributeType;
 import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.DefaultNodeType;
@@ -83,13 +85,13 @@ public class SimpleJsonNode implements Node {
 		
 		AttributesDefinition attrDefinitions = getNodeType().getAttributeDefinitions();
 		logger.finest(this.getName() + ": Getting attribute {" + attributeName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
-		Node attrDefinition = (Node) attrDefinitions.getAttributeDefinition(attributeName);
+		AttributeDefinition attrDefinition = attrDefinitions.getAttributeDefinition(attributeName);
 		if (attrDefinition == null) {
 			throw new UnknownAttributeException("Unknown attribute {" + attributeName + "} for {" + getNodeType() + "}", null);
 		}
-		String attributeType = (String) attrDefinition.get("type");
+		AttributeType attributeType = attrDefinition.getAttributeType();
 		
-		if ("NodeReference".equals(attributeType) && obj instanceof String) {
+		if (attributeType == AttributeType.NODE_REFERENCE && obj instanceof String) {
 			String ref = (String) obj;
 			logger.fine("Trying to resolve object {" + ref + "}");
 			if (!ref.startsWith("/")) {
@@ -101,9 +103,9 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return branchAccess.getNode(ref);
-		} else if ("clob".equals(attributeType) && obj == null) {
+		} else if (attributeType == AttributeType.CLOB && obj == null) {
 			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(path, attributeName + ".clob.property"));
-		} else if ("blob".equals(attributeType) && obj == null) {
+		} else if (attributeType == AttributeType.BLOB && obj == null) {
 			return branchAccess.getContentRepository().getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
 		}
 
@@ -116,7 +118,7 @@ public class SimpleJsonNode implements Node {
 		}
 
 
-		if ("Node".equals(attributeType)) {
+		if (attributeType == AttributeType.NODE) {
 
 			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;
@@ -134,7 +136,7 @@ public class SimpleJsonNode implements Node {
 				currentSubNodeType = new DefaultNodeType();
 			}
 			return new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
-		} else if ("ListOfNodes".equals(attributeType)) {
+		} else if (attributeType == AttributeType.LIST_OF_NODES) {
 			JSONArray array = (JSONArray) obj;
 			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
 			NodeType subNodeType = null;
@@ -157,12 +159,12 @@ public class SimpleJsonNode implements Node {
 				
 			}
 			return ret;
-		} else if ("Boolean".equals(attributeType)) {
+		} else if (attributeType == AttributeType.BOOLEAN) {
 			if (obj instanceof Boolean) {
 				return (Boolean) obj;
 			}
 			return null;
-		} else if ("Integer".equals(attributeType)) {
+		} else if (attributeType == AttributeType.INTEGER) {
 			if (obj instanceof Integer) {
 				return obj;
 			}

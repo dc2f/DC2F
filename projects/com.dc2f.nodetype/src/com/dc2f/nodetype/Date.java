@@ -17,6 +17,9 @@ public class Date extends BaseNodeType {
 	}
 
 	public java.util.Date getDate(Node node) {
+		if (node.get("timestamp") == null) {
+			return null;
+		}
 		return new java.util.Date(((Integer)node.get("timestamp")).intValue() * 1000L);
 	}
 
