@@ -1,5 +1,8 @@
 package com.dc2f.contentrepository.filejson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,9 +73,16 @@ public class SimpleJsonNodeTypeInfo extends SimpleJsonNode implements NodeTypeIn
 	@Override
 	public String[] getAttributeNames() {
 		SimpleJsonNode attributes = (SimpleJsonNode) get("attributes");
+		List<String> attributeNames = new ArrayList<String>();
 		if (attributes != null) {
-			return JSONObject.getNames(attributes.getJsonObject());
+			String[] names = JSONObject.getNames(attributes.getJsonObject());
+			if (names != null) {
+				attributeNames.addAll(Arrays.asList(names));
+			}
 		}
-		return null;
+		if (getParentNodeType() != null) {
+			attributeNames.addAll(Arrays.asList(getParentNodeType().getAttributeDefinitions().getAttributeNames()));
+		}
+		return attributeNames.toArray(new String[attributeNames.size()]);
 	}
 }

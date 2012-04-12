@@ -4,6 +4,7 @@ import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
+import com.dc2f.contentrepository.exception.InvalidAttributeTypeException;
 
 public class AttributeDefinitionImpl implements AttributeDefinition {
 	
@@ -35,7 +36,11 @@ public class AttributeDefinitionImpl implements AttributeDefinition {
 
 	@Override
 	public AttributeType getAttributeType() {
-		return AttributeType.nameToType((String)node.get("type"));
+		try {
+			return AttributeType.nameToType((String)node.get("type"));
+		} catch (InvalidAttributeTypeException e) {
+			throw new InvalidAttributeTypeException("Invalid part for node {" + getPath() + "}", e);
+		}
 	}
 
 }

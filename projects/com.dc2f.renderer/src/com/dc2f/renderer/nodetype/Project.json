@@ -8,7 +8,7 @@
 			'required': true
 		},
 		'domains': {
-			'type': 'StringArray',
+			'type': 'String',
 			'required': true,
 			'minlength': 1
 		},

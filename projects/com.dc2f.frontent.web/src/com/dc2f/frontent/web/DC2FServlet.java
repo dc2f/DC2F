@@ -67,9 +67,12 @@ public class DC2FServlet implements Servlet {
 		ServletURLMapper mapper = new ServletURLMapper(craccess, getServletConfig());
 		Node node = mapper.getNode(request);
 		logger.info("We got a node: {" + node + "}");
+		long startTime = System.currentTimeMillis();
 		
 		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath(node.getPath()), mapper),
 					new ServletRenderResponse(response));
+		long endTime = System.currentTimeMillis();
+		logger.info("served request in " + (endTime-startTime) + "ms");
 	}
 	
 	private class ServletRenderResponse implements ContentRenderResponse {

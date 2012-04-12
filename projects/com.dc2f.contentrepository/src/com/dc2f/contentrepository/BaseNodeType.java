@@ -33,7 +33,7 @@ public abstract class BaseNodeType implements NodeType {
 			final Boolean freeattributes = (Boolean) nodeTypeInfo.get("freeattributes");
 			final String valueType = (String)nodeTypeInfo.get("valuetype");
 			final String valueNodeType = (String) nodeTypeInfo.get("valuenodetype");
-			if (attrDefinitions == null && !valueType.equals("Node")) {
+			if (attrDefinitions == null && (valueType == null || !valueType.equals("Node"))) {
 				logger.severe("Node has no attribute defintions {" + this
 						+ "} (class:" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
 			}
