@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD:projects/com.dc2f.contentrepository.filejson/.classpath
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+=======
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
+>>>>>>> f12676203b63d263c50c997e948bc5d5fb28572f:projects/com.dc2f.contentrepository.filejson/.classpath
 	<classpathentry combineaccessrules="false" kind="src" path="/com.dc2f.contentrepository"/>
 	<classpathentry kind="lib" path="lib/json-java.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>

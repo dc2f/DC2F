@@ -77,7 +77,6 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		
 		saveButton.addClickHandler(new ClickHandler() {
 			
-			@Override
 			public void onClick(ClickEvent event) {
 				save();
 			}
@@ -99,7 +98,6 @@ public class DC2FEditorProviderUIBinder extends Composite {
 			public void onSuccess(ContentNode result) {
 			}
 
-			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
