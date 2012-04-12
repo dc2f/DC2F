@@ -15,6 +15,9 @@
         <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/com.dc2f.contentrepository/com.dc2f.contentrepository">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="com.dc2f.contentrepository.filejson.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.dc2f.contentrepository.filejson/com.dc2f.contentrepository.filejson">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="DC2F_webapp"/>
         <property name="java-output-path" value="/DC2F_webapp/build/classes"/>
     </wb-module>

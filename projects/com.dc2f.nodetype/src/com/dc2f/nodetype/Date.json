@@ -1,5 +1,5 @@
 {
-	'class': 'com.dc2f.nodetype.File',
+	'class': 'com.dc2f.nodetype.Date',
 
 	'attributes': {
 		'timestamp': {

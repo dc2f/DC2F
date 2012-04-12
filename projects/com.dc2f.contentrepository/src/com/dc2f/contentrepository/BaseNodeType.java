@@ -13,6 +13,9 @@ public abstract class BaseNodeType implements NodeType {
 
 	public void init(NodeTypeInfo nodeTypeInfo) {
 		this.nodeTypeInfo = nodeTypeInfo;
+		if (nodeTypeInfo == null) {
+			throw new IllegalArgumentException("Tried to initialize node type with null nodeTypeInfo.");
+		}
 	}
 	
 	public NodeTypeInfo getNodeTypeInfo() {

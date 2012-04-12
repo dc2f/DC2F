@@ -162,9 +162,16 @@ public class SimpleJsonNode implements Node {
 				return (Boolean) obj;
 			}
 			return null;
+		} else if ("Integer".equals(attributeType)) {
+			if (obj instanceof Integer) {
+				return obj;
+			}
+			if (obj != null) {
+				return new Integer(obj.toString());
+			}
 		}
 		logger.info("getting property " + attributeName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
-		logger.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "}");
+		logger.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "} - attributeType: {" + attributeType + "}");
 		return null;
 	}
 	

@@ -13,7 +13,16 @@ public class Node implements Serializable {
 	
 	String path;
 
-	private String nodeType;
+	private DTONodeType nodeType;
+	
+	public Node() {
+	}
+	public Node(String name, String path, DTONodeType nodeType) {
+		this();
+		this.name = name;
+		this.path = path;
+		this.nodeType = nodeType;
+	}
 	
 	public void setName(String givenName) {
 		name = givenName;
@@ -31,11 +40,11 @@ public class Node implements Serializable {
 		return path;
 	}
 	
-	public void setNodeType(String givenNodeType) {
+	public void setNodeType(DTONodeType givenNodeType) {
 		nodeType = givenNodeType;
 	}
 	
-	public String getNodeType() {
+	public DTONodeType getNodeType() {
 		return nodeType;
 	}
 

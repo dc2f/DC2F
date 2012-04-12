@@ -1,6 +1,6 @@
 package com.dc2f.backend.gwt.client;
 
-import com.dc2f.backend.gwt.client.editor.DC2FEditorProvider;
+import com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder;
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
 import com.dc2f.backend.gwt.client.services.DC2FNavigationServiceAsync;
 import com.google.gwt.core.client.EntryPoint;
@@ -25,7 +25,7 @@ public class DC2FBackend implements EntryPoint {
 		final LazyTree navigation = new LazyTree(navigationService);
 		main.add(navigation, DockPanel.WEST);
 
-		final DC2FEditorProvider editorFrame = new DC2FEditorProvider();
+		final DC2FEditorProviderUIBinder editorFrame = new DC2FEditorProviderUIBinder();
 		editorFrame.bindToNavigation(navigation);
 		main.add(editorFrame, DockPanel.CENTER);
 
