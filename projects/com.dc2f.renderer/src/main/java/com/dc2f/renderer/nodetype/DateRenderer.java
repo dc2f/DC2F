@@ -8,7 +8,6 @@ import com.dc2f.renderer.ContentRenderRequest;
 public class DateRenderer extends BaseNodeType implements
 		ContextRendererNodeType {
 
-	@Override
 	public String renderNode(Node configNode, ContentRenderRequest request,
 			Node context, Object value) {
 		//Object timestamp = ((Node)value).get("timestamp");

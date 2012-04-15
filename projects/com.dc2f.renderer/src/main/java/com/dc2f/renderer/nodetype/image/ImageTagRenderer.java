@@ -11,7 +11,6 @@ public class ImageTagRenderer extends BaseNodeType implements
 		ContextRendererNodeType {
 	private static final Logger logger = Logger.getLogger(ImageTagRenderer.class.getName());
 
-	@Override
 	public String renderNode(Node configNode, ContentRenderRequest request, Node context,
 			Object value) {
 		logger.info("need to render image tag for image {" + value + "}");

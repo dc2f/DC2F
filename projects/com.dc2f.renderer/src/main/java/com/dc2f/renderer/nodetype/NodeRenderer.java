@@ -15,7 +15,6 @@ import com.dc2f.renderer.nodetype.template.HtmlTemplate;
 public class NodeRenderer extends BaseNodeType implements
 		ContextRendererNodeType {
 
-	@Override
 	public String renderNode(Node configNode, ContentRenderRequest request, Node context, Object value) {
 		CRAccess crAccess = request.getContentRepositoryTransaction();
 		context = request.getCurrentNodeContext();

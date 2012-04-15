@@ -1,4 +1,6 @@
-package com.dc2f.renderer.test;
+package com.dc2f.renderer;
+
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayWriter;
@@ -6,8 +8,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.logging.Logger;
+
+import org.junit.Test;
 
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.CRSession;
@@ -23,20 +28,17 @@ import com.dc2f.renderer.url.URLMapper;
 public class RenderTest {
 	private static final Logger logger = Logger.getLogger(RenderTest.class.getName());
 
-	/**
-	 * @param args
-	 * @throws FileNotFoundException 
-	 */
-	public static void main(String[] args) throws FileNotFoundException {
+	@Test
+	public void testRendering() throws FileNotFoundException, URISyntaxException {
 		NodeRendererFactory factory = NodeRendererFactory.getInstance();
 		NodeRenderer renderer = factory.getRenderer("com.dc2f.renderer.web");
 		
-		File crdir = new File(System.getProperty("crdir", "../../design/example"));
-		if (crdir == null || !crdir.exists()) {
-			System.out.println("Please specify a crdir :) ( -Dcrdir=xxx)");
-			System.exit(1);
-		}
+		String crdirPath = "/example";
+		
+		File crdir = new File(RenderTest.class.getResource(crdirPath).toURI());
+		assertNotNull("cannot find the example repository in my libraries.", crdir);
 		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
+		assertNotNull("cannot initialize the json repository for " + crdir, cr);
 		CRSession conn = cr.authenticate(null);
 		BranchAccess craccess = conn.openTransaction(null);
 		//ContentRepository cr = new SimpleFileContentRepository(crdir);
@@ -51,7 +53,6 @@ public class RenderTest {
 		
 		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath("/cmsblog"), new URLMapper() {
 
-			@Override
 			public String getRenderURL(Node node) {
 				return node.getPath();
 			}
@@ -66,7 +67,6 @@ public class RenderTest {
 				return stream;
 			}
 
-			@Override
 			public void setMimeType(String mimeType) {
 				logger.info("Setting mimeType to {" + mimeType + "}");
 			}

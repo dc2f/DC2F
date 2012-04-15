@@ -8,7 +8,6 @@ import com.dc2f.renderer.nodetype.ContextRendererNodeType;
 public class NodeURLRenderer extends BaseNodeType implements
 		ContextRendererNodeType {
 
-	@Override
 	public String renderNode(Node configNode, ContentRenderRequest request,
 			Node context, Object value) {
 		if (value instanceof Node) {

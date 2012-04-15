@@ -31,7 +31,6 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		this.urlMapper = urlMapper;
 	}
 
-	@Override
 	public Node getNode() {
 		return nodePath[nodePath.length-1];
 	}
@@ -43,12 +42,10 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		return nodeStack.remove(0);
 	}
 
-	@Override
 	public CRAccess getContentRepositoryTransaction() {
 		return crAccess;
 	}
 
-	@Override
 	public Object setAttribute(String key, Object value) {
 		return attributes.put(key, value);
 	}
@@ -56,17 +53,14 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		return attributes.get(key);
 	}
 
-	@Override
 	public Node[] getNodesInPath() {
 		return nodePath;
 	}
 
-	@Override
 	public Node popNodeContext() {
 		return nodeContextStack.remove(0);
 	}
 
-	@Override
 	public void pushNodeContext(Node node) {
 		nodeContextStack.add(0, node);
 	}
@@ -75,12 +69,10 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		return nodeContextStack.get(0);
 	}
 
-	@Override
 	public Node popRenderContext() {
 		return renderContextStack.remove(0);
 	}
 
-	@Override
 	public void pushRenderContext(Node addToContext) {
 		renderContextStack.add(0, addToContext);
 	}
@@ -89,12 +81,10 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		return renderContextStack;
 	}
 
-	@Override
 	public URLMapper getURLMapper() {
 		return urlMapper;
 	}
 
-	@Override
 	public ContentRepository getContentRepository() {
 		return contentRepository;
 	}
