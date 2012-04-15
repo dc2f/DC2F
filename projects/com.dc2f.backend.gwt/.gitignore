@@ -1,4 +1,8 @@
+/bin
 /war/WEB-INF/classes
 /war/WEB-INF/deploy
 /war/dc2f
 /.gwt/.gwt-log
+/target
+.project
+.classpath

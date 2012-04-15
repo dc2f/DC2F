@@ -1,1 +1,5 @@
+bin
 build
+target
+.project
+.classpath
