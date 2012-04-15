@@ -41,7 +41,6 @@ public class ServletURLMapper implements URLMapper {
 		return null;
 	}
 
-	@Override
 	public String getRenderURL(Node node) {
 		String servletURL = servletConfig.getServletContext().getContextPath();
 		String nodePath = node.getPath();

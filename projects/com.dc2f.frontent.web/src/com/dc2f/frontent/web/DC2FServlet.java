@@ -30,28 +30,23 @@ public class DC2FServlet implements Servlet {
 	
 	private static final Logger logger = Logger.getLogger(DC2FServlet.class.getName());
 	
-	@Override
 	public void destroy() {
 
 	}
 
-	@Override
 	public ServletConfig getServletConfig() {
 		return config;
 	}
 
-	@Override
 	public String getServletInfo() {
 		return null;
 	}
 
-	@Override
 	public void init(ServletConfig configuration) throws ServletException {
 		config = configuration;
 
 	}
 
-	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
 		NodeRendererFactory factory = NodeRendererFactory.getInstance();
@@ -83,7 +78,6 @@ public class DC2FServlet implements Servlet {
 			this.response = response;
 		}
 
-		@Override
 		public OutputStream getOutputStream() {
 			try {
 				return response.getOutputStream();
@@ -92,7 +86,6 @@ public class DC2FServlet implements Servlet {
 			}
 		}
 
-		@Override
 		public Writer getWriter() {
 			try {
 				return response.getWriter();
@@ -101,7 +94,6 @@ public class DC2FServlet implements Servlet {
 			}
 		}
 
-		@Override
 		public void setMimeType(String mimeType) {
 			response.setContentType(mimeType);
 		}
