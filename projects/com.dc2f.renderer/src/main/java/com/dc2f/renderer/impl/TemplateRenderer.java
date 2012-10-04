@@ -32,8 +32,8 @@ public class TemplateRenderer implements NodeRenderer {
 		NodeType nodeType = node.getNodeType();
 		if (nodeType instanceof BinaryNodeType) {
 			BinaryNodeType binary = (BinaryNodeType) nodeType;
-			OutputStream outputStream = response.getOutputStream();
 			response.setMimeType(binary.getMimeType(node));
+			OutputStream outputStream = response.getOutputStream();
 			InputStream inputStream = ((BinaryNodeType) nodeType).getInputStream(node);
 			// FIXME what happens when inputStream is null?!?! (not found?)
 			byte[] buf = new byte[1024];
