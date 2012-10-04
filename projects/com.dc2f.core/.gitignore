@@ -1,5 +1,4 @@
-bin
-build
-target
 .project
+.settings
 .classpath
+target
