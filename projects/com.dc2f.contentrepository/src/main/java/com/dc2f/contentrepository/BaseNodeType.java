@@ -23,7 +23,6 @@ public abstract class BaseNodeType implements NodeType {
 		return nodeTypeInfo;
 	}
 	
-	@Override
 	public AttributesDefinition getAttributeDefinitions() {
 		if (nodeTypeInfo == null) {
 			logger.severe("node type was not initialized! {" + this.getClass().getName() + "} nodeTypeInfo: {" + nodeTypeInfo + "}");
@@ -49,12 +48,10 @@ public abstract class BaseNodeType implements NodeType {
 
 			return new AttributesDefinition() {
 				
-				@Override
 				public String[] getAttributeNames() {
 					return nodeTypeInfo.getAttributeNames();
 				}
 				
-				@Override
 				public AttributeDefinition getAttributeDefinition(String propertyName) {
 						if (freeattributes != null && freeattributes.booleanValue()) {
 							return new AttributeDefinitionImpl(new MapNode(new KeyValuePair("type", valueType), new KeyValuePair("typeofnode", valueNodeType)));

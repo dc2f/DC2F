@@ -9,12 +9,10 @@ public class MapAttributeDefinition extends MapNode implements AttributesDefinit
 		super(entries);
 	}
 
-	@Override
 	public AttributeDefinition getAttributeDefinition(String propertyName) {
 		return new AttributeDefinitionImpl((Node) get(propertyName));
 	}
 
-	@Override
 	public String[] getAttributeNames() {
 		return internalMap.keySet().toArray(new String[internalMap.size()]);
 	}

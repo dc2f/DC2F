@@ -14,27 +14,22 @@ public class AttributeDefinitionImpl implements AttributeDefinition {
 		this.node = node;
 	}
 
-	@Override
 	public String getName() {
 		return node.getName();
 	}
 
-	@Override
 	public NodeType getNodeType() {
 		return node.getNodeType();
 	}
 
-	@Override
 	public String getPath() {
 		return node.getPath();
 	}
 
-	@Override
 	public Object get(String attributeName) {
 		return node.get(attributeName);
 	}
 
-	@Override
 	public AttributeType getAttributeType() {
 		try {
 			return AttributeType.nameToType((String)node.get("type"));

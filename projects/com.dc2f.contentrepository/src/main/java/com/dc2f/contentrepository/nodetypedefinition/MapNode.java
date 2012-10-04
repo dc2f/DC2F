@@ -16,22 +16,18 @@ public class MapNode implements Node {
 		}
 	}
 
-	@Override
 	public String getName() {
 		return null;
 	}
 
-	@Override
 	public NodeType getNodeType() {
 		return null;
 	}
 
-	@Override
 	public String getPath() {
 		return null;
 	}
 
-	@Override
 	public Object get(String attributeName) {
 		return internalMap.get(attributeName);
 	}
