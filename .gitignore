@@ -2,3 +2,7 @@
 *~
 **/.gwt/.gwt-log
 gwt-unitCache
+.settings
+.project
+.classpath
+target
