@@ -20,6 +20,7 @@ public class AttributeEditor extends Editor {
 		super(dc2fEditorProviderUIBinder);
 		setName("Attributes");
 		final DockPanel main = new DockPanel();
+		main.getElement().setId("DC2FAttributeEditor");
 		main.add(attributeList, DockPanel.CENTER);
 		initWidget(main);
 	}

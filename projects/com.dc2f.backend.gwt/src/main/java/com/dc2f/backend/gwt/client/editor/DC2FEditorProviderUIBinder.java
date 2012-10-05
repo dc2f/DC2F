@@ -22,7 +22,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
@@ -118,8 +117,9 @@ public class DC2FEditorProviderUIBinder extends Composite {
 					public void onSuccess(ContentNode result) {
 						actualNode = result;
 						refreshEditors();
+						chooseDefaultEditor(result);
 					}
-					
+
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						
@@ -178,6 +178,12 @@ public class DC2FEditorProviderUIBinder extends Composite {
 	public void showEditor(Editor editor) {
 		setMain(editor);
 		saveButton.setEnabled(false);
+	}
+	
+	private void chooseDefaultEditor(ContentNode node) {
+		Editor editor = availableEditors.get(0);
+		editor.loadNode(node);
+		setMain(editor);
 	}
 	
 	private Widget setMain(Widget widget) {

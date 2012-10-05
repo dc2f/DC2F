@@ -22,7 +22,9 @@ public class DC2FBackend implements EntryPoint {
 	public void onModuleLoad() {
 		((ServiceDefTarget) navigationService).setServiceEntryPoint(GWT.getModuleBaseURL() + "navigation");
 		final DockPanel main = new DockPanel();
+		main.getElement().setId("DC2FMain");
 		final LazyTree navigation = new LazyTree(navigationService);
+		navigation.getElement().setId("DC2FNavigation");
 		main.add(navigation, DockPanel.WEST);
 
 		final DC2FEditorProviderUIBinder editorFrame = new DC2FEditorProviderUIBinder();
