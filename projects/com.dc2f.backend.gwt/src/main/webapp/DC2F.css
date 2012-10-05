@@ -2,12 +2,12 @@
 
 /** Colorset generated with http://www.colorsontheweb.com/colorwizard.asp
  
-  orange
+  cyan
  -----------------
- color      BE5C1C
- border     381B08
- background EDAE85
- shades     6D6D6D
+ color      5CD6B6
+ border     1E7A62
+ background D6F4EC
+ shades     999999
 */
 
 
@@ -30,18 +30,30 @@ table#DC2FMain td td{
 }
 
 table#DC2FMain td:nth-child(1) {
-	background-color: #FFB183;
+	background-color: #5CD6B6;
+	border-right: 1px solid #1E7A62;
 	width: 15em;
 }
 table#DC2FMain td:nth-child(2) {
-	background-color: #FFF1E9;
+	background-color: #D6F4EC;
+}
+
+#DC2FMain .gwt-TreeItem-selected {
+	background-color: #1E7A62;
+	color: #D6F4EC;
+	padding: 0.1em;
+	border-radius: 0.25em;
 }
 
 table#DC2FMain table td:nth-child(1), table#DC2FMain table td:nth-child(2) {
 	background:none;
 	width: auto;
+	border: none;
 }
 
+#DC2FMain .gwt-TextBox{
+	padding: 2px 4px;
+}
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
@@ -64,8 +76,10 @@ h1 {
 
 #DC2FAttributeEditor .gwt-Label {
 	width: 10em;
-	line-height: 2.3em;
 	margin-left: 1em;
+}
+#DC2FAttributeEditor td {
+	line-height: 2.3em;
 }
 
 /** Most GWT widgets already have a style name defined */
