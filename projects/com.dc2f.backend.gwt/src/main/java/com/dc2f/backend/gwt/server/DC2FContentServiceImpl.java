@@ -96,6 +96,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 	}
 
 	public String getSource(ContentNode node) {
+			//TODO this should be provided by the repository instead of fetching the systemproperty
 			String crDir = System.getProperty("crdir");
 			File file = new File(crDir + node.getPath());
 			if(file.isDirectory()) {
@@ -115,7 +116,6 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 				}
 			}
 			
-		// TODO get the source of the node
 		return "Couldn't get source.";
 	}
 
