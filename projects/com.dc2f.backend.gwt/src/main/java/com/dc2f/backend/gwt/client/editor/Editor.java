@@ -1,5 +1,6 @@
 package com.dc2f.backend.gwt.client.editor;
 
+import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -14,6 +15,10 @@ public abstract class Editor extends Composite {
 	 * name of the editor.
 	 */
 	protected String name;
+	
+	public DC2FContentServiceAsync getContentService() {
+		return editorProvider.getContentService();
+	}
 	
 	/**
 	 * editor provider which is used to show the editor in the GUI.

@@ -1,8 +1,16 @@
 package com.dc2f.backend.gwt.shared;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.Set;
 
 import java.util.HashMap;
+
+import org.apache.commons.io.IOUtils;
 
 
 public class ContentNode extends Node {
@@ -24,11 +32,6 @@ public class ContentNode extends Node {
 	
 	public Set<String> getAttributeNames() {
 		return attributes.keySet();
-	}
-
-	public String getSource() {
-		// TODO get the source of the node
-		return "Cannot get source at the moment";
 	}
 
 }

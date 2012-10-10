@@ -38,6 +38,10 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	ContentNode actualNode;
 	
+	public DC2FContentServiceAsync getContentService() {
+		return contentService;
+	}
+	
 	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
 
 	private Vector<Editor> availableEditors; 

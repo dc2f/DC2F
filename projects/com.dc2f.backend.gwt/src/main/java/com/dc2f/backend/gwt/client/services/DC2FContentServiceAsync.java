@@ -14,4 +14,6 @@ public interface DC2FContentServiceAsync {
 
 	void saveNode(ContentNode actualNode, AsyncCallback<ContentNode> callback);
 
+	void getSource(ContentNode actualNode, AsyncCallback<String> callback);
+
 }

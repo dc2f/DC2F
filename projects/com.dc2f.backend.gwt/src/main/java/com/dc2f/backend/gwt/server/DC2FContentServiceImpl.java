@@ -1,8 +1,15 @@
 package com.dc2f.backend.gwt.server;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.IOUtils;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.shared.ContentNode;
@@ -86,6 +93,30 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		}
 		//craccess.saveNode(dc2fNode);
 		return node;
+	}
+
+	public String getSource(ContentNode node) {
+			String crDir = System.getProperty("crdir");
+			File file = new File(crDir + node.getPath());
+			if(file.isDirectory()) {
+				file = new File(file, "_core.json");
+			}
+			if(file.canRead()) {
+				try {
+					StringWriter writer = new StringWriter();
+					IOUtils.copy(new FileInputStream(file), writer, "UTF-8");
+					return writer.toString();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		// TODO get the source of the node
+		return "Couldn't get source.";
 	}
 
 }
