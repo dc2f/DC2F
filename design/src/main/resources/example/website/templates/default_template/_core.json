@@ -1,0 +1,54 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+	'context': {
+		'content': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+		},
+		
+		'breadcrumbs': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+			'renderSubtype': 'breadcrumbs',
+			'rootNode': '/website',
+		},
+		
+		
+		
+		
+		
+		'navigation': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'renderednode',
+			'ref': '/website/templates/navigation',
+			
+		},
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'explicit',
+			'value': 'hm?',
+		},
+		'projectname': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'explicit',
+			'value': 'DC2F',
+		},
+		'basecss': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/website/templates/default_template/basecss',
+		},
+		'bootstrapcss': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/website/templates/default_template/bootstrap/bootstrapcss',
+		},
+		'bootstrapresponsivecss': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/website/templates/default_template/bootstrap/bootstrapresponsivecss',
+		},
+	}
+
+}
+

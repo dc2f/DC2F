@@ -1,0 +1,37 @@
+{
+	'extends': 'classpath:com/dc2f/renderer/nodetype/RenderableNodeType',
+
+	'attributes': {
+		'title': { 'type': 'String', },
+		'body': { 'type': 'String',  },
+		'lastmodified': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/nodetype/Date' },
+	},
+
+
+	'renderconfiguration': [
+		{
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+			'rendertype': 'com.dc2f.rendertype.web',
+			'template': 'static_template',
+		},
+		{
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+			'rendertype': 'com.dc2f.rendertype.web.overview',
+			'template': 'articletemplate_overview',
+		},
+		{
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+			'rendertype': 'com.dc2f.rendertype.web.breadcrumbs',
+			'template': '/cmsblog/templates/breadcrumbstemplate',
+			'addtocontext': {
+				'title': {
+					'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+					'refcontext': 'node',
+					'ref': '.@title',
+				},
+			},
+		},
+	],
+
+
+}

@@ -63,6 +63,7 @@ public class FilePublisher {
 		
 		
 		String rootProjectPath = "/cmsblog";
+		rootProjectPath = System.getProperty("projectpath", rootProjectPath);
 		
 		renderNodeRecursive(craccess.getNode(rootProjectPath));
 	}

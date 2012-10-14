@@ -1,0 +1,9 @@
+{
+	'nodetype': '/website/nodetype/StaticContent',
+
+
+	'title': 'Start Page',
+	'lastmodified': { timestamp: 1234567890 },
+	'body': 'My first cool article, yeah!',
+
+}

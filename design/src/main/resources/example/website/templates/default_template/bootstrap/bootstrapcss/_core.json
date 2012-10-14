@@ -1,0 +1,6 @@
+{
+	'nodetype': 'classpath:com/dc2f/nodetype/File',
+	
+	'filename': 'bootstrap.min.css',
+	'mimeType': 'text/css',
+}
