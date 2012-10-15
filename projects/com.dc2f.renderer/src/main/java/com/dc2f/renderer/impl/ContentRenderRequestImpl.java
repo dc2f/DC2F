@@ -77,6 +77,9 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		renderContextStack.add(0, addToContext);
 	}
 	
+	/**
+	 * returns the render context stack - elements MIGHT be null.
+	 */
 	public List<Node> getRenderContextStack() {
 		return renderContextStack;
 	}

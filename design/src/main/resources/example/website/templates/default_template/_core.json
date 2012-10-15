@@ -23,7 +23,7 @@
 		'navigation': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
 			'refcontext': 'renderednode',
-			'ref': '/website/templates/navigation',
+			'ref': '/website/templates/navigationtemplate',
 			
 		},
 		'title': {

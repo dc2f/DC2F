@@ -8,6 +8,10 @@
 			'_comment': 'Allows customization for the rendertype (it is appended to the default render type.)',
 			'type': 'String',
 		},
+		'acceptedVariants': {
+			'_comment': 'Comma separated list of accepted variants for the rendering of subnoes.',
+			'type': 'String',
+		},
 		'sortBy': {
 			'_comment': 'The property node of the children which should be used for sorting',
 		},
