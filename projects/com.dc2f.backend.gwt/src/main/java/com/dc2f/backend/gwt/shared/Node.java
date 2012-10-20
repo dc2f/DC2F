@@ -47,5 +47,13 @@ public class Node implements Serializable {
 	public DTONodeType getNodeType() {
 		return nodeType;
 	}
+	
+	/**
+	 * @param otherNode
+	 * @return <code>true</code> if the other node is the same object as this node. (Can be an older version of it)
+	 */
+	public boolean same(Node otherNode) {
+		return otherNode != null && getPath().equals(otherNode.getPath());
+	}
 
 }

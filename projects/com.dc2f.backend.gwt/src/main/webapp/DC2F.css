@@ -81,6 +81,10 @@ h1 {
 #DC2FAttributeEditor td {
 	line-height: 2.3em;
 }
+#DC2FSourceEditor.error, #DC2FSourceEditor.error textarea {
+	color: red;
+}
+
 
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {

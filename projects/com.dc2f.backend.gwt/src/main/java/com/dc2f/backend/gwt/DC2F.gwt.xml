@@ -13,6 +13,9 @@
 
 	<!-- Other module inherits                                      -->
 	<!-- inherits name='com.dc2f.contentrepository.shared' / -->
+	
+	<!-- inherit the google json classes -->
+	<inherits name="com.google.gwt.json.JSON" />
 
 	<!-- Specify the app entry point class.                         -->
 	<entry-point class='com.dc2f.backend.gwt.client.DC2FBackend' />

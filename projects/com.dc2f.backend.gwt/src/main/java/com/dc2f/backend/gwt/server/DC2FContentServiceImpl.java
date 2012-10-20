@@ -19,6 +19,8 @@ import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
+import com.dc2f.contentrepository.adapters.SourceWriteAccessAdapter;
+import com.dc2f.contentrepository.adapters.WriteAccessAdapter;
 
 public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements DC2FContentService {
 	
@@ -91,7 +93,15 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		for(String attributeName : node.getAttributeNames()) {
 			//dc2fNode.set(attributeName, node.get(attributeName));
 		}
-		//craccess.saveNode(dc2fNode);
+		craccess.getAdapter(WriteAccessAdapter.class).saveNode(dc2fNode);
+		return node;
+	}
+	
+	public ContentNode saveNode(ContentNode node, String source) {
+		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
+		if(craccess.getAdapter(SourceWriteAccessAdapter.class).saveNode(dc2fNode, source)) {
+			craccess.getNode(node.getPath());
+		}
 		return node;
 	}
 
@@ -118,5 +128,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 			
 		return "Couldn't get source.";
 	}
+	
+	
 
 }

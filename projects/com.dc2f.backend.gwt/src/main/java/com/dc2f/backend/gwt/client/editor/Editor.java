@@ -16,6 +16,9 @@ public abstract class Editor extends Composite {
 	 */
 	protected String name;
 	
+	
+	private ChangeHandler changeHandler = new NodeChangedChangeHandler();
+	
 	public DC2FContentServiceAsync getContentService() {
 		return editorProvider.getContentService();
 	}
@@ -90,18 +93,18 @@ public abstract class Editor extends Composite {
 	 * {@link #getChangeHandler(String)}.
 	 */
 	protected ChangeHandler getChangeHandler() {
-		return new ChangeHandler() {
-			
-			public void onChange(ChangeEvent event) {
-				editorProvider.nodeHasChanged(event);
-				
-			}
-		};
+		return changeHandler;
 	}
 
 	public boolean isUsableFor(ContentNode actualNode) {
 		// TODO add proper check for using this editor
 		return true;
+	}
+	
+	protected class NodeChangedChangeHandler implements ChangeHandler {
+		public void onChange(ChangeEvent event) {
+			editorProvider.nodeHasChanged(event);
+		}
 	}
 
 }
