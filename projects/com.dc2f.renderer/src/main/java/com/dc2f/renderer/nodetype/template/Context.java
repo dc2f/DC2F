@@ -18,6 +18,10 @@ public class Context extends BaseNodeType {
 			List<Node> stack = request.getRenderContextStack();
 			for (Iterator<Node> i = stack.iterator() ; i.hasNext() && value == null ; ) {
 				Node ctx = i.next();
+				if (ctx == null) {
+					continue;
+//					throw new RuntimeException("Context is null?!");
+				}
 				value = (Node) ctx.get(propertyName);
 			}
 		}

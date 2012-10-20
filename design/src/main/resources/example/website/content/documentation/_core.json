@@ -1,0 +1,9 @@
+{
+	'nodetype': '/website/nodetype/StaticContent',
+
+
+	'title': 'Documentation',
+	'lastmodified': { timestamp: 1234567890 },
+	'body': 'This will be some documentation :)',
+
+}

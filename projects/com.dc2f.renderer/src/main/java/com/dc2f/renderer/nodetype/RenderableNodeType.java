@@ -31,7 +31,7 @@ public class RenderableNodeType extends BaseNodeType {
 		for (Node confignode : config) {
 			if (renderType.equals(confignode.get("rendertype"))) {
 				String nodeVariant = (String) confignode.get("variant");
-				if (nodeVariant == null || Arrays.binarySearch(acceptedVariants, nodeVariant) > 0) {
+				if (nodeVariant == null || Arrays.binarySearch(acceptedVariants, nodeVariant) >= 0) {
 					return confignode;
 				}
 			}

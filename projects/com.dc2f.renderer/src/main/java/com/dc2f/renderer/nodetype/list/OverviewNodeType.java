@@ -13,11 +13,16 @@ public class OverviewNodeType extends BaseNodeType implements
 	public String renderNode(Node configNode, ContentRenderRequest request,
 			Node context, Object value) {
 		if (value instanceof Node) {
+			String acceptedVariantsStr = (String) configNode.get("acceptedVariants");
+			String acceptedVariants[] = null;
+			if (acceptedVariantsStr != null) {
+				acceptedVariants = acceptedVariantsStr.split(",");
+			}
 			Node[] children = request.getContentRepositoryTransaction().getChildren((Node) value);
 			StringBuffer buf = new StringBuffer();
 			for (Node child : children) {
 				ContentRenderRequestImpl req = new ContentRenderRequestImpl(request.getContentRepository(), request.getContentRepositoryTransaction(), new Node[]{child}, request.getURLMapper());
-				buf.append(TemplateRenderer.internalRenderNode(req, null, "com.dc2f.rendertype.web.overview", null));
+				buf.append(TemplateRenderer.internalRenderNode(req, null, "com.dc2f.rendertype.web.overview", acceptedVariants));
 			}
 			return buf.toString();
 		}
