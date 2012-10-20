@@ -10,6 +10,17 @@ Current Features and Subprojects
 We have defined a json filesystem format that allows us to render content based on structured context.
 
 
+Assigned TODOs
+--------------
+
+* Priority A
+  * Backend - Implement Saving in Source Editor 
+* Priority B
+  * Validation - Implement Validation in Source Editor
+* Priority C
+  * At the moment none
+
+
 Future Ideas
 ------------
 
