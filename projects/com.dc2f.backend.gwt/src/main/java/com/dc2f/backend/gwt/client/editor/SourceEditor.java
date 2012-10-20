@@ -12,7 +12,17 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.TextArea;
 
+/**
+ * The source editor allows the user to edit the source of every node as it is. This is intended for experienced users.
+ * @author bigbear3001
+ *
+ */
 public class SourceEditor extends Editor {
+
+	/**
+	 * style name to use if the editor is in an error state (e.g. invalid source code);
+	 */
+	private static final String ERROR_STYLE_NAME = "error";
 
 	private TextArea editor;
 	
@@ -112,6 +122,7 @@ public class SourceEditor extends Editor {
 	
 	private JSONValue validate(String text) {
 		try {
+			this.removeStyleName(ERROR_STYLE_NAME);
 			if(text != null && !text.isEmpty()) {
 				return JSONParser.parseStrict(text);
 			} else {
@@ -119,7 +130,7 @@ public class SourceEditor extends Editor {
 			}
 		} catch (JSONException e) {
 			//TODO maybe we can get a line number here and give the user a more precise error message
-			this.addStyleName("error");
+			this.addStyleName(ERROR_STYLE_NAME);
 			return null;
 		}
 	}
