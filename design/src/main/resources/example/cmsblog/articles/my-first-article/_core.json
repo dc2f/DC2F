@@ -5,6 +5,6 @@
 	'title': 'My first Article :)',
 	'date': { timestamp: 1234567890 },
 	'image': '/cmsblog/images/myfirstarticleimage',
-	'body': 'My first cool article, yeah!',
+	'body': 'My first cool article, yeah!'
 
 }
