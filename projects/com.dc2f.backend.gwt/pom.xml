@@ -6,7 +6,6 @@
 	<artifactId>backend.gwt</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -49,7 +48,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.5.0-rc1</version>
+				<version>2.4.0</version>
 				<executions>
 					<execution>
 						<goals>
