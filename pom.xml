@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dc2f</groupId>
+  <artifactId>dc2f</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+
+  <modules>
+    <module>design</module>
+    <module>projects/com.dc2f.core</module>
+    <module>projects/com.dc2f.backend.gwt</module>
+    <module>projects/com.dc2f.contentrepository</module>
+    <module>projects/com.dc2f.contentrepository.filejson</module>
+    <module>projects/com.dc2f.frontend.web</module>
+    <module>projects/com.dc2f.nodetype</module>
+    <module>projects/com.dc2f.publish.files</module>
+    <module>projects/com.dc2f.renderer</module>
+  </modules>
+</project>
