@@ -12,6 +12,7 @@ import com.dc2f.backend.gwt.client.LazyTree.LazyTreeItem;
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.DC2FException;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +20,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Composite;
@@ -55,6 +57,8 @@ public class DC2FEditorProviderUIBinder extends Composite {
 	@UiField HorizontalPanel editorList;
 	@UiField SimplePanel centerPanel;
 	@UiField Label selectionLabel;
+	
+	private Timer saveButtonReset = new ResetSaveButton();
 
 	interface DC2FEditorProviderUIBinderUiBinder extends
 			UiBinder<Widget, DC2FEditorProviderUIBinder> {
@@ -94,11 +98,24 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	}
 
+	private class ResetSaveButton extends Timer {
+
+		@Override
+		public void run() {
+			closeButton.setEnabled(false);
+			closeButton.setText("save");
+		}
+		
+	}
+	
 	
 	protected void save() {
 		// TODO Auto-generated method stub
 		contentService.saveNode(actualNode, new AsyncCallback<ContentNode>() {
 			public void onSuccess(ContentNode result) {
+				closeButton.setText("saved");
+				closeButton.setEnabled(false);
+				saveButtonReset.schedule(1000);
 			}
 
 			public void onFailure(Throwable caught) {

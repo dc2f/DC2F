@@ -21,7 +21,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
 	private static final int BUFFER_SIZE = 1024;
 	
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	public static final Charset CHARSET = Charset.forName("UTF-8");
 
 	private File crdir;
 

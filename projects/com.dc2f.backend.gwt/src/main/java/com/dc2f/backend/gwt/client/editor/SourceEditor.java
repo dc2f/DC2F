@@ -103,11 +103,13 @@ public class SourceEditor extends Editor {
 				}
 				JSONValue current = validate(source);
 				if(current != null) {
-					JSONObject difference = JSONComparator.compare(last, current).isObject();
+					JSONObject difference = JSONComparator.compare(current, last).isObject();
 					if(difference != null) {
 						for(String attributeName : difference.keySet()) {
 							//TODO: check for other values than string
-							loadedNode.set(attributeName, difference.get(attributeName).isString().stringValue());
+							if (difference.get(attributeName).isString() != null) {
+								loadedNode.set(attributeName, difference.get(attributeName).isString().stringValue());
+							}
 						}
 						lastSource = source;
 					}
