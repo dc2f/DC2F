@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.NodeType;
 import com.dc2f.nodetype.BinaryNodeType;
 import com.dc2f.renderer.url.URLMapper;
 
@@ -83,6 +84,12 @@ public class FilePublisherURLMapper implements URLMapper {
 			
 			@SuppressWarnings("unchecked")
 			List<Node> urlMappingList = (List<Node>) renderConfig.get("urlmapping");
+			NodeType targetNodeType = (NodeType) renderConfig.get("targetnodetype");
+			if (targetNodeType != null) {
+				if (!node.getNodeType().isSubTypeOf(targetNodeType)) {
+					continue;
+				}
+			}
 			
 			if (urlMappingList != null && urlMappingList.size() > 0) {
 				for (Node urlmapping : urlMappingList) {
@@ -95,8 +102,14 @@ public class FilePublisherURLMapper implements URLMapper {
 					}
 				}
 			}
+			Node indexNode = (Node) renderConfig.get("index");
+			if (indexNode != null) {
+				String tmp = getRenderPath(indexNode);
+				if (tmp != null) {
+					return tmp;
+				}
+			}
 		}
-
 		
 		return null;
 	}
