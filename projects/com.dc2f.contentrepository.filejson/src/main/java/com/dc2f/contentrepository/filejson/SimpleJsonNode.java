@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributeType;
 import com.dc2f.contentrepository.AttributesDefinition;
-import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.DefaultNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
@@ -103,6 +102,8 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return branchAccess.getNode(ref);
+		} else if (attributeType == AttributeType.NODETYPE_REFERENCE && obj instanceof String) {
+			return branchAccess.getNodeType((String) obj);
 		} else if (attributeType == AttributeType.CLOB && obj == null) {
 			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(path, attributeName + ".clob.property"));
 		} else if (attributeType == AttributeType.BLOB && obj == null) {

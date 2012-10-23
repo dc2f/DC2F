@@ -62,9 +62,9 @@ public class TemplateRenderer implements NodeRenderer {
 	}
 	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response, String renderType, String[] acceptedVariants) {
 		for (Node node : request.getNodesInPath()) {
-			if (node.getNodeType() instanceof RenderableNodeType) {
-				RenderableNodeType nodeType = (RenderableNodeType) node.getNodeType();
-				Node renderConfig = nodeType.getRenderConfiguration(node, renderType, acceptedVariants);
+			Node renderConfig = request.getRenderConfiguration(node, renderType, acceptedVariants);
+			if (renderConfig != null) {
+//				Node renderConfig = nodeType.getRenderConfiguration(node, renderType, acceptedVariants);
 				
 				if (renderConfig == null) {
 					logger.warning("No render configuration found for renderType {" + renderType + "}");

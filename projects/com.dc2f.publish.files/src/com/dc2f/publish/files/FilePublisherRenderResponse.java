@@ -18,7 +18,6 @@ public class FilePublisherRenderResponse implements ContentRenderResponse {
 	static Logger logger = Logger.getLogger(FilePublisherRenderResponse.class.getName());
 
 	private File outputbasedir;
-	private Node node;
 	
 	private static final String MIME_TYPE_HTML = "text/html";
 	
@@ -41,11 +40,16 @@ public class FilePublisherRenderResponse implements ContentRenderResponse {
 	
 	OutputStream outputStream = null;
 	Writer writer = null;
+
+	private FilePublisherURLMapper urlMapper;
+
+	private Node node;
 	
 	
 
-	public FilePublisherRenderResponse(File outputbasedir, Node node) {
+	public FilePublisherRenderResponse(File outputbasedir, FilePublisherURLMapper urlMapper, Node node) {
 		this.outputbasedir = outputbasedir;
+		this.urlMapper = urlMapper;
 		this.node = node;
 	}
 	
@@ -60,8 +64,8 @@ public class FilePublisherRenderResponse implements ContentRenderResponse {
 	}
 	
 	protected File getOutputFile() {
-		String fileExtension = FilePublisherRenderResponse.getFileExtensionForMimeType(mimeType);
-		File f = new File(outputbasedir, node.getPath() + fileExtension);
+//		String fileExtension = FilePublisherRenderResponse.getFileExtensionForMimeType(mimeType);
+		File f = new File(outputbasedir, urlMapper.getRenderPath(node));
 		f.getParentFile().mkdirs();
 		logger.finer("using file " + f.getAbsolutePath());
 		return f;

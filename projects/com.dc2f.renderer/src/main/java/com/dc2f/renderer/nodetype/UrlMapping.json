@@ -1,0 +1,12 @@
+{
+	'attributes': {
+		'url': {
+			'type': 'String'
+		},
+		'targetattribute': {
+			'_comment': 'Optional name of an attribut which should be used in the url as slug.',
+			'_TODO': 'implement this in some sane way.',
+			'type': 'String'
+		}
+	}
+}

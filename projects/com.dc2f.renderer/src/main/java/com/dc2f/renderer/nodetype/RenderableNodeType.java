@@ -17,6 +17,7 @@ public class RenderableNodeType extends BaseNodeType {
 	 * @param renderType
 	 * @param acceptedVariants (Optional list of variants (the first render configuration is returned which matches one of the variants.).)
 	 * @return
+	 * @deprecated
 	 */
 	@SuppressWarnings("unchecked")
 	public Node getRenderConfiguration(Node node, String renderType, String[] acceptedVariants) {

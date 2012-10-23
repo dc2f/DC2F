@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.ContentRepository;
 import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.NodeType;
+import com.dc2f.contentrepository.NodeTypeInfo;
 import com.dc2f.renderer.ContentRenderRequest;
+import com.dc2f.renderer.nodetype.Project;
 import com.dc2f.renderer.url.URLMapper;
 
 public class ContentRenderRequestImpl implements ContentRenderRequest {
+	private static Logger logger = Logger.getLogger(ContentRenderRequestImpl.class.getName());
 
 	private ContentRepository contentRepository;
 	private Map<String, Object> attributes = new HashMap<String, Object>();
@@ -22,6 +27,7 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	public List<Node> renderContextStack = new LinkedList<Node>();
 	private URLMapper urlMapper;
 	private CRAccess crAccess;
+	private Node projectNode;
 
 	public ContentRenderRequestImpl(ContentRepository contentRepository, CRAccess crAccess, Node[] nodePath, URLMapper urlMapper) {
 		this.contentRepository = contentRepository;
@@ -90,5 +96,60 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 
 	public ContentRepository getContentRepository() {
 		return contentRepository;
+	}
+	
+	public void setProjectNode(Node projectNode) {
+		this.projectNode = projectNode;
+	}
+	
+	public Node getProjectNode() {
+		if (this.projectNode != null) {
+			return this.projectNode;
+		}
+		Node projectNode = null;
+		for (int i = 0 ; i < nodePath.length ; i++) {
+			if (nodePath[i].getNodeType() instanceof Project) {
+				projectNode = nodePath[i];
+				break;
+			}
+		}
+		return projectNode;
+	}
+	
+	public Node getRenderConfiguration(Node node, String renderType, String[] acceptedVariants) {
+		if (acceptedVariants != null) {
+			Arrays.sort(acceptedVariants);
+		}
+		// find the project node with the render configuration.
+		Node projectNode = getProjectNode();
+		if (projectNode == null){ 
+			throw new RuntimeException("Unable to find project configuration.");
+		}
+		@SuppressWarnings("unchecked")
+		List<Node> config = (List<Node>) projectNode.get("renderconfiguration");
+		
+		if (config == null) {
+//			config = (List<Node>) node.get("renderconfiguration");
+			throw new RuntimeException("project does not contain any render configuration?");
+		}
+		
+		for (Node confignode : config) {
+			NodeType targetNodeType = (NodeType) confignode.get("targetnodetype");
+			if (targetNodeType != null) {
+				if (!node.getNodeType().isSubTypeOf(targetNodeType)) {
+					continue;
+				}
+			}
+			// TODO also check target path, url, etc.?
+			
+			if (renderType.equals(confignode.get("rendertype"))) {
+				String nodeVariant = (String) confignode.get("variant");
+				if (nodeVariant == null || Arrays.binarySearch(acceptedVariants, nodeVariant) >= 0) {
+					return confignode;
+				}
+			}
+		}
+		logger.warning("Unable to find render configuration for type {" + renderType + "} available: {" +config.toString() + "}");
+		return null;
 	}
 }

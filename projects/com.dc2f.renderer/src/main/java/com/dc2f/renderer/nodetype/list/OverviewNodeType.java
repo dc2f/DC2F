@@ -22,6 +22,7 @@ public class OverviewNodeType extends BaseNodeType implements
 			StringBuffer buf = new StringBuffer();
 			for (Node child : children) {
 				ContentRenderRequestImpl req = new ContentRenderRequestImpl(request.getContentRepository(), request.getContentRepositoryTransaction(), new Node[]{child}, request.getURLMapper());
+				req.setProjectNode(request.getProjectNode());
 				buf.append(TemplateRenderer.internalRenderNode(req, null, "com.dc2f.rendertype.web.overview", acceptedVariants));
 			}
 			return buf.toString();

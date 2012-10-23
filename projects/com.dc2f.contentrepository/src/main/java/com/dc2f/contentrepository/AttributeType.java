@@ -7,6 +7,7 @@ public enum AttributeType {
 	STRING("String"),
 	INTEGER("Integer"),
 	NODE_REFERENCE("NodeReference"),
+	NODETYPE_REFERENCE("NodeTypeReference"),
 	CLOB("clob"),
 	BLOB("blob"),
 	NODE("Node"),

@@ -83,4 +83,17 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 		return wrappedRequest.getContentRepository();
 	}
 
+
+	@Override
+	public Node getRenderConfiguration(Node node, String renderType,
+			String[] acceptedVariants) {
+		return wrappedRequest.getRenderConfiguration(node, renderType, acceptedVariants);
+	}
+
+
+	@Override
+	public Node getProjectNode() {
+		return wrappedRequest.getProjectNode();
+	}
+
 }

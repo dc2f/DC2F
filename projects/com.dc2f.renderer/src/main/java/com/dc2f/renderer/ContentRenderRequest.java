@@ -29,4 +29,8 @@ public interface ContentRenderRequest {
 	public List<Node> getRenderContextStack();
 	public URLMapper getURLMapper();
 	public ContentRepository getContentRepository();
+	
+	
+	public Node getRenderConfiguration(Node node, String renderType, String[] acceptedVariants);
+	public Node getProjectNode();
 }
