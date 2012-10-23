@@ -119,7 +119,7 @@ public class SimpleJsonNode implements Node {
 		}
 
 
-		if (attributeType == AttributeType.NODE) {
+		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject && attributeType == AttributeType.NODE_REFERENCE)) {
 
 			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;

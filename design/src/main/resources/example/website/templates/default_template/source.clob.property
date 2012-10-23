@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>$title</title>
+    <title>DC2F - $title</title>
     <meta name="description"></meta>
     <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
@@ -24,7 +24,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">$projectname</a>
+          <a class="brand" href="$homepagelink">$projectname</a>
           <div class="nav-collapse collapse">
             $navigation
             <!--ul class="nav">
@@ -45,8 +45,6 @@
     	</div>
     
     
-    	<h1>$title</h1>
-
 	    <div id="content">
 	      $content
 	    </div>

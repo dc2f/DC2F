@@ -2,7 +2,7 @@
 
 	'attributes': {
 		'title': { 'type': 'String', },
-		'body': { 'type': 'String',  },
+		'body': { 'type': 'clob',  },
 		'lastmodified': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/nodetype/Date' },
 	},
 

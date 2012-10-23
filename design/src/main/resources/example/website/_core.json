@@ -40,6 +40,26 @@
 				'variant': 'navigation',
 				'targetnodetype': '/website/nodetype/StaticContent',
 			},
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web.title',
+				'template': {
+						'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+						'source': '$title',
+						'context': {
+							'title': {
+								'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+								'ref': '.@title',
+							}
+						},
+										
+				},
+				'targetnodetype': '/website/nodetype/StaticContent',
+			},
+			
+			
 			
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
@@ -55,7 +75,6 @@
 					}
 				]
 			},
-
 
 
 

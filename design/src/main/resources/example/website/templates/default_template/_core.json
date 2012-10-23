@@ -27,6 +27,13 @@
 			
 		},
 		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+			'renderSubtype': 'title',
+			'rootNode': '/website',
+		},
+		'_OLD_title': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'explicit',
 			'value': 'hm?',
@@ -35,6 +42,11 @@
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'explicit',
 			'value': 'DC2F',
+		},
+		
+		'homepagelink': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/website'
 		},
 		'basecss': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
