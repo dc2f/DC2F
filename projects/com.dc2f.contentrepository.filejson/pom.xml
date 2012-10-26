@@ -7,6 +7,7 @@
 		<groupId>com.dc2f</groupId>
 		<artifactId>master</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../com.dc2f.master/pom.xml</relativePath>
 	</parent>
 	<dependencies>
 		<dependency>
