@@ -51,7 +51,7 @@ public class RenderTest {
 		final Writer writer = new CharArrayWriter();
 		final OutputStream stream = new ByteArrayOutputStream();
 		
-		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath("/cmsblog"), new URLMapper() {
+		renderer.renderNode(new ContentRenderRequestImpl(cr, craccess, craccess.getNodesInPath("/website"), new URLMapper() {
 
 			public String getRenderURL(Node node) {
 				return node.getPath();
