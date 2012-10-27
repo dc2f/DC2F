@@ -15,10 +15,14 @@ import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.shared.ContentNode;
 import com.dc2f.backend.gwt.shared.DTOAttributesDefinition;
 import com.dc2f.backend.gwt.shared.DTONodeType;
+import com.dc2f.backend.gwt.shared.NotChangeableException;
 import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.ChangeableNode;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
+import com.dc2f.contentrepository.adapters.SourceWriteAccessAdapter;
+import com.dc2f.contentrepository.adapters.WriteAccessAdapter;
 
 public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements DC2FContentService {
 	
@@ -88,10 +92,23 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 
 	public ContentNode saveNode(ContentNode node) {
 		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
-		for(String attributeName : node.getAttributeNames()) {
-			//dc2fNode.set(attributeName, node.get(attributeName));
+		if (dc2fNode instanceof ChangeableNode) {
+			ChangeableNode dc2fChangeableNode = (ChangeableNode) dc2fNode;
+			for(String attributeName : node.getAttributeNames()) {
+				dc2fChangeableNode.set(attributeName, node.get(attributeName));
+			}
+			craccess.getAdapter(WriteAccessAdapter.class).saveNode(dc2fNode);
+			return node;
+		} else {
+			throw new NotChangeableException("Node " + node.getPath() + " is not changeable.");
 		}
-		//craccess.saveNode(dc2fNode);
+	}
+	
+	public ContentNode saveNode(ContentNode node, String source) {
+		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
+		if(craccess.getAdapter(SourceWriteAccessAdapter.class).saveNode(dc2fNode, source)) {
+			craccess.getNode(node.getPath());
+		}
 		return node;
 	}
 
@@ -118,5 +135,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 			
 		return "Couldn't get source.";
 	}
+	
+	
 
 }

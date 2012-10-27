@@ -15,6 +15,7 @@ import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.CRAdapter;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
+import com.dc2f.contentrepository.adapters.WriteAccessAdapter;
 import com.dc2f.contentrepository.adapters.XPathSearchAdapter;
 
 public class SimpleBranchAccess implements BranchAccess {
@@ -129,6 +130,8 @@ public class SimpleBranchAccess implements BranchAccess {
 	public <T extends CRAdapter> T getAdapter(Class<T> adapterInterface) {
 		if (adapterInterface.isAssignableFrom(XPathSearchAdapter.class)) {
 			return (T) new SimpleXPathSearchAdapter(this);
+		} else if (adapterInterface.isAssignableFrom(WriteAccessAdapter.class)) {
+			return (T) new SimpleJsonWriteAccess(this);
 		}
 		return null;
 	}

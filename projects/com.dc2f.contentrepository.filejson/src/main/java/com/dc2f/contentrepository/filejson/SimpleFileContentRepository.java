@@ -21,7 +21,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 	private static final Logger logger = Logger.getLogger(SimpleFileContentRepository.class.getName());
 	private static final int BUFFER_SIZE = 1024;
 	
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	public static final Charset CHARSET = Charset.forName("UTF-8");
 
 	private File crdir;
 
@@ -38,7 +38,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 		return crdir;
 	}
 	
-	protected String loadFile(InputStream inputStream) {
+	protected static String loadFile(InputStream inputStream) {
 		try {
 			InputStreamReader reader = new InputStreamReader(inputStream, CHARSET);
 			StringBuilder builder = new StringBuilder();//(int) f.length());
@@ -71,7 +71,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 		}
 	}
 	
-	protected JSONObject loadJSON(File f) {
+	protected static JSONObject loadJSON(File f) {
 		try {
 			return loadJSON(new FileInputStream(f));
 		} catch (FileNotFoundException e) {
@@ -83,7 +83,7 @@ public class SimpleFileContentRepository implements ContentRepository {
 		}
 	}
 	
-	protected JSONObject loadJSON(InputStream inputStream) throws JSONException {
+	protected static JSONObject loadJSON(InputStream inputStream) throws JSONException {
 		String str = loadFile(inputStream);
 		if (str == null) {
 			return null;
