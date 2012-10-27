@@ -102,8 +102,8 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 		@Override
 		public void run() {
-			closeButton.setEnabled(false);
-			closeButton.setText("save");
+			saveButton.setEnabled(false);
+			saveButton.setText("save");
 		}
 		
 	}
@@ -113,8 +113,8 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		// TODO Auto-generated method stub
 		contentService.saveNode(actualNode, new AsyncCallback<ContentNode>() {
 			public void onSuccess(ContentNode result) {
-				closeButton.setText("saved");
-				closeButton.setEnabled(false);
+				saveButton.setText("saved");
+				saveButton.setEnabled(false);
 				saveButtonReset.schedule(1000);
 			}
 

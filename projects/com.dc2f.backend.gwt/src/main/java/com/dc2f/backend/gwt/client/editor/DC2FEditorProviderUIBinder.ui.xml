@@ -14,8 +14,8 @@
 			</g:Dock>
 			<g:Dock direction="SOUTH">
 				<g:HorizontalPanel>
-					<g:Button ui:field="closeButton">Close</g:Button>
-					<g:Button ui:field="saveButton">Save</g:Button>
+					<g:Button ui:field="closeButton">close</g:Button>
+					<g:Button ui:field="saveButton">save</g:Button>
 				</g:HorizontalPanel>
 			</g:Dock>
 			<g:Dock direction="CENTER">
