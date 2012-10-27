@@ -1,5 +1,13 @@
 {
 	'attributes': {
+		'rootnode': { 'type': 'NodeReference' },
+		'targetnodetype': { '_comment': 'optional limitation for a node type.', 'type': 'NodeTypeReference' },
+		
+		'urlmapping': {
+			'type': 'ListOfNodes',
+			'typeofsubnodes': 'classpath:com/dc2f/renderer/nodetype/UrlMapping'
+		},
+	
 		'rendertype': { 'type': 'String', },
 		'variant': { 'type': 'String', },
 		'template': { 'type': 'NodeReference' },

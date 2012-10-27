@@ -103,6 +103,8 @@ public class SimpleJsonNode implements Node, ChangeableNode {
 				}
 			}
 			return branchAccess.getNode(ref);
+		} else if (attributeType == AttributeType.NODETYPE_REFERENCE && obj instanceof String) {
+			return branchAccess.getNodeType((String) obj);
 		} else if (attributeType == AttributeType.CLOB && obj == null) {
 			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(path, attributeName + ".clob.property"));
 		} else if (attributeType == AttributeType.BLOB && obj == null) {
@@ -118,7 +120,7 @@ public class SimpleJsonNode implements Node, ChangeableNode {
 		}
 
 
-		if (attributeType == AttributeType.NODE) {
+		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject && attributeType == AttributeType.NODE_REFERENCE)) {
 
 			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;

@@ -2,10 +2,12 @@ package com.dc2f.renderer.nodetype.template;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.dc2f.contentrepository.BaseNodeType;
 import com.dc2f.contentrepository.Node;
+import com.dc2f.contentrepository.exception.UnknownAttributeException;
 import com.dc2f.renderer.ContentRenderRequest;
 import com.dc2f.renderer.nodetype.ContextRendererNodeType;
 
@@ -47,7 +49,12 @@ public class Context extends BaseNodeType {
 					renderValue = request.getAttribute(ref);
 				} else if (refContextProperty.equals("renderednode")) {
 					if (ref.startsWith(".@")) {
-						renderValue = request.getCurrentNodeContext().get(ref.substring(2));
+						try {
+							renderValue = request.getCurrentNodeContext().get(ref.substring(2));
+						} catch (UnknownAttributeException e) {
+							renderValue = "{ERROR While resolving attribute {" + ref.substring(2) + "}}";
+							logger.log(Level.SEVERE, "Error while trying to resolve attribute " + ref.substring(2));
+						}
 					} else {
 						renderValue = request.getContentRepositoryTransaction().resolveNode(request.getCurrentNodeContext(), ref);
 					}

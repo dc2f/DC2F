@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.dc2f.contentrepository.nodetypedefinition.AttributeDefinitionImpl;
 import com.dc2f.contentrepository.nodetypedefinition.KeyValuePair;
 import com.dc2f.contentrepository.nodetypedefinition.MapNode;
+import com.dc2f.contentrepository.nodetypedefinition.NodeTypeDefinition;
 
 
 public abstract class BaseNodeType implements NodeType {
@@ -74,6 +75,23 @@ public abstract class BaseNodeType implements NodeType {
 				};
 		}
 		
+	}
+	
+	@Override
+	public boolean isSubTypeOf(NodeType parentNodeType) {
+		NodeTypeInfo info = this.getNodeTypeInfo();
+		String parentNodeTypePath = parentNodeType.getNodeTypeInfo().getPath();
+		while (info != null) {
+			if (info.getPath().equals(parentNodeTypePath)) {
+				return true;
+			}
+			NodeType tmp = info.getParentNodeType();
+			if (tmp instanceof NodeTypeDefinition) {
+				return false;
+			}
+			info = tmp.getNodeTypeInfo();
+		}
+		return false;
 	}
 	
 	@Override

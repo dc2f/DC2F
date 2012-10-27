@@ -16,4 +16,11 @@ public interface NodeType {
 	public void init(NodeTypeInfo nodeTypeInfo);
 	
 	public AttributesDefinition getAttributeDefinitions();
+	
+	/**
+	 * returns true if the receiver is either equal to the given parentNodeType, or is a sub type of the parent node type.
+	 * @param parentNodeType
+	 * @return
+	 */
+	public boolean isSubTypeOf(NodeType parentNodeType);
 }
