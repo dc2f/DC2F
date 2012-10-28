@@ -21,7 +21,7 @@ import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.contentrepository.exception.UnknownAttributeException;
 
-public class SimpleJsonNode implements Node, ChangeableNode {
+public class SimpleJsonNode implements Node {
 	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
 
 	private SimpleBranchAccess branchAccess;
@@ -191,19 +191,6 @@ public class SimpleJsonNode implements Node, ChangeableNode {
 			return getPath().equals(((SimpleJsonNode)obj).getPath());
 		}
 		return super.equals(obj);
-	}
-
-	@Override
-	public void set(String attributeName, Object attributeValue) {
-		try {
-			if(attributeValue instanceof String) {
-				jsonObject.put(attributeName, attributeValue);
-			} else {
-				logger.severe("FIXME: Not Implemented: cannot set property of class " + attributeValue.getClass());
-			}
-		} catch (JSONException e) {
-			logger.log(Level.SEVERE, "Cannot set property {" + attributeName + "}.", e);
-		}
 	}
 
 }

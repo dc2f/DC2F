@@ -41,7 +41,7 @@ public class SimpleBranchAccess implements BranchAccess {
 		} catch (JSONException e) {
 			logger.log(Level.SEVERE, "Error while fetching nodetype property from json object", e);
 		}
-		return new SimpleJsonNode(this, path, jsonObject, nodeType);
+		return new ChangeableJsonNode(this, path, jsonObject, nodeType);
 	}
 
 	@Override
