@@ -14,6 +14,7 @@
 		},
 		'sortBy': {
 			'_comment': 'The property node of the children which should be used for sorting',
+			'type': 'Integer',
 		},
 	},
 }

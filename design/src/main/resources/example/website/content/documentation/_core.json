@@ -4,5 +4,6 @@
 
 	'title': 'Documentation',
 	'lastmodified': { timestamp: 1234567890 },
+	'sortorder': 2,
 
 }
