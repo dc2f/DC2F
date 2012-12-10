@@ -15,7 +15,6 @@
 		<module>../com.dc2f.contentrepository.filejson</module>
 		<module>../com.dc2f.core</module>
 		<module>../com.dc2f.frontend.web</module>
-		<module>../com.dc2f.frontent.web</module>
 		<module>../com.dc2f.nodetype</module>
 		<module>../com.dc2f.publish.files</module>
 		<module>../com.dc2f.renderer</module>
