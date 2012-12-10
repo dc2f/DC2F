@@ -1,8 +1,59 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.dc2f</groupId>
-  <artifactId>samplerepository</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Example Content Repository</name>
-  <description>JSON Content Repository containing the examples needed for testing and documentation</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>samplerepository</artifactId>
+	<name>Example Content Repository</name>
+	<description>JSON Content Repository containing the examples needed for testing and documentation</description>
+
+	<parent>
+		<groupId>com.dc2f</groupId>
+		<artifactId>master</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../com.dc2f.master/pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.dc2f</groupId>
+			<artifactId>publisher.file</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<!-- version>[1.2.1,)</version -->
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.dc2f.publish.files.FilePublisher</mainClass>
+					<executable>maven</executable>
+					<!-- optional -->
+					<!-- workingDirectory>.</workingDirectory -->
+					<systemProperties>
+						<systemProperty>
+							<key>crdir</key>
+							<value>./src/main/resources/example</value>
+						</systemProperty>
+						<systemProperty>
+							<key>projectpath</key>
+							<value>/website</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -19,12 +19,12 @@
 			<artifactId>nodetype</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
+		<!-- dependency>
 			<groupId>com.dc2f</groupId>
 			<artifactId>samplerepository</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency -->
 		<dependency>
 			<groupId>com.dc2f</groupId>
 			<artifactId>contentrepository.filejson</artifactId>

@@ -82,6 +82,9 @@ public class SimpleJsonNode implements Node {
 		//if (obj instanceof String && ("class".equals(propertyName) )) {
 			return obj;
 		}
+		if (getNodeType() == null) {
+			throw new RuntimeException("Unable to find nodetype for node " + getPath());
+		}
 		
 		AttributesDefinition attrDefinitions = getNodeType().getAttributeDefinitions();
 		logger.finest(this.getName() + ": Getting attribute {" + attributeName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);

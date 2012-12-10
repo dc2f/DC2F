@@ -8,6 +8,7 @@
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/list/OverviewNodeType',
 			'ref': '/website/content',
 			'acceptedVariants': 'navigation',
+			'sortBy': 'sortorder'
 		},
 	},
 }

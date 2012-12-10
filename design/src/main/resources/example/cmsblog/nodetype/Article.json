@@ -6,6 +6,7 @@
 		'title': { 'type': 'String', },
 		'body': { 'type': 'String',  },
 		'date': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/nodetype/Date' },
+		'sortorder': { 'type': 'Integer' },
 	},
 
 
