@@ -5,19 +5,24 @@
 	<artifactId>master</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
+
 	<modules>
-		<module>backend.gwt</module>
-		<module>contentrepository</module>
-		<module>contentrepository.filejson</module>
-		<module>core</module>
-		<module>frontend.core</module>
-		<module>nodetype</module>
-		<module>publisher.file</module>
-		<module>renderer</module>
+		<!-- module>backend.gwt</module> <module>contentrepository</module> <module>contentrepository.filejson</module> 
+			<module>core</module> <module>frontend.core</module> <module>nodetype</module> 
+			<module>publisher.file</module> <module>renderer</module -->
+		<module>../com.dc2f.backend.gwt</module>
+		<module>../com.dc2f.contentrepository</module>
+		<module>../com.dc2f.contentrepository.filejson</module>
+		<module>../com.dc2f.core</module>
+		<module>../com.dc2f.frontend.web</module>
+		<module>../com.dc2f.frontent.web</module>
+		<module>../com.dc2f.nodetype</module>
+		<module>../com.dc2f.publish.files</module>
+		<module>../com.dc2f.renderer</module>
+
 	</modules>
-	
-	
+
+
 	<build>
 		<resources>
 			<resource>
