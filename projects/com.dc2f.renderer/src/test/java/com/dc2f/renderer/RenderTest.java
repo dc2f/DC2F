@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.logging.Logger;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.dc2f.contentrepository.BranchAccess;
@@ -28,7 +29,7 @@ import com.dc2f.renderer.url.URLMapper;
 public class RenderTest {
 	private static final Logger logger = Logger.getLogger(RenderTest.class.getName());
 
-	@Test
+	@Test @Ignore
 	public void testRendering() throws FileNotFoundException, URISyntaxException {
 		NodeRendererFactory factory = NodeRendererFactory.getInstance();
 		NodeRenderer renderer = factory.getRenderer("com.dc2f.renderer.web");
