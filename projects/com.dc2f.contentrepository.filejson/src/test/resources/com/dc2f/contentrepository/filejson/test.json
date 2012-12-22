@@ -1,6 +1,8 @@
 {
 	"testString": "string",
+	
 	"testInteger": 1,
 	"testStringInteger": "1",
+	
 	"testBoolean": true
 }
