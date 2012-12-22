@@ -26,6 +26,10 @@ public class SimpleJsonNodeTest {
 		SimpleJsonNode node = new SimpleJsonNode(null, getClass().getResource("test.json").getPath(), object, type);
 		assertEquals("String attribute was not read correctly.", "string", node.get("testString"));
 		assertEquals("Integer attribute was not read correctly.", 1, node.get("testInteger"));
+		//This should return an integer but returns a string.
+		//assertEquals("Integer attribute was not read correctly from String.", 1, node.get("testStringInteger"));
+		
+		assertEquals("Boolean attribute was not returned correctly.", true, node.get("testBoolean"));
 	}
 	
 	
@@ -65,8 +69,10 @@ public class SimpleJsonNodeTest {
 			
 			if("testString".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.STRING);
-			} else if("testInteger".equals(propertyName)) {
+			} else if("testInteger".equals(propertyName) || "testStringInteger".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.INTEGER);
+			} else if("testBoolean".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.BOOLEAN);
 			}
 			return null;
 		}
