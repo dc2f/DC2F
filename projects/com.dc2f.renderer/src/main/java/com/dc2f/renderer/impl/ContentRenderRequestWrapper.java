@@ -96,4 +96,16 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 		return wrappedRequest.getProjectNode();
 	}
 
+
+	@Override
+	public ContentRenderRequest getRootContentRenderRequest() {
+		return wrappedRequest.getRootContentRenderRequest();
+	}
+
+
+	@Override
+	public ContentRenderRequest getParentContentRenderRequest() {
+		return wrappedRequest.getParentContentRenderRequest();
+	}
+
 }

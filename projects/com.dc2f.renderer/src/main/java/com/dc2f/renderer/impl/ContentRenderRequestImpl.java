@@ -29,12 +29,18 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	private CRAccess crAccess;
 	private Node projectNode;
 
+	private ContentRenderRequest parent;
+
 	public ContentRenderRequestImpl(ContentRepository contentRepository, CRAccess crAccess, Node[] nodePath, URLMapper urlMapper) {
 		this.contentRepository = contentRepository;
 		this.crAccess = crAccess;
 		this.nodePath = nodePath;
 		this.nodeStack = Arrays.asList(nodePath);
 		this.urlMapper = urlMapper;
+	}
+	
+	public void setParentContentRenderRequest(ContentRenderRequest parent) {
+		this.parent = parent;
 	}
 
 	public Node getNode() {
@@ -151,5 +157,18 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 		}
 		logger.warning("Unable to find render configuration for type {" + renderType + "} available: {" +config.toString() + "}");
 		return null;
+	}
+
+	@Override
+	public ContentRenderRequest getRootContentRenderRequest() {
+		if (parent == null) {
+			return this;
+		}
+		return parent.getRootContentRenderRequest();
+	}
+
+	@Override
+	public ContentRenderRequest getParentContentRenderRequest() {
+		return parent;
 	}
 }
