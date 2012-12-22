@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.logging.Logger;
 
@@ -35,8 +36,9 @@ public class RenderTest {
 		NodeRenderer renderer = factory.getRenderer("com.dc2f.renderer.web");
 		
 		String crdirPath = "/example";
-		
-		File crdir = new File(RenderTest.class.getResource(crdirPath).toURI());
+		URL resource = RenderTest.class.getResource(crdirPath);
+		logger.info("Found " + crdirPath + " in " + resource);
+		File crdir = new File(resource.toURI());
 		assertNotNull("cannot find the example repository in my libraries.", crdir);
 		ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
 		assertNotNull("cannot initialize the json repository for " + crdir, cr);
