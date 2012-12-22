@@ -1,3 +1,6 @@
+Visit http://dc2f.com/ for details!
+
+
 DC2F
 =============
 
@@ -26,3 +29,8 @@ Future Ideas
 ------------
 
 tbd.
+
+
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/053f8893d4ec6b5908c09d9c43e28b5f "githalytics.com")](http://githalytics.com/dc2f/DC2F)
