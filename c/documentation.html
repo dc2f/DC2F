@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>DC2F - Documentation</title>
+    <meta name="description"></meta>
+    <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    
+    <link href="../media/basecss.css" rel="stylesheet" type="text/css" />
+    <link href="../media/bootstrapcss.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="../media/bootstrapresponsivecss.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+  
+      <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="../c/startpage.html">DC2F</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav"><li><a href="../c/startpage.html">Start Page</a></li><li><a href="../c/documentation.html">Documentation</a></li></ul>
+            <!--ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <!--li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li -->
+            </ul-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+        <div class="breadcrumbs">
+      		<ul>
+        		<li><a href="../c/startpage.html">DC2F Website</a></li> <li><a href="../c/documentation.html">Documentation</a></li> 
+      		</ul>
+    	</div>
+    
+    
+	    <div id="content">
+	      <div class="content">
+	<h1>Documentation</h1>	<div class="body"><h2>Basics of DC2F</h2>
+
+<p>DC2F is currently only supports a JSON Content Repository. 
+This means that you can use a simple JSON file structure to configure 
+DC2F and manage your content. This is obviously not very satisfactory and we are 
+working hard on a web based editor to make things simpler.</p>
+
+<p>Everything within DC2F is a <strong>Node</strong>. No matter if you are managing your content, 
+configuring a template or setting up a new project. You are always working with Nodes. And in the current state
+this means writing down JSON files representing nodes.</p>
+
+<p>The basic separation follows the typical MVC Pattern:
+  <ul>
+  	<li>Model: Rich content objects, these aren't all just "Web Pages" but real object types about what your web pages will all about. This could be articles, generic content, blog entries, but also biographies, products or places, depending on what kind of content your are managing. But the important thing is, that these content types don't necessarily need to know that they are rendered in the context of a web page.</li>
+  	<li>View (Template): Defines how each content types will be rendered, and how it looks.</li>
+  	<li>Controller: The URL mapping and render configuration which brings together the content objects with their respective templates and serves them under an URL, or publishes it into a static file.</li>
+  </ul>
+</p>
+
+<h2>Content Types (Model)</h2>
+
+<p>Before managing your content, you first have to define the <strong>structure</strong> of your content. In
+DC2F you will not be managing different "Webpages" but instead smart "Content Objects". The different types of 
+content are called <strong>NodeType</strong>s and are themselves configured using a simple node structure.</p>
+
+<p>An example for a simple content type you might use for a basic website might look like the following:</p>
+
+<strong>StaticContent</strong>
+<pre>
+{
+	"attributes": {
+		"title": { "type": "String", },
+		"body": { "type": "clob",  },
+		"lastmodified": { "type": "Node", "typeofnode": "classpath:com/dc2f/nodetype/Date" },
+	}
+}
+</pre>
+</div>
+</div>
+	    </div>
+	</div>
+  </body>
+</html>
