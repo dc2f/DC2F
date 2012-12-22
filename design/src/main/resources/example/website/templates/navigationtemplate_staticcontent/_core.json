@@ -2,7 +2,7 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<li><a href="$link">$title</a></li>',
+	'source': '<li class="$activeclass"><a href="$link">$title</a></li>',
 	'context': {
 		'title': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
@@ -12,5 +12,10 @@
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
 			'ref': '.',
 		},
+		'activeclass': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/condition/RenderOnlyIfNodeIsOnPath',
+			'inpath_string': 'active',
+			'ref': '.',
+		}
 	},
 }

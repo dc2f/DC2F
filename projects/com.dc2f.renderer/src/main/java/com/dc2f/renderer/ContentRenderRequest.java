@@ -31,6 +31,9 @@ public interface ContentRenderRequest {
 	public ContentRepository getContentRepository();
 	
 	
+	public ContentRenderRequest getRootContentRenderRequest();
+	public ContentRenderRequest getParentContentRenderRequest();
+	
 	public Node getRenderConfiguration(Node node, String renderType, String[] acceptedVariants);
 	public Node getProjectNode();
 }

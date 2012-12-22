@@ -1,0 +1,16 @@
+{
+	'class': 'com.dc2f.renderer.nodetype.condition.RenderOnlyIfNodeIsOnPath',
+	'extends': 'classpath:com/dc2f/renderer/nodetype/ContextRendererNodeType',
+	
+	
+	'attributes': {
+		'inpath_string': {
+			'type': 'String',
+			'_comment': 'string which will be rendered when the given node is in the current render path.',
+		},
+		'notinpath_string': {
+			'type': 'String',
+			'_comment': 'string which will be rendered when the given node is NOT in the current render path.',
+		},
+	}
+}

@@ -41,11 +41,11 @@
 					<mainClass>com.dc2f.publish.files.FilePublisher</mainClass>
 					<executable>maven</executable>
 					<!-- optional -->
-					<!-- workingDirectory>.</workingDirectory -->
+					<!-- workingDirectory>.</workingDirectory-->
 					<systemProperties>
 						<systemProperty>
 							<key>crdir</key>
-							<value>./src/main/resources/example</value>
+							<value>${project.build.directory}/../src/main/resources/example</value>
 						</systemProperty>
 						<systemProperty>
 							<key>projectpath</key>
