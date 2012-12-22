@@ -2,17 +2,17 @@
 	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
 
 
-	'source': '<div class="content">\n	<h1>$title</h1>	<div class="body">$body</div>\n</div>',
+	'source': '<strong>$title</strong><pre>$examplecode</pre>',
 	'context': {
 		'title': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'node',
 			'ref': '.@title',
 		},
-		'body': {
-			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+		'examplecode': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
 			'refcontext': 'node',
-			'ref': '.@body',
+			'ref': '.@examplecode',
 		},
 		'_body': {
 			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',

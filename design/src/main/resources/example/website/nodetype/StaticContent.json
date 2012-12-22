@@ -2,7 +2,8 @@
 
 	'attributes': {
 		'title': { 'type': 'String', },
-		'body': { 'type': 'clob',  },
+		'_body': { 'type': 'clob',  },
+		'body': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate' },
 		'lastmodified': { 'type': 'Node', 'typeofnode': 'classpath:com/dc2f/nodetype/Date' },
 		'sortorder': { 'type': 'Integer' }
 	},

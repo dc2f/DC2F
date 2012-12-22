@@ -20,6 +20,11 @@ public class HtmlTemplate extends TemplateNodeType {
 		// the context
 		// it might better to prepare the context? or at least cache the results
 		// of the context.
+		
+		if (context == null) {
+			// if context is null, the HtmlTemplate is basically a StringRenderer ;-)
+			return source;
+		}
 
 		Pattern placeholderLookup = Pattern.compile("\\$([A-Za-z0-9]+)");
 		logger.info("rendering template with source {" + source + "}");

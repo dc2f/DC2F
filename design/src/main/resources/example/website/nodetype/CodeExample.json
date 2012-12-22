@@ -1,0 +1,10 @@
+{
+
+	'attributes': {
+		'title': { 'type': 'String', },
+		'examplecode': { 'type': 'clob',  },
+		'language': { 'type': 'String', },
+	},
+
+
+}

@@ -3,6 +3,22 @@
 
 
 	'title': 'Documentation',
+	'body': {
+		context: {
+			'simpleexample': {
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+				'refcontext': 'valuenode',
+				'valuenode': {
+					'nodetype': '/website/nodetype/CodeExample',
+					
+					'title': 'Simple Example',
+					'examplecode': 'MY EXAMPLE!!',
+					'language': 'json',
+					
+				},
+			},
+		}
+	},
 	'lastmodified': { timestamp: 1234567890 },
 	'sortorder': 2,
 

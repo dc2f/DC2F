@@ -25,7 +25,6 @@
 				
 				'rendertype': 'com.dc2f.rendertype.web',
 				'template': '/website/nodetype/static_template',
-				'_NVMindex': '/website/content/startpage',
 				'urlmapping': [
 					{
 						'nodetype': 'classpath:com/dc2f/renderer/nodetype/UrlMapping',
@@ -33,6 +32,18 @@
 					}
 				]
 			},
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+
+				'rootnode': '/website/content',
+				'targetnodetype': '/website/nodetype/CodeExample',
+				
+				'rendertype': 'com.dc2f.rendertype.web',
+				'template': '/website/nodetype/code_example_template',
+			},
+			
+			
+			
 			{
 				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
 				'rendertype': 'com.dc2f.rendertype.web.overview',

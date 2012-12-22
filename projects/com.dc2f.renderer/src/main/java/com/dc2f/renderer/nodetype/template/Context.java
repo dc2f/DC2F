@@ -60,10 +60,10 @@ public class Context extends BaseNodeType {
 					}
 				} else if (refContextProperty.equals("context")) {
 					renderValue = this.resolveFromContext(context, request, ref);
+				} else if (refContextProperty.equals("valuenode")) {
+					renderValue = value.get("valuenode");
 				} else {
-					if (renderValue == null) {
-						renderValue = value.get("value");
-					}
+					renderValue = value.get("value");
 				}
 				
 				replacement = ((ContextRendererNodeType) value.getNodeType()).renderNode(
