@@ -16,7 +16,6 @@ public class ChangeableJsonNode extends SimpleJsonNode implements ChangeableNode
 	public ChangeableJsonNode(SimpleBranchAccess branchAccess, String path,
 			JSONObject jsonObject, NodeType nodeType) {
 		super(branchAccess, path, jsonObject, nodeType);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
