@@ -19,6 +19,9 @@ public enum AttributeType {
 	 * Attribute type for attributes that contain another node. This is used for links.
 	 */
 	NODE_REFERENCE("NodeReference"),
+	/**
+	 * Attribute type for attrbutes that hold the type information for the node.
+	 */
 	NODETYPE_REFERENCE("NodeTypeReference"),
 	/**
 	 * Attribute type for attributes that contain large texts.

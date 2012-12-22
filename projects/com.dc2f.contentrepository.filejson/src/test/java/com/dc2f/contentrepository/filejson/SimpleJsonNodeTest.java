@@ -84,21 +84,22 @@ public class SimpleJsonNodeTest {
 	
 	@Test
 	public void testTypeAttributes() throws IOException, JSONException {
-		String json = IOUtils.toString(getClass().getResourceAsStream(JSON_FILE_NAME));
-		JSONObject object = new JSONObject(json);
-		NodeType type = new TestNodeType();
-		SimpleBranchAccess braccess = new TestBranchAccess();
-		
-		SimpleJsonNode node = new SimpleJsonNode(braccess, "/", object, type);
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
 		assertEquals("Type attribute was not read correctly.", "TestJSON", node.get("type"));
+		assertEquals("Class attribute was not read correctly.", "org.json.JSONObject", node.get("class"));
+	}
+	
+	@Test
+	public void testNodeTypeAttribute() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		assertEquals("Type attribute was not read correctly.", new TestNodeType(), node.get("nodetype"));
 		assertEquals("Class attribute was not read correctly.", "org.json.JSONObject", node.get("class"));
 	}
 	
 	
 	
 	
-	
-	private class TestNodeType implements NodeType {
+	public static class TestNodeType implements NodeType {
 
 		TestAttributesDefinition attributesDefinitions = new TestAttributesDefinition();
 		
@@ -125,9 +126,14 @@ public class SimpleJsonNodeTest {
 			return false;
 		}
 		
+		@Override
+		public boolean equals(Object arg0) {
+			return arg0.getClass().equals(TestNodeType.class);
+		}
+		
 	}
 	
-	private class TestAttributesDefinition implements AttributesDefinition {
+	private static class TestAttributesDefinition implements AttributesDefinition {
 
 		@Override
 		public AttributeDefinition getAttributeDefinition(String propertyName) {
@@ -144,6 +150,8 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.CLOB);
 			} else if("testAbsoluteReference".equals(propertyName) || "testRelativeReference".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODE_REFERENCE);
+			} else if("nodetype".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.NODETYPE_REFERENCE);
 			}
 			return null;
 		}
@@ -156,7 +164,7 @@ public class SimpleJsonNodeTest {
 		
 	}
 	
-	private class TestAttributeDefinition implements AttributeDefinition {
+	private static class TestAttributeDefinition implements AttributeDefinition {
 
 		AttributeType type;
 		
