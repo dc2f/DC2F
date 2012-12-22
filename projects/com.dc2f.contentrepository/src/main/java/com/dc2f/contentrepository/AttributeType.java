@@ -31,6 +31,17 @@ public enum AttributeType {
 	 * Attribute type for attributes that contain binaries (images and documents).
 	 */
 	BLOB("blob"),
+	/**
+	 * Attribute type for attributes that contain inline nodes. E.g. child attribute in the given json example
+	 * <pre>
+	 * {
+	 * 	"myattribute": "test",
+	 * 	"child": {
+	 * 		"myattribute": "child.test"
+	 * 	}
+	 * }
+	 * </pre>
+	 */
 	NODE("Node"),
 	LIST_OF_NODES("ListOfNodes")
 	;

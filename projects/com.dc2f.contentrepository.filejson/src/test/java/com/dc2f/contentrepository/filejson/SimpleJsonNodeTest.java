@@ -32,7 +32,6 @@ public class SimpleJsonNodeTest {
 	
 	private static final File REPOSITORY_DIR = new File(SimpleJsonNodeTest.class.getResource(JSON_FILE_NAME).getPath()).getParentFile();
 
-
 	@Test
 	public void testSimpleAttributes() throws IOException, JSONException {
 		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
@@ -93,10 +92,15 @@ public class SimpleJsonNodeTest {
 	public void testNodeTypeAttribute() throws IOException, JSONException {
 		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
 		assertEquals("Type attribute was not read correctly.", new TestNodeType(), node.get("nodetype"));
-		assertEquals("Class attribute was not read correctly.", "org.json.JSONObject", node.get("class"));
 	}
 	
-	
+	@Test
+	public void testNodeAttribute() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		
+		Node inlineNode = (Node) node.get("node");
+		assertEquals("Inline node cannot resolve attributes.", "node", inlineNode.get("testString"));
+	}
 	
 	
 	public static class TestNodeType implements NodeType {
@@ -152,6 +156,8 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.NODE_REFERENCE);
 			} else if("nodetype".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODETYPE_REFERENCE);
+			} else if("node".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.NODE);
 			}
 			return null;
 		}

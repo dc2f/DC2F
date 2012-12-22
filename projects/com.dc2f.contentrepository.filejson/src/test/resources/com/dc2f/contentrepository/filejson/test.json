@@ -14,5 +14,10 @@
 	"testAbsoluteReference": "/test2.json",
 	"testRelativeReference": "test2.json",
 	
-	"nodetype": "test.nodetype"
+	"nodetype": "test.nodetype",
+	
+	"node": {
+		"nodetype": "test.nodetype",
+		"testString": "node"
+	}
 }
