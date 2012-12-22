@@ -1,0 +1,7 @@
+{
+
+	"type": "TestJSON",
+	"class": "org.json.JSONObject",
+
+	"testString": "test2"
+}

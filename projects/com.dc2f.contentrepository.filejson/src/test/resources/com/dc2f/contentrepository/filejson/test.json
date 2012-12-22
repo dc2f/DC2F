@@ -8,5 +8,9 @@
 	"testInteger": 1,
 	"testStringInteger": "1",
 	
-	"testBoolean": true
+	"testBoolean": true,
+	
+	
+	"testAbsoluteReference": "/test2.json",
+	"testRelativeReference": "test2.json"
 }

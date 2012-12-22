@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
@@ -34,11 +35,7 @@ public class SimpleJsonNodeTest {
 
 	@Test
 	public void testSimpleAttributes() throws IOException, JSONException {
-		String json = IOUtils.toString(getClass().getResourceAsStream(JSON_FILE_NAME));
-		JSONObject object = new JSONObject(json);
-		NodeType type = new TestNodeType();
-		
-		SimpleJsonNode node = new SimpleJsonNode(null, "/", object, type);
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
 		assertEquals("String attribute was not read correctly.", "string", node.get("testString"));
 		assertEquals("Integer attribute was not read correctly.", 1, node.get("testInteger"));
 		//This should return an integer but returns a string.
@@ -51,15 +48,38 @@ public class SimpleJsonNodeTest {
 	
 	@Test
 	public void testBinaryAttributes() throws IOException, JSONException {
-		String json = IOUtils.toString(getClass().getResourceAsStream(JSON_FILE_NAME));
-		JSONObject object = new JSONObject(json);
-		NodeType type = new TestNodeType();
-		SimpleBranchAccess braccess = new TestBranchAccess();
-		
-		SimpleJsonNode node = new SimpleJsonNode(braccess, "/", object, type);
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
 		assertEquals("Blob attribute was not read correctly.", "This should be an image", IOUtils.toString(((FileInputStream) node.get("image"))));
 		assertEquals("Clob attribute was not read correctly.", "This can be a large textfile", node.get("text"));
 
+	}
+
+
+	private SimpleJsonNode getSimpleNode(String file) throws IOException, JSONException {
+		
+		InputStream stream = null;
+		if(file.startsWith("/")) {
+			stream = getClass().getResourceAsStream(file.substring(1));
+		} else {
+			stream = getClass().getResourceAsStream(file);
+		}
+		if(stream != null) {
+			String json = IOUtils.toString(stream);
+			JSONObject object = new JSONObject(json);
+			NodeType type = new TestNodeType();
+			SimpleBranchAccess braccess = new TestBranchAccess();
+			
+			SimpleJsonNode node = new SimpleJsonNode(braccess, "/", object, type);
+			return node;
+		}
+		return null;
+	}
+	
+	@Test
+	public void testReferenceAttributes() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		assertEquals("Absolute reference attribute was not read correctly.", getSimpleNode("test2.json"), node.get("testAbsoluteReference"));
+		assertEquals("Relative reference attribute was not read correctly.", getSimpleNode("test2.json"), node.get("testRelativeReference"));
 	}
 	
 	@Test
@@ -122,6 +142,8 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.BLOB);
 			} else if("text".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.CLOB);
+			} else if("testAbsoluteReference".equals(propertyName) || "testRelativeReference".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.NODE_REFERENCE);
 			}
 			return null;
 		}
@@ -179,7 +201,16 @@ public class SimpleJsonNodeTest {
 			super(new TestSession(), null);
 		}
 
-		
+		@Override
+		public Node getNode(String path) {
+			try {
+				return getSimpleNode(path);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			} catch (JSONException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
 	private class TestSession extends SimpleCRSession {
