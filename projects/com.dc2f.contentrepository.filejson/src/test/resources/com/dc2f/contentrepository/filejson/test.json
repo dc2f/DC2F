@@ -1,4 +1,8 @@
 {
+
+	"type": "TestJSON",
+	"class": "org.json.JSONObject",
+
 	"testString": "string",
 	
 	"testInteger": 1,

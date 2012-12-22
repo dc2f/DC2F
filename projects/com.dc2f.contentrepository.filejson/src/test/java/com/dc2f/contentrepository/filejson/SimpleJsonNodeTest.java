@@ -62,6 +62,19 @@ public class SimpleJsonNodeTest {
 
 	}
 	
+	@Test
+	public void testTypeAttributes() throws IOException, JSONException {
+		String json = IOUtils.toString(getClass().getResourceAsStream(JSON_FILE_NAME));
+		JSONObject object = new JSONObject(json);
+		NodeType type = new TestNodeType();
+		SimpleBranchAccess braccess = new TestBranchAccess();
+		
+		SimpleJsonNode node = new SimpleJsonNode(braccess, "/", object, type);
+		assertEquals("Type attribute was not read correctly.", "TestJSON", node.get("type"));
+		assertEquals("Class attribute was not read correctly.", "org.json.JSONObject", node.get("class"));
+	}
+	
+	
 	
 	
 	
