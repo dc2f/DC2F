@@ -19,6 +19,7 @@ import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.Authentication;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.CRAdapter;
+import com.dc2f.contentrepository.DefaultNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.contentrepository.NodeTypeInfo;
@@ -100,6 +101,12 @@ public class SimpleJsonNodeTest {
 		
 		Node inlineNode = (Node) node.get("node");
 		assertEquals("Inline node cannot resolve attributes.", "node", inlineNode.get("testString"));
+	
+		Node subInlineNode = (Node) inlineNode.get("node");
+		assertEquals("Inline node with nodetype cannot resolve attributes.", "node.node", subInlineNode.get("testString"));
+
+		Node defaultInlineNode = (Node) node.get("node-default");
+		assertEquals("Default inline node (without nodetype) has not the default class.", DefaultNodeType.class, defaultInlineNode.getNodeType().getClass());
 	}
 	
 	
@@ -157,6 +164,8 @@ public class SimpleJsonNodeTest {
 			} else if("nodetype".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODETYPE_REFERENCE);
 			} else if("node".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.NODE, "test.nodetype");
+			} else if("node-default".equals(propertyName)){
 				return new TestAttributeDefinition(AttributeType.NODE);
 			}
 			return null;
@@ -174,8 +183,15 @@ public class SimpleJsonNodeTest {
 
 		AttributeType type;
 		
-		public TestAttributeDefinition(AttributeType string) {
+		String nodetype;
+		
+		public TestAttributeDefinition(AttributeType attributetype) {
+			type = attributetype;
+		}
+		
+		public TestAttributeDefinition(AttributeType string, String typeofnode) {
 			type = string;
+			nodetype = typeofnode;
 		}
 
 		@Override
@@ -198,7 +214,9 @@ public class SimpleJsonNodeTest {
 
 		@Override
 		public Object get(String attributeName) {
-			// TODO Auto-generated method stub
+			if("typeofnode".equals(attributeName)) {
+				return nodetype;
+			}
 			return null;
 		}
 

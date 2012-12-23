@@ -18,6 +18,14 @@
 	
 	"node": {
 		"nodetype": "test.nodetype",
-		"testString": "node"
+		"testString": "node",
+		"node": {
+			"typeofnode": "test.nodetype",
+			"testString": "node.node"
+		}
+	},
+	
+	"node-default": {
+	
 	}
 }
