@@ -24,6 +24,7 @@ import com.dc2f.contentrepository.DefaultNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.contentrepository.NodeTypeInfo;
+import com.dc2f.contentrepository.exception.UnknownAttributeException;
 
 public class SimpleJsonNodeTest {
 	
@@ -134,6 +135,12 @@ public class SimpleJsonNodeTest {
 		assertEquals("Number of subnodes isn't correct", 2, subnodes.size());
 		assertEquals("First subnode didn't return the correct test string.", "subnode1", subnodes.get(0).get("testString"));
 		assertEquals("Second subnode didn't return the correct test string.", "subnode2", subnodes.get(1).get("testString"));
+	}
+	
+	@Test(expected=UnknownAttributeException.class)
+	public void testUnknownAttribute() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		node.get("unknownAttribute");
 	}
 	
 	
