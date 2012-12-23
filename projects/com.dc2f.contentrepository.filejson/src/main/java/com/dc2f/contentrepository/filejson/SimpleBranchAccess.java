@@ -115,7 +115,7 @@ public class SimpleBranchAccess implements BranchAccess {
 		File[] files = new File(cr.getCrdir(), node.getPath()).listFiles();
 		List<Node> children = new ArrayList<Node>(files.length);
 		for(File file : files) {
-			if (file.isDirectory()) {
+			if (file.isDirectory() && !file.getName().startsWith("@")) {
 				Node child = getNode(node.getPath() + "/" + file.getName());
 				if (child != null) {
 					children.add(child);

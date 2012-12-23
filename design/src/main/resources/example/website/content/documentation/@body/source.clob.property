@@ -25,13 +25,5 @@ content are called <strong>NodeType</strong>s and are themselves configured usin
 
 <p>An example for a simple content type you might use for a basic website might look like the following:</p>
 
-<strong>StaticContent</strong>
-<pre>
-{
-	"attributes": {
-		"title": { "type": "String", },
-		"body": { "type": "clob",  },
-		"lastmodified": { "type": "Node", "typeofnode": "classpath:com/dc2f/nodetype/Date" },
-	}
-}
-</pre>
+$simplestaticcontent
+

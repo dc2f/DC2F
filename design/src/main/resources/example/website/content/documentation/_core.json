@@ -3,6 +3,16 @@
 
 
 	'title': 'Documentation',
+	'body': {
+		context: {
+			'simplestaticcontent': {
+				'nodetype': '/website/nodetype/CodeExample',
+				
+				'title': 'StaticContent',
+				'language': 'json',
+			},
+		}
+	},
 	'lastmodified': { timestamp: 1234567890 },
 	'sortorder': 2,
 

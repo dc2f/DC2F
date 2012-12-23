@@ -25,6 +25,7 @@ public class SimpleJsonNode implements Node {
 
 	private SimpleBranchAccess branchAccess;
 	private String path;
+	private String internalPath;
 	private JSONObject jsonObject;
 	private NodeType nodeType;
 
@@ -34,7 +35,7 @@ public class SimpleJsonNode implements Node {
 			path = path.replaceAll("/+$", "");
 		}
 		this.branchAccess = branchAccess;
-		this.path = path;
+		this.internalPath = this.path = path;
 		this.jsonObject = jsonObject;
 		this.nodeType = nodeType;
 	}
@@ -108,7 +109,7 @@ public class SimpleJsonNode implements Node {
 		} else if (attributeType == AttributeType.NODETYPE_REFERENCE && obj instanceof String) {
 			return branchAccess.getNodeType((String) obj);
 		} else if (attributeType == AttributeType.CLOB && obj == null) {
-			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(path, attributeName + ".clob.property"));
+			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(internalPath, attributeName + ".clob.property"));
 		} else if (attributeType == AttributeType.BLOB && obj == null) {
 			return branchAccess.getContentRepository().getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
 		}
@@ -139,7 +140,9 @@ public class SimpleJsonNode implements Node {
 			if (currentSubNodeType == null) {
 				currentSubNodeType = new DefaultNodeType();
 			}
-			return new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
+			SimpleJsonNode retNode = new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
+			retNode.setInternalPath(internalPath + "/@" + attributeName);
+			return retNode;
 		} else if (attributeType == AttributeType.LIST_OF_NODES) {
 			JSONArray array = (JSONArray) obj;
 			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
@@ -181,6 +184,10 @@ public class SimpleJsonNode implements Node {
 		return null;
 	}
 	
+	private void setInternalPath(String internalPath) {
+		this.internalPath = internalPath;
+	}
+
 	@Override
 	public String toString() {
 		return "{SimpleJsonNode:" + getPath() + "}";
@@ -190,7 +197,8 @@ public class SimpleJsonNode implements Node {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof SimpleJsonNode) {
-			return getPath().equals(((SimpleJsonNode)obj).getPath());
+			return internalPath.equals(((SimpleJsonNode)obj).internalPath);
+//			return getPath().equals(((SimpleJsonNode)obj).getPath());
 		}
 		return super.equals(obj);
 	}
