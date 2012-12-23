@@ -25,7 +25,15 @@
 		}
 	},
 	
-	"node-default": {
-	
-	}
+	"node-default": { },
+	"subnodes": [
+		{
+			"nodetype": "test.nodetype",
+			"testString": "subnode1"
+		},
+		{
+			"nodetype": "test.nodetype",
+			"testString": "subnode2"
+		}
+	]
 }

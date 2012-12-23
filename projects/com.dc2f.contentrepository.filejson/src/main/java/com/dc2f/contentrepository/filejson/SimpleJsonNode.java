@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributeType;
 import com.dc2f.contentrepository.AttributesDefinition;
-import com.dc2f.contentrepository.ChangeableNode;
 import com.dc2f.contentrepository.DefaultNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;

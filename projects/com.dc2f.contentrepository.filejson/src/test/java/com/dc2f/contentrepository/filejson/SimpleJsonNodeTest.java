@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
@@ -109,6 +110,15 @@ public class SimpleJsonNodeTest {
 		assertEquals("Default inline node (without nodetype) has not the default class.", DefaultNodeType.class, defaultInlineNode.getNodeType().getClass());
 	}
 	
+	@Test
+	public void testListOfNodesAttribute() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		List<Node> subnodes = (List<Node>) node.get("subnodes");
+		assertEquals("Number of subnodes isn't correct", 2, subnodes.size());
+		assertEquals("First subnode didn't return the correct test string.", "subnode1", subnodes.get(0).get("testString"));
+		assertEquals("Second subnode didn't return the correct test string.", "subnode2", subnodes.get(1).get("testString"));
+	}
+	
 	
 	public static class TestNodeType implements NodeType {
 
@@ -165,8 +175,10 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.NODETYPE_REFERENCE);
 			} else if("node".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODE, "test.nodetype");
-			} else if("node-default".equals(propertyName)){
+			} else if("node-default".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODE);
+			} else if("subnodes".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.LIST_OF_NODES);
 			}
 			return null;
 		}
