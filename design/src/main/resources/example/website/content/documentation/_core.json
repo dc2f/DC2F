@@ -5,17 +5,11 @@
 	'title': 'Documentation',
 	'body': {
 		context: {
-			'simpleexample': {
-				'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
-				'refcontext': 'valuenode',
-				'valuenode': {
-					'nodetype': '/website/nodetype/CodeExample',
-					
-					'title': 'Simple Example',
-					'examplecode': 'MY EXAMPLE!!',
-					'language': 'json',
-					
-				},
+			'simplestaticcontent': {
+				'nodetype': '/website/nodetype/CodeExample',
+				
+				'title': 'StaticContent',
+				'language': 'json',
 			},
 		}
 	},

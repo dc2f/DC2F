@@ -9,6 +9,7 @@ import com.dc2f.contentrepository.BaseNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.exception.UnknownAttributeException;
 import com.dc2f.renderer.ContentRenderRequest;
+import com.dc2f.renderer.impl.TemplateRenderer;
 import com.dc2f.renderer.nodetype.ContextRendererNodeType;
 
 public class Context extends BaseNodeType {
@@ -72,7 +73,10 @@ public class Context extends BaseNodeType {
 					replacement = "";
 				}
 			} else {
-				replacement = "" + value.getNodeType();
+				replacement = TemplateRenderer.internalRenderNodeOfContent(request, value, value, TemplateRenderer.RENDER_TYPE);
+				if (replacement == null) {
+					replacement = "" + value.getNodeType();
+				}
 			}
 		} else {
 			logger.severe("Unable to resolve context variable {" + propertyName

@@ -3,10 +3,13 @@ package com.dc2f.renderer.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.dc2f.contentrepository.CRAccess;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.nodetype.BinaryNodeType;
@@ -57,6 +60,49 @@ public class TemplateRenderer implements NodeRenderer {
 
 	}
 
+	/**
+	 * creates a child render request suitable to render nodes which are the contents of other nodes.
+	 * @param request parent render request
+	 * @param newRootNode the context from where the subnode should be rendered - if it is null the current render iteration will simply continue.
+	 * @param nodeToBeRendered the actual node which should be rendered.
+	 * @param renderType
+	 * @return
+	 */
+	public static String internalRenderNodeOfContent(ContentRenderRequest request,
+			Node newRootNode, Node nodeToBeRendered, String renderType) {
+		CRAccess crAccess = request.getContentRepositoryTransaction();
+		List<Node> nodePath = new ArrayList<Node>();
+		Node node = nodeToBeRendered;
+		
+		// FIXME: This is a stupid way to find the node path :(
+		nodePath.add(node);
+		Node context = request.getCurrentNodeContext();
+		if (newRootNode != null) {
+			context = newRootNode;
+		}
+		// if we should continue to render until node, and we are already there.. we are done
+		if (node.equals(context)) {
+			// except, obviously this is a new render run starting at "newRootNode".
+			if (newRootNode == null) {
+				// nothing more to render.
+				return null;
+			}
+		} else {
+			while ((node = crAccess.getParentNode(node)) != null) {
+				if (node.equals(context)) {
+					break;
+				}
+				nodePath.add(0, node);
+			}
+		}
+		if (newRootNode != null) {
+			nodePath.add(0, context);
+		}
+
+		ContentRenderRequestImpl newRequest = new ContentRenderRequestImpl(request.getContentRepository(), request.getContentRepositoryTransaction(), nodePath.toArray(new Node[nodePath.size()]), request.getURLMapper());
+		newRequest.setProjectNode(request.getProjectNode());
+		return TemplateRenderer.internalRenderNode(newRequest, null, renderType, null);
+	}
 	public static String internalRenderNode(ContentRenderRequest request, ContentRenderResponse response, String[] acceptedVariants) {
 		return internalRenderNode(request, response, RENDER_TYPE, acceptedVariants);
 	}
