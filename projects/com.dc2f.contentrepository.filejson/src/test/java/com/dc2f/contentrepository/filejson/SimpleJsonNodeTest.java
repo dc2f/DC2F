@@ -110,6 +110,23 @@ public class SimpleJsonNodeTest {
 		assertEquals("Default inline node (without nodetype) has not the default class.", DefaultNodeType.class, defaultInlineNode.getNodeType().getClass());
 	}
 	
+	
+	@Test
+	public void testNulls() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		Object object = node.get("testNullString");
+		assertNull("Null string was not null.", object);
+		object = node.get("testNullInteger");
+		assertNull("Null integer was not null.", object);
+		object = node.get("testNullBoolean");
+		assertNull("Null boolean was not null.", object);
+		object = node.get("testNullNode");
+		assertNull("Null node was not null.", object);
+		object = node.get("testNullSubnodes");
+		assertNull("Null subnodes was not null.", object);
+		
+	}
+	
 	@Test
 	public void testListOfNodesAttribute() throws IOException, JSONException {
 		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
@@ -159,11 +176,11 @@ public class SimpleJsonNodeTest {
 		@Override
 		public AttributeDefinition getAttributeDefinition(String propertyName) {
 			
-			if("testString".equals(propertyName)) {
+			if(propertyName.endsWith("String")) {
 				return new TestAttributeDefinition(AttributeType.STRING);
-			} else if("testInteger".equals(propertyName) || "testStringInteger".equals(propertyName)) {
+			} else if(propertyName.endsWith("Integer")) {
 				return new TestAttributeDefinition(AttributeType.INTEGER);
-			} else if("testBoolean".equals(propertyName)) {
+			} else if(propertyName.endsWith("Boolean")) {
 				return new TestAttributeDefinition(AttributeType.BOOLEAN);
 			} else if("image".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.BLOB);
@@ -173,11 +190,11 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.NODE_REFERENCE);
 			} else if("nodetype".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODETYPE_REFERENCE);
-			} else if("node".equals(propertyName)) {
+			} else if("node".equals(propertyName) || "testNullNode".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODE, "test.nodetype");
 			} else if("node-default".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.NODE);
-			} else if("subnodes".equals(propertyName)) {
+			} else if("subnodes".equals(propertyName) || "testNullSubnodes".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.LIST_OF_NODES);
 			}
 			return null;

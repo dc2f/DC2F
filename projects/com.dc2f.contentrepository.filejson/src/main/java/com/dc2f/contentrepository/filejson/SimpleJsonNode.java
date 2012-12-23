@@ -116,7 +116,7 @@ public class SimpleJsonNode implements Node {
 		if (obj instanceof String) {
 			return obj;
 		}
-		if (obj == null) {
+		if (obj == null || obj == JSONObject.NULL) {
 			// FIXME check if property is required?!
 			return null;
 		}

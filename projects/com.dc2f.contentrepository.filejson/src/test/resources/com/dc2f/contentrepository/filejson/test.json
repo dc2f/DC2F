@@ -2,14 +2,11 @@
 
 	"type": "TestJSON",
 	"class": "org.json.JSONObject",
-
-	"testString": "string",
 	
+	"testString": "string",
 	"testInteger": 1,
 	"testStringInteger": "1",
-	
 	"testBoolean": true,
-	
 	
 	"testAbsoluteReference": "/test2.json",
 	"testRelativeReference": "test2.json",
@@ -35,5 +32,14 @@
 			"nodetype": "test.nodetype",
 			"testString": "subnode2"
 		}
-	]
+	],
+	
+	
+	"testNullString": null,
+	"testNullInteger": null,
+	"testNullBoolean": null,
+	"testNullNode": null,
+	"testNullSubnodes": null,
+	
+	
 }
