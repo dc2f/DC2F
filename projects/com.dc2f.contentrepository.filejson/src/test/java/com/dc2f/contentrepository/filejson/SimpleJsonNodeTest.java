@@ -125,7 +125,8 @@ public class SimpleJsonNodeTest {
 		assertNull("Null node was not null.", object);
 		object = node.get("testNullSubnodes");
 		assertNull("Null subnodes was not null.", object);
-		
+		object = node.get("testMissingString");
+		assertNull("Missing string attribute was not null.", object);
 	}
 	
 	@Test
