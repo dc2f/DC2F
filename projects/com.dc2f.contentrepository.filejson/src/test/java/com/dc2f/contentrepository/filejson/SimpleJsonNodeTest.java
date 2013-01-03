@@ -1,6 +1,7 @@
 package com.dc2f.contentrepository.filejson;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,9 +18,6 @@ import org.junit.Test;
 import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributeType;
 import com.dc2f.contentrepository.AttributesDefinition;
-import com.dc2f.contentrepository.Authentication;
-import com.dc2f.contentrepository.BranchAccess;
-import com.dc2f.contentrepository.CRAdapter;
 import com.dc2f.contentrepository.DefaultNodeType;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
@@ -132,10 +130,21 @@ public class SimpleJsonNodeTest {
 	@Test
 	public void testListOfNodesAttribute() throws IOException, JSONException {
 		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		@SuppressWarnings("unchecked")
 		List<Node> subnodes = (List<Node>) node.get("subnodes");
 		assertEquals("Number of subnodes isn't correct", 2, subnodes.size());
 		assertEquals("First subnode didn't return the correct test string.", "subnode1", subnodes.get(0).get("testString"));
 		assertEquals("Second subnode didn't return the correct test string.", "subnode2", subnodes.get(1).get("testString"));
+	}
+	
+	@Test
+	public void testListOfIntegerNodesAttribute() throws IOException, JSONException {
+		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
+		@SuppressWarnings("unchecked")
+		List<Node> subnodes = (List<Node>) node.get("integerSubnodes");
+		assertEquals("Number of subnodes isn't correct", 2, subnodes.size());
+		assertEquals("First subnode didn't return the correct test string.", 1, subnodes.get(0).get("valueInteger"));
+		assertEquals("Second subnode didn't return the correct test string.", 2, subnodes.get(1).get("valueInteger"));
 	}
 	
 	@Test(expected=UnknownAttributeException.class)
@@ -204,6 +213,8 @@ public class SimpleJsonNodeTest {
 				return new TestAttributeDefinition(AttributeType.NODE);
 			} else if("subnodes".equals(propertyName) || "testNullSubnodes".equals(propertyName)) {
 				return new TestAttributeDefinition(AttributeType.LIST_OF_NODES);
+			} else if("integerSubnodes".equals(propertyName)) {
+				return new TestAttributeDefinition(AttributeType.LIST_OF_NODES, "test.nodetype");
 			}
 			return null;
 		}
@@ -251,7 +262,7 @@ public class SimpleJsonNodeTest {
 
 		@Override
 		public Object get(String attributeName) {
-			if("typeofnode".equals(attributeName)) {
+			if("typeofnode".equals(attributeName) || "typeofsubnodes".equals(attributeName)) {
 				return nodetype;
 			}
 			return null;
