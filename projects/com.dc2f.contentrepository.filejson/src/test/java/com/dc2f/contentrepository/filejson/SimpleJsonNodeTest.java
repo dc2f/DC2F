@@ -53,9 +53,18 @@ public class SimpleJsonNodeTest {
 		assertEquals("Clob attribute was not read correctly.", "This can be a large textfile", node.get("text"));
 
 	}
+	
+	@Test
+	public void testPathEquals() throws IOException, JSONException {
+		assertEquals("Path that only differ by the last slash should be equal.", getSimpleNode(JSON_FILE_NAME, "/test"), getSimpleNode(JSON_FILE_NAME, "/test/"));
+	}
 
 
 	private SimpleJsonNode getSimpleNode(String file) throws IOException, JSONException {
+		return getSimpleNode(file, "/");
+	}
+	
+	private SimpleJsonNode getSimpleNode(String file, String path) throws IOException, JSONException {
 		
 		InputStream stream = null;
 		if(file.startsWith("/")) {
@@ -69,7 +78,7 @@ public class SimpleJsonNodeTest {
 			NodeType type = new TestNodeType();
 			SimpleBranchAccess braccess = new TestBranchAccess();
 			
-			SimpleJsonNode node = new SimpleJsonNode(braccess, "/", object, type);
+			SimpleJsonNode node = new SimpleJsonNode(braccess, path, object, type);
 			return node;
 		}
 		return null;
