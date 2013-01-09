@@ -178,7 +178,7 @@ public class SimpleJsonNode implements Node {
 			if (obj instanceof Integer) {
 				return obj;
 			}
-			return new Integer(obj.toString());
+			return Integer.valueOf(obj.toString());
 		}
 		logger.info("getting property " + attributeName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
 		logger.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "} - attributeType: {" + attributeType + "}");
