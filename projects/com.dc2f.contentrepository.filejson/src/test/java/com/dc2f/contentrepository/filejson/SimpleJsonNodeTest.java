@@ -51,7 +51,6 @@ public class SimpleJsonNodeTest {
 		SimpleJsonNode node = getSimpleNode(JSON_FILE_NAME);
 		assertEquals("Blob attribute was not read correctly.", "This should be an image", IOUtils.toString(((FileInputStream) node.get("image"))));
 		assertEquals("Clob attribute was not read correctly.", "This can be a large textfile", node.get("text"));
-
 	}
 	
 	@Test

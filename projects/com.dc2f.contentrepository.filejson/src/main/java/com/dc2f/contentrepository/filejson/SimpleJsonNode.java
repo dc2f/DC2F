@@ -58,13 +58,16 @@ public class SimpleJsonNode implements Node {
 	public String getPath() {
 		return path;
 	}
-	
-	protected Object internalGet(String attributeName) {
+	/**
+	 * @param name - name of the attribute to get
+	 * @return the attribute with the given name from the json object
+	 */
+	protected Object internalGet(String name) {
 		try {
-			return jsonObject.get(attributeName);
+			return jsonObject.get(name);
 		} catch (JSONException e) {
-			if (jsonObject.has(attributeName)) {
-				logger.log(Level.SEVERE, "Error while getting attribute {" + attributeName
+			if (jsonObject.has(name)) {
+				logger.log(Level.SEVERE, "Error while getting attribute {" + name
 						+ "} of node type {" + path + "}", e);
 			}
 			return null;
