@@ -110,13 +110,6 @@ public class TemplateRenderer implements NodeRenderer {
 		for (Node node : request.getNodesInPath()) {
 			Node renderConfig = request.getRenderConfiguration(node, renderType, acceptedVariants);
 			if (renderConfig != null) {
-//				Node renderConfig = nodeType.getRenderConfiguration(node, renderType, acceptedVariants);
-				
-				if (renderConfig == null) {
-					logger.warning("No render configuration found for renderType {" + renderType + "}");
-					return null;
-				}
-				
 				Node templateNode = (Node) renderConfig.get("template");
 				Node addToContext = (Node) renderConfig.get("addtocontext");
 				if (templateNode.getNodeType() instanceof TemplateNodeType) {
