@@ -1,6 +1,7 @@
 package com.dc2f.backend.gwt.shared;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class DTOAttributesDefinition implements Serializable {
 	}
 	
 	public DTOAttributesDefinition(String[] attributeNames) {
-		this.attributeNames = attributeNames.clone();
+		this.attributeNames = Arrays.copyOf(attributeNames, attributeNames.length);
 	}
 
 	public Node getAttributeDefinition(String propertyName) {

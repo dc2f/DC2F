@@ -1,5 +1,6 @@
 package com.dc2f.renderer.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.dc2f.contentrepository.CRAccess;
@@ -15,7 +16,7 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 
 	public ContentRenderRequestWrapper(ContentRenderRequest wrappedRequest, Node[] newNodePath) {
 		this.wrappedRequest = wrappedRequest;
-		this.newNodePath = newNodePath.clone();
+		this.newNodePath = Arrays.copyOf(newNodePath, newNodePath.length);
 	}
 	
 
