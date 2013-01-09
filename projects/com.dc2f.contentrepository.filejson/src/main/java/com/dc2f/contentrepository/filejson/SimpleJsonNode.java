@@ -203,5 +203,10 @@ public class SimpleJsonNode implements Node {
 		}
 		return super.equals(obj);
 	}
+	
+	@Override
+	public int hashCode() {
+		return internalPath.hashCode();
+	}
 
 }
