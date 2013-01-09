@@ -144,7 +144,8 @@ public class SimpleJsonNode implements Node {
 		}
 		AttributeType attributeType = attrDefinition.getAttributeType();
 		
-		if (attributeType == AttributeType.NODE_REFERENCE && obj instanceof String) {
+		if (attributeType == AttributeType.NODE_REFERENCE
+				&& obj instanceof String) {
 			String ref = (String) obj;
 			LOGGER.fine("Trying to resolve object {" + ref + "}");
 			if (!ref.startsWith("/")) {
@@ -156,12 +157,16 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return branchAccess.getNode(ref);
-		} else if (attributeType == AttributeType.NODETYPE_REFERENCE && obj instanceof String) {
+		} else if (attributeType == AttributeType.NODETYPE_REFERENCE 
+				&& obj instanceof String) {
 			return branchAccess.getNodeType((String) obj);
 		} else if (attributeType == AttributeType.CLOB && obj == null) {
-			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(internalPath, attributeName + ".clob.property"));
+			obj = branchAccess.getContentRepository().loadRepositoryFile(
+					new File(internalPath, attributeName + ".clob.property"));
 		} else if (attributeType == AttributeType.BLOB && obj == null) {
-			return branchAccess.getContentRepository().getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
+			return branchAccess.getContentRepository()
+					.getInputStreamForRepositoryFile(new File(path,
+							attributeName + ".blob.property"));
 		}
 
 		if (obj instanceof String) {
@@ -173,9 +178,11 @@ public class SimpleJsonNode implements Node {
 		}
 
 
-		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject && attributeType == AttributeType.NODE_REFERENCE)) {
+		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject 
+				&& attributeType == AttributeType.NODE_REFERENCE)) {
 
-			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
+			String subNodeTypeName =
+				((JSONObject) obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;
 			if (subNodeTypeName != null) {
 				currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
@@ -190,28 +197,35 @@ public class SimpleJsonNode implements Node {
 			if (currentSubNodeType == null) {
 				currentSubNodeType = new DefaultNodeType();
 			}
-			SimpleJsonNode retNode = new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
-			retNode.setInternalPath(internalPath + "/@" + attributeName);
+			SimpleJsonNode retNode = new SimpleJsonNode(branchAccess, path,
+					(JSONObject) obj, currentSubNodeType);
+			retNode.internalPath = internalPath + "/@" + attributeName;
 			return retNode;
 		} else if (attributeType == AttributeType.LIST_OF_NODES) {
 			JSONArray array = (JSONArray) obj;
-			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
+			String typeofsubnodes =
+				(String) attrDefinition.get("typeofsubnodes");
 			NodeType subNodeType = null;
 			if (typeofsubnodes != null) {
 				subNodeType = branchAccess.getNodeType(typeofsubnodes);
 			}
 			List<Node> ret = new ArrayList<Node>();
-			for (int i = 0 ; i < array.length() ; i++) {
+			for (int i = 0; i < array.length(); i++) {
 				try {
 					JSONObject arrayobj = (JSONObject) array.get(i);
-					String subNodeTypeName = arrayobj.optString("nodetype", null);
+					String subNodeTypeName =
+						arrayobj.optString("nodetype", null);
 					NodeType currentSubNodeType = subNodeType;
 					if (subNodeTypeName != null) {
-						currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
+						currentSubNodeType =
+							branchAccess.getNodeType(subNodeTypeName);
 					}
-					ret.add(new SimpleJsonNode(branchAccess, path, arrayobj, currentSubNodeType));
+					ret.add(new SimpleJsonNode(branchAccess, path, arrayobj,
+							currentSubNodeType));
 				} catch (JSONException e) {
-					LOGGER.log(Level.SEVERE, "Error while converting property into ListOfNodes", e);
+					LOGGER.log(Level.SEVERE,
+							"Error while converting property into ListOfNodes",
+							e);
 				}
 				
 			}
@@ -227,32 +241,31 @@ public class SimpleJsonNode implements Node {
 			}
 			return Integer.valueOf(obj.toString());
 		}
-		LOGGER.info("getting property " + attributeName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
-		LOGGER.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "} - attributeType: {" + attributeType + "}");
+		LOGGER.info("getting property " + attributeName
+				+ " --- attrDefinitions: " + attrDefinitions
+				+ " attrDefinition: " + attrDefinition);
+		LOGGER.severe("FIXME: Not Implemented: Unable to convert property {"
+				+ attributeName + "} of node type {" + getName() + "}: {"
+				+ obj.getClass().getName() + "} - attributeType: {"
+				+ attributeType + "}");
 		return null;
-	}
-
-	private void setInternalPath(String internalPath) {
-		this.internalPath = internalPath;
-	}
-
-	@Override
-	public String toString() {
-		return "{SimpleJsonNode:" + getPath() + "}";
-		//return "{SimpleJsonNode:" + jsonObject.toString() + "}";
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public final String toString() {
+		return "{SimpleJsonNode:" + getPath() + "}";
+	}
+	
+	@Override
+	public final boolean equals(final Object obj) {
 		if (obj instanceof SimpleJsonNode) {
-			return internalPath.equals(((SimpleJsonNode)obj).internalPath);
-//			return getPath().equals(((SimpleJsonNode)obj).getPath());
+			return internalPath.equals(((SimpleJsonNode) obj).internalPath);
 		}
 		return super.equals(obj);
 	}
 	
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		return internalPath.hashCode();
 	}
 
