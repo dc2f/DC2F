@@ -15,7 +15,7 @@ public class DTOAttributesDefinition implements Serializable {
 	}
 	
 	public DTOAttributesDefinition(String[] attributeNames) {
-		this.attributeNames = Arrays.copyOf(attributeNames, attributeNames.length);
+		this.attributeNames = attributeNames;
 	}
 
 	public Node getAttributeDefinition(String propertyName) {

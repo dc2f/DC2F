@@ -34,7 +34,7 @@ public class ContentRenderRequestImpl implements ContentRenderRequest {
 	public ContentRenderRequestImpl(ContentRepository contentRepository, CRAccess crAccess, Node[] nodePath, URLMapper urlMapper) {
 		this.contentRepository = contentRepository;
 		this.crAccess = crAccess;
-		this.nodePath = Arrays.copyOf(nodePath, nodePath.length);
+		this.nodePath = nodePath;
 		this.nodeStack = Arrays.asList(nodePath);
 		this.urlMapper = urlMapper;
 	}

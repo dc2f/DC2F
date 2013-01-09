@@ -16,7 +16,7 @@ public class ContentRenderRequestWrapper implements ContentRenderRequest {
 
 	public ContentRenderRequestWrapper(ContentRenderRequest wrappedRequest, Node[] newNodePath) {
 		this.wrappedRequest = wrappedRequest;
-		this.newNodePath = Arrays.copyOf(newNodePath, newNodePath.length);
+		this.newNodePath = newNodePath;
 	}
 	
 
