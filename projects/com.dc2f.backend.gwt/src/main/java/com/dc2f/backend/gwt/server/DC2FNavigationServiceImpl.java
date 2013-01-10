@@ -7,25 +7,39 @@ import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
 import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.dc2f.contentrepository.BranchAccess;
+import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+/**
+ * Implementation of the navigation service.
+ */
 public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements DC2FNavigationService {
 
 	/**
-	 * generated unique serialization id
+	 * generated unique serialization id.
 	 */
 	private static final long serialVersionUID = 4683885240439796785L;
-	
-	BranchAccess craccess;
 
+	/**
+	 * content repository accessor.
+	 */
+	private BranchAccess craccess;
+
+	/**
+	 * create a new service.
+	 */
 	public DC2FNavigationServiceImpl() {
 		craccess = DC2FAccessManager.getAccess();
 	}
-	
-	public List<DTONodeInfo> getNodesForPath(String path) {
+
+	/**
+	 * @param path parent path for the listed children.
+	 * @return returns a list of child nodes below the given path.
+	 */
+	public List<DTONodeInfo> getNodesForPath(final String path) {
 		Vector<DTONodeInfo> nodes = new Vector<DTONodeInfo>();
-		for(com.dc2f.contentrepository.Node dc2fNode : craccess.getChildren(craccess.getNode(path))) {
+		for (Node dc2fNode : craccess.getChildren(craccess.getNode(path))) {
 			DTONodeInfo node = new DTONodeInfo();
 			node.setName(dc2fNode.getName());
 			node.setPath(dc2fNode.getPath());
@@ -39,15 +53,19 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 		}
 		return nodes;
 	}
-	
-	public DTONodeInfo getNodeForPath(String path) {
-		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(path);
+
+	/**
+	 * @param path the path of the node which will be returned.
+	 * @return returns the node at the given path.
+	 */
+	public DTONodeInfo getNodeForPath(final String path) {
+		Node dc2fNode = craccess.getNode(path);
 		DTONodeInfo node = new DTONodeInfo();
 		node.setName(dc2fNode.getName());
 		node.setPath(dc2fNode.getPath());
 		node.setNodeType(new DTONodeType(node.getNodeType().getPath(), null));
 		return node;
-		
+
 	}
 
 }

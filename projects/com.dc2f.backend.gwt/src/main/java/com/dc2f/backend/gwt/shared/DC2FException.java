@@ -9,9 +9,9 @@ public class DC2FException extends RuntimeException {
 
 	/**
 	 * Create a new DC2FException.
-	 * @param message
+	 * @param message error description.
 	 */
-	public DC2FException(String message) {
+	public DC2FException(final String message) {
 		super(message);
 	}
 	
