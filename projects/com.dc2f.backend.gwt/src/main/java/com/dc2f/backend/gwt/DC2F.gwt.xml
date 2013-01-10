@@ -17,6 +17,8 @@
 	<!-- inherit the google json classes -->
 	<inherits name="com.google.gwt.json.JSON" />
 	<inherits name="com.google.gwt.logging.Logging"/>
+	
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 
 	<!-- Specify the app entry point class.                         -->
 	<entry-point class='com.dc2f.backend.gwt.client.DC2FBackend' />

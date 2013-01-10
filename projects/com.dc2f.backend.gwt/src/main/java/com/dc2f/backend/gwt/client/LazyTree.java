@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 
+@Deprecated
 public class LazyTree extends Tree {
 
 	DC2FNavigationServiceAsync service;

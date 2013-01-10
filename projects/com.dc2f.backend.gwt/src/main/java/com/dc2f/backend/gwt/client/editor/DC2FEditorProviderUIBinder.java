@@ -7,28 +7,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Vector;
 
-import com.dc2f.backend.gwt.client.LazyTree;
-import com.dc2f.backend.gwt.client.LazyTree.LazyTreeItem;
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.Node;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.TreeItem;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 /**
  * @author herbert
@@ -108,16 +106,16 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		});
 	}
 
-	public void bindToNavigation(LazyTree navigation) {
-		navigation.addSelectionHandler(new SelectionHandler<TreeItem>() {
-			public void onSelection(SelectionEvent<TreeItem> event) {
-				LazyTreeItem item = (LazyTreeItem) event.getSelectedItem();
-				System.out.println("selected node " + item.getPath());
+	public void bindToNavigation(final SingleSelectionModel<Node> selectionModel) {
+		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+			public void onSelectionChange(SelectionChangeEvent event) {
+				Node node = selectionModel.getSelectedObject();
+				System.out.println("selected node " + node.getPath());
 				if (lastMainWidget != null) {
 					centerPanel.remove(lastMainWidget);
 				}
-				selectionLabel.setText("Selected Node: " + item.getPath());
-				contentService.getNodeForPath(item.getPath(), new AsyncCallback<ContentNode>() {
+				selectionLabel.setText("Selected Node: " + node.getPath());
+				contentService.getNodeForPath(node.getPath(), new AsyncCallback<ContentNode>() {
 					public void onSuccess(ContentNode result) {
 						actualNode = result;
 						refreshEditors();
