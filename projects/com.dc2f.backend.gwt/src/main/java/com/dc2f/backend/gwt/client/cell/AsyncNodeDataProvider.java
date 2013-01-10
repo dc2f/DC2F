@@ -12,49 +12,59 @@ import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
 
+/**
+ * asynchronous node provider.
+ * 
+ * @author herbert
+ */
 public class AsyncNodeDataProvider extends AsyncDataProvider<DTONodeInfo> {
-	private Logger logger = Logger.getLogger(AsyncNodeDataProvider.class
-			.getName());
+	/** **/
+	private Logger logger = Logger.getLogger(AsyncNodeDataProvider.class.getName());
 
+	/**
+	 * navigation service which is used to build the tree.
+	 */
 	private DC2FNavigationServiceAsync navigationService;
+
+	/**
+	 * the current parent node.
+	 */
 	private DTONodeInfo node;
 
-	public AsyncNodeDataProvider(DC2FNavigationServiceAsync navigationService,
-			DTONodeInfo value) {
+	/**
+	 * creates a new data provider for the given parent node.
+	 * 
+	 * @param navigationService navigation service to request child nodes.
+	 * @param node the parent node for which we will provide the children.
+	 */
+	public AsyncNodeDataProvider(final DC2FNavigationServiceAsync navigationService, final DTONodeInfo node) {
 		// TODO
 		this.navigationService = navigationService;
-		this.node = value;
+		this.node = node;
 	}
 
 	@Override
-	protected void onRangeChanged(HasData<DTONodeInfo> display) {
+	protected void onRangeChanged(final HasData<DTONodeInfo> display) {
 		final Range range = display.getVisibleRange();
 		logger.info("onRangeChanged(" + display.getVisibleRange() + ")");
-		navigationService.getNodesForPath(node.getPath(),
-				new AsyncCallback<List<DTONodeInfo>>() {
+		navigationService.getNodesForPath(node.getPath(), new AsyncCallback<List<DTONodeInfo>>() {
 
-					public void onSuccess(List<DTONodeInfo> result) {
-						int toIndex = Math.min(
-								range.getStart() + range.getLength() + 1,
-								result.size());
-						int fromIndex = Math.min(range.getStart(), toIndex);
-						if (toIndex < 0) {
-							logger.info("fromIndex is < 0 - calling updateRowData with null.");
-							updateRowData(range.getStart(),
-									Collections.<DTONodeInfo> emptyList());
-							return;
-						}
-						List<DTONodeInfo> values = result.subList(fromIndex, toIndex);
-						updateRowData(range.getStart(), values);
-					}
+			public void onSuccess(final List<DTONodeInfo> result) {
+				int toIndex = Math.min(range.getStart() + range.getLength() + 1, result.size());
+				int fromIndex = Math.min(range.getStart(), toIndex);
+				if (toIndex < 0) {
+					logger.info("fromIndex is < 0 - calling updateRowData with null.");
+					updateRowData(range.getStart(), Collections.<DTONodeInfo> emptyList());
+					return;
+				}
+				List<DTONodeInfo> values = result.subList(fromIndex, toIndex);
+				updateRowData(range.getStart(), values);
+			}
 
-					public void onFailure(Throwable caught) {
-						logger.log(
-								Level.SEVERE,
-								"Error while getting children of "
-										+ node.getPath(), caught);
-					}
-				});
+			public void onFailure(final Throwable caught) {
+				logger.log(Level.SEVERE, "Error while getting children of " + node.getPath(), caught);
+			}
+		});
 	}
 
 }

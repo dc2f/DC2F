@@ -10,6 +10,11 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
+/**
+ * cell which knows how to render a node in the tree.
+ * 
+ * @author herbert
+ */
 public class NodeCell extends AbstractCell<DTONodeInfo> {
 
 	/**
@@ -19,13 +24,9 @@ public class NodeCell extends AbstractCell<DTONodeInfo> {
 		/**
 		 * The template for this Cell, which includes styles and a value.
 		 * 
-		 * @param styles
-		 *            the styles to include in the style attribute of the div
-		 * @param value
-		 *            the safe value. Since the value type is {@link SafeHtml},
-		 *            it will not be escaped before including it in the
-		 *            template. Alternatively, you could make the value type
-		 *            String, in which case the value would be escaped.
+		 * @param styles the styles to include in the style attribute of the div
+		 * @param value the safe value. Since the value type is {@link SafeHtml}, it will not be escaped before including it in the template. Alternatively, you could make the value type String, in
+		 *            which case the value would be escaped.
 		 * @return a {@link SafeHtml} instance
 		 */
 		@SafeHtmlTemplates.Template("<div style=\"{0}\">{1}</div>")
@@ -37,12 +38,12 @@ public class NodeCell extends AbstractCell<DTONodeInfo> {
 	 */
 	private static Templates templates = GWT.create(Templates.class);
 
+	/** **/
 	public NodeCell() {
 	}
 
 	@Override
-	public void render(com.google.gwt.cell.client.Cell.Context context,
-			DTONodeInfo value, SafeHtmlBuilder sb) {
+	public void render(final com.google.gwt.cell.client.Cell.Context context, final DTONodeInfo value, final SafeHtmlBuilder sb) {
 		if (value == null) {
 			return;
 		}
@@ -51,8 +52,7 @@ public class NodeCell extends AbstractCell<DTONodeInfo> {
 		SafeHtml safeValue = SafeHtmlUtils.fromString(value.getName());
 
 		// Use the template to create the Cell's html.
-		SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue
-				.asString());
+		SafeStyles styles = SafeStylesUtils.forTrustedColor(safeValue.asString());
 		SafeHtml rendered = templates.cell(styles, safeValue);
 		sb.append(rendered);
 	}

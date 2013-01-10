@@ -115,7 +115,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 					centerPanel.remove(lastMainWidget);
 				}
 				selectionLabel.setText("Selected Node: " + node.getPath());
-				contentService.getNodeForPath(node.getPath(), new AsyncCallback<DTOEditableNode>() {
+				contentService.getEditableNodeForPath(node.getPath(), new AsyncCallback<DTOEditableNode>() {
 					public void onSuccess(DTOEditableNode result) {
 						actualNode = result;
 						refreshEditors();

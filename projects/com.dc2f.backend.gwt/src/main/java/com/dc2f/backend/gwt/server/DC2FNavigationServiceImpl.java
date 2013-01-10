@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
+import com.dc2f.backend.gwt.shared.DC2FException;
 import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.dc2f.contentrepository.BranchAccess;
@@ -31,6 +32,16 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 	 */
 	public DC2FNavigationServiceImpl() {
 		craccess = DC2FAccessManager.getAccess();
+	}
+	
+	/**
+	 * @return content repository accessor. (will never be null)
+	 */
+	protected BranchAccess getBranchAccess() {
+		if (craccess == null) {
+			throw new DC2FException("unable to load content repository accessor.");
+		}
+		return craccess;
 	}
 
 	/**

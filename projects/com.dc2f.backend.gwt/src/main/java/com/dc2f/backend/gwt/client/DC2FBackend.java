@@ -19,6 +19,9 @@ import com.google.gwt.view.client.SingleSelectionModel;
  */
 public class DC2FBackend implements EntryPoint {
 
+	/**
+	 * @see DC2FNavigationServiceAsync 
+	 **/
 	private final DC2FNavigationServiceAsync navigationService = GWT
 			.create(DC2FNavigationService.class);
 
