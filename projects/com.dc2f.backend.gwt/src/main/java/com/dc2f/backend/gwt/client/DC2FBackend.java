@@ -4,8 +4,8 @@ import com.dc2f.backend.gwt.client.cell.NodeTreeModel;
 import com.dc2f.backend.gwt.client.editor.DC2FEditorProviderUIBinder;
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
 import com.dc2f.backend.gwt.client.services.DC2FNavigationServiceAsync;
-import com.dc2f.backend.gwt.shared.ContentNode;
-import com.dc2f.backend.gwt.shared.Node;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
+import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.cellview.client.CellTree;
@@ -34,11 +34,11 @@ public class DC2FBackend implements EntryPoint {
 		// final LazyTree navigation = new LazyTree(navigationService);
 		// navigation.getElement().setId("DC2FNavigation");
 		// main.add(navigation, DockPanel.WEST);
-		final SingleSelectionModel<Node> selectionModel = new SingleSelectionModel<Node>();
+		final SingleSelectionModel<DTONodeInfo> selectionModel = new SingleSelectionModel<DTONodeInfo>();
 
 		NodeTreeModel nodeTreeModel = new NodeTreeModel(navigationService,
 				selectionModel);
-		ContentNode rootNode = new ContentNode();
+		DTOEditableNode rootNode = new DTOEditableNode();
 		rootNode.setName("/");
 		rootNode.setPath("/");
 		rootNode.setHasSubNodes(true);

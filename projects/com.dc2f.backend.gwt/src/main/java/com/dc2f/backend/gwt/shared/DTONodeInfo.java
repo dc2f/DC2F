@@ -2,7 +2,7 @@ package com.dc2f.backend.gwt.shared;
 
 import java.io.Serializable;
 
-public class Node implements Serializable {
+public class DTONodeInfo implements Serializable {
 
 	/**
 	 * generated unique serialization version id
@@ -17,9 +17,9 @@ public class Node implements Serializable {
 	
 	private boolean hasSubNodes = false;;
 	
-	public Node() {
+	public DTONodeInfo() {
 	}
-	public Node(String name, String path, DTONodeType nodeType) {
+	public DTONodeInfo(String name, String path, DTONodeType nodeType) {
 		this();
 		this.name = name;
 		this.path = path;
@@ -54,7 +54,7 @@ public class Node implements Serializable {
 	 * @param otherNode
 	 * @return <code>true</code> if the other node is the same object as this node. (Can be an older version of it)
 	 */
-	public boolean same(Node otherNode) {
+	public boolean same(DTONodeInfo otherNode) {
 		return otherNode != null && getPath().equals(otherNode.getPath());
 	}
 	

@@ -3,7 +3,7 @@ package com.dc2f.backend.gwt.client;
 import java.util.List;
 
 import com.dc2f.backend.gwt.client.services.DC2FNavigationServiceAsync;
-import com.dc2f.backend.gwt.shared.Node;
+import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -28,7 +28,7 @@ public class LazyTree extends Tree {
 	}
 
 	private void loadItems(String path, LazyTreeItem root) {
-		service.getNodesForPath(path, new LazyTreeNodeLoadCallback<List<Node>>(root));
+		service.getNodesForPath(path, new LazyTreeNodeLoadCallback<List<DTONodeInfo>>(root));
 	}
 	
 	class LazyOpenHandler<T extends TreeItem> implements OpenHandler<TreeItem> {
@@ -67,7 +67,7 @@ public class LazyTree extends Tree {
 		}
 	}
 	
-	class LazyTreeNodeLoadCallback<T extends List<Node>> implements AsyncCallback<T> {
+	class LazyTreeNodeLoadCallback<T extends List<DTONodeInfo>> implements AsyncCallback<T> {
 
 		LazyTreeItem root;
 		
@@ -76,7 +76,7 @@ public class LazyTree extends Tree {
 		}
 		
 		public void onSuccess(T resultList) {
-			for(Node result : resultList) {
+			for(DTONodeInfo result : resultList) {
 				String name = result.getName();
 				if(name == null || "".equals(name)) {
 					name = "---";

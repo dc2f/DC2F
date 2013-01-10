@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 
-public class ContentNode extends Node {
+public class DTOEditableNode extends DTONodeInfo {
 
 	/**
 	 * generated unique serialization version id

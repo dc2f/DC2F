@@ -9,8 +9,8 @@ import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
-import com.dc2f.backend.gwt.shared.ContentNode;
-import com.dc2f.backend.gwt.shared.Node;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
+import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -34,7 +34,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
  */
 public class DC2FEditorProviderUIBinder extends Composite {
 
-	ContentNode actualNode;
+	DTOEditableNode actualNode;
 	
 	public DC2FContentServiceAsync getContentService() {
 		return contentService;
@@ -95,8 +95,8 @@ public class DC2FEditorProviderUIBinder extends Composite {
 	
 	protected void save() {
 		// TODO Auto-generated method stub
-		contentService.saveNode(actualNode, new AsyncCallback<ContentNode>() {
-			public void onSuccess(ContentNode result) {
+		contentService.saveNode(actualNode, new AsyncCallback<DTOEditableNode>() {
+			public void onSuccess(DTOEditableNode result) {
 			}
 
 			public void onFailure(Throwable caught) {
@@ -106,17 +106,17 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		});
 	}
 
-	public void bindToNavigation(final SingleSelectionModel<Node> selectionModel) {
+	public void bindToNavigation(final SingleSelectionModel<DTONodeInfo> selectionModel) {
 		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			public void onSelectionChange(SelectionChangeEvent event) {
-				Node node = selectionModel.getSelectedObject();
+				DTONodeInfo node = selectionModel.getSelectedObject();
 				System.out.println("selected node " + node.getPath());
 				if (lastMainWidget != null) {
 					centerPanel.remove(lastMainWidget);
 				}
 				selectionLabel.setText("Selected Node: " + node.getPath());
-				contentService.getNodeForPath(node.getPath(), new AsyncCallback<ContentNode>() {
-					public void onSuccess(ContentNode result) {
+				contentService.getNodeForPath(node.getPath(), new AsyncCallback<DTOEditableNode>() {
+					public void onSuccess(DTOEditableNode result) {
 						actualNode = result;
 						refreshEditors();
 						chooseDefaultEditor(result);
@@ -173,7 +173,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		return availableEditors;
 	}
 	
-	protected ContentNode getActualNode() {
+	protected DTOEditableNode getActualNode() {
 		return actualNode;
 	}
 
@@ -182,7 +182,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		saveButton.setEnabled(false);
 	}
 	
-	private void chooseDefaultEditor(ContentNode node) {
+	private void chooseDefaultEditor(DTOEditableNode node) {
 		Editor editor = availableEditors.get(0);
 		editor.loadNode(node);
 		setMain(editor);

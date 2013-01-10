@@ -1,7 +1,7 @@
 package com.dc2f.backend.gwt.client.editor;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
-import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -75,9 +75,9 @@ public abstract class Editor extends Composite {
 
 	/**
 	 * Method is called when the editor is activated and before the editor is loaded into the GUI.
-	 * @param node - editable {@link ContentNode}.
+	 * @param node - editable {@link DTOEditableNode}.
 	 */
-	public abstract void loadNode(ContentNode node);
+	public abstract void loadNode(DTOEditableNode node);
 	
 	/**
 	 * get a change handler for the given attribute
@@ -96,7 +96,7 @@ public abstract class Editor extends Composite {
 		return changeHandler;
 	}
 
-	public boolean isUsableFor(ContentNode actualNode) {
+	public boolean isUsableFor(DTOEditableNode actualNode) {
 		// TODO add proper check for using this editor
 		return true;
 	}

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
-import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.dc2f.backend.gwt.shared.DTOAttributesDefinition;
 import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.NotChangeableException;
@@ -39,10 +39,10 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		craccess = DC2FAccessManager.getAccess();
 	}
 	
-	public ContentNode getNodeForPath(String path) {
+	public DTOEditableNode getNodeForPath(String path) {
 		logger.info("Getting node for path {" + path + "}");
 		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(path);
-		ContentNode node = convertNodeToDTO(dc2fNode, null);
+		DTOEditableNode node = convertNodeToDTO(dc2fNode, null);
 		
 		return node;
 	}
@@ -53,17 +53,17 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 	 * @param simpleNodeCache just a hash map of already converted nodes - currently this is only required to prevent infinite recursions :)
 	 * @return
 	 */
-	private static ContentNode convertNodeToDTO(
-			com.dc2f.contentrepository.Node dc2fNode, Map<String, ContentNode> simpleNodeCache) {
+	private static DTOEditableNode convertNodeToDTO(
+			com.dc2f.contentrepository.Node dc2fNode, Map<String, DTOEditableNode> simpleNodeCache) {
 		if (simpleNodeCache == null) {
-			simpleNodeCache = new HashMap<String, ContentNode>();
+			simpleNodeCache = new HashMap<String, DTOEditableNode>();
 		}
-		ContentNode tmp = simpleNodeCache.get(dc2fNode.getPath());
+		DTOEditableNode tmp = simpleNodeCache.get(dc2fNode.getPath());
 		if (tmp != null) {
 			return tmp;
 		}
 		
-		ContentNode node = new ContentNode();
+		DTOEditableNode node = new DTOEditableNode();
 		node.setName(dc2fNode.getName());
 		node.setPath(dc2fNode.getPath());
 		simpleNodeCache.put(dc2fNode.getPath(), node);
@@ -90,7 +90,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		return node;
 	}
 
-	public ContentNode saveNode(ContentNode node) {
+	public DTOEditableNode saveNode(DTOEditableNode node) {
 		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
 		if (dc2fNode instanceof ChangeableNode) {
 			ChangeableNode dc2fChangeableNode = (ChangeableNode) dc2fNode;
@@ -104,7 +104,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		}
 	}
 	
-	public ContentNode saveNode(ContentNode node, String source) {
+	public DTOEditableNode saveNode(DTOEditableNode node, String source) {
 		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
 		if(craccess.getAdapter(SourceWriteAccessAdapter.class).saveNode(dc2fNode, source)) {
 			craccess.getNode(node.getPath());
@@ -112,7 +112,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		return node;
 	}
 
-	public String getSource(ContentNode node) {
+	public String getSource(DTOEditableNode node) {
 			//TODO this should be provided by the repository instead of fetching the systemproperty
 			String crDir = System.getProperty("crdir");
 			File file = new File(crDir + node.getPath());

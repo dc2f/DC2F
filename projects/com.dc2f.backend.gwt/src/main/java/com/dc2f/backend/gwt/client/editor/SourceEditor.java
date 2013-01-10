@@ -1,7 +1,7 @@
 package com.dc2f.backend.gwt.client.editor;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
-import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.json.client.JSONException;
@@ -34,7 +34,7 @@ public class SourceEditor extends Editor {
 	/**
 	 * holds the currently loaded Node.
 	 */
-	private ContentNode loadedNode;
+	private DTOEditableNode loadedNode;
 	
 	public SourceEditor(DC2FEditorProviderUIBinder dc2fEditorProviderUIBinder) {
 		super(dc2fEditorProviderUIBinder);
@@ -48,7 +48,7 @@ public class SourceEditor extends Editor {
 	}
 
 	@Override
-	public void loadNode(ContentNode node) {
+	public void loadNode(DTOEditableNode node) {
 		DC2FContentServiceAsync contentService = getContentService();
 		contentService.getSource(node, new AsyncCallback<String>() {
 
@@ -74,7 +74,7 @@ public class SourceEditor extends Editor {
 	
 	private class SourceEditorChangeHandler extends NodeChangedChangeHandler {
 		
-		private ContentNode lastLoadedNode;
+		private DTOEditableNode lastLoadedNode;
 		
 		private String lastSource;
 		

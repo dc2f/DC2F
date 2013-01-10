@@ -1,6 +1,6 @@
 package com.dc2f.backend.gwt.client.editor;
 
-import com.dc2f.backend.gwt.shared.ContentNode;
+import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AttributeEditor extends Editor {
 
-	ContentNode loadedNode;
+	DTOEditableNode loadedNode;
 	
 	VerticalPanel attributeList = new VerticalPanel();
 	
@@ -26,7 +26,7 @@ public class AttributeEditor extends Editor {
 	}
 
 	@Override
-	public void loadNode(ContentNode node) {
+	public void loadNode(DTOEditableNode node) {
 		loadedNode = node;
 		attributeList.clear();
 		for(String attributeName : node.getNodeType().getAttributesDefinition().getAttributeNames()) {

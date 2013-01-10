@@ -1,6 +1,6 @@
 package com.dc2f.backend.gwt.client.cell;
 
-import com.dc2f.backend.gwt.shared.Node;
+import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.safecss.shared.SafeStyles;
@@ -10,7 +10,7 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
-public class NodeCell extends AbstractCell<Node> {
+public class NodeCell extends AbstractCell<DTONodeInfo> {
 
 	/**
 	 * The HTML templates used to render the cell.
@@ -42,7 +42,7 @@ public class NodeCell extends AbstractCell<Node> {
 
 	@Override
 	public void render(com.google.gwt.cell.client.Cell.Context context,
-			Node value, SafeHtmlBuilder sb) {
+			DTONodeInfo value, SafeHtmlBuilder sb) {
 		if (value == null) {
 			return;
 		}

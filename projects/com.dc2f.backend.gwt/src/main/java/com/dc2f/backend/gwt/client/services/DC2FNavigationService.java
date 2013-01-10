@@ -2,12 +2,12 @@ package com.dc2f.backend.gwt.client.services;
 
 import java.util.List;
 
-import com.dc2f.backend.gwt.shared.Node;
+import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface DC2FNavigationService extends RemoteService {
 	
-	Node getNodeForPath(String Path);
+	DTONodeInfo getNodeForPath(String Path);
 
-	List<Node> getNodesForPath(String path);
+	List<DTONodeInfo> getNodesForPath(String path);
 }
