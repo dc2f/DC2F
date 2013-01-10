@@ -33,6 +33,8 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 			if (type != null) {
 				node.setNodeType(new DTONodeType(type.getNodeTypeInfo().getPath(), null));
 			}
+			// TODO We should probably improve this (especially performance wise)
+			node.setHasSubNodes(craccess.getChildren(dc2fNode).length > 0);
 			nodes.add(node);
 		}
 		return nodes;

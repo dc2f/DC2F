@@ -15,6 +15,8 @@ public class Node implements Serializable {
 
 	private DTONodeType nodeType;
 	
+	private boolean hasSubNodes = false;;
+	
 	public Node() {
 	}
 	public Node(String name, String path, DTONodeType nodeType) {
@@ -54,6 +56,13 @@ public class Node implements Serializable {
 	 */
 	public boolean same(Node otherNode) {
 		return otherNode != null && getPath().equals(otherNode.getPath());
+	}
+	
+	public boolean hasSubNodes() {
+		return hasSubNodes;
+	}
+	public void setHasSubNodes(boolean hasSubNodes) {
+		this.hasSubNodes = hasSubNodes;
 	}
 
 }
