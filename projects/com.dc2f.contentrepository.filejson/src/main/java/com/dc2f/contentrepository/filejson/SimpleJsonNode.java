@@ -20,55 +20,98 @@ import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
 import com.dc2f.contentrepository.exception.UnknownAttributeException;
 
+/**
+ * Represents a {@link Node} from the {@link SimpleFileContentRepository}.
+ */
 public class SimpleJsonNode implements Node {
-	private static final Logger logger = Logger.getLogger(SimpleJsonNode.class.getName());
+	/**
+	 * Logger for debug and error messages.
+	 */
+	private static final Logger LOGGER =
+		Logger.getLogger(SimpleJsonNode.class.getName());
 
+	/**
+	 * Branch access for fetching additional nodes.
+	 */
 	private SimpleBranchAccess branchAccess;
+	
+	/**
+	 * Path of the current node. (More specifically the path in the filesystem
+	 * where the _core.json file can be found that defines this node)
+	 * This is not unique if one _core.json file defines more than one node (eg
+	 * subnodes have the same path).
+	 */
 	private String path;
+	/**
+	 * Internal path to the object. additionally to the path this contains an
+	 * identifier for internal nodes. this is unique even for mutliple subnodes
+	 * within the same _core.json file.
+	 */
 	private String internalPath;
+	
+	/**
+	 * json object for _core.json defining this node.
+	 */
 	private JSONObject jsonObject;
+	
+	/**
+	 * type information for this node.
+	 */
 	private NodeType nodeType;
 
-	public SimpleJsonNode(SimpleBranchAccess branchAccess, String path, JSONObject jsonObject, NodeType nodeType) {
+	/**
+	 * Create a new Node.
+	 * @param newBranchAccess - BranchAccess for fetching addtional nodes.
+	 * @param newPath - path to the node
+	 * @param newJsonObject - json object for this node
+	 * @param newNodeType - type of this node
+	 */
+	public SimpleJsonNode(final SimpleBranchAccess newBranchAccess,
+			final String newPath, final JSONObject newJsonObject,
+			final NodeType newNodeType) {
 		// "normalize" path :)
+		branchAccess = newBranchAccess;
+		path = newPath;
 		if (path != null && path.endsWith("/") && !"/".equals(path)) {
 			path = path.replaceAll("/+$", "");
 		}
-		this.branchAccess = branchAccess;
-		this.internalPath = this.path = path;
-		this.jsonObject = jsonObject;
-		this.nodeType = nodeType;
+		internalPath = path;
+		jsonObject = newJsonObject;
+		nodeType = newNodeType;
 	}
 	
-	public JSONObject getJsonObject() {
+	/**
+	 * @return the json object that defined this node.
+	 */
+	public final JSONObject getJsonObject() {
 		return jsonObject;
 	}
 
 	@Override
-	public String getName() {
+	public final String getName() {
 		return new File(path).getName();
 	}
 
 	@Override
-	public NodeType getNodeType() {
+	public final NodeType getNodeType() {
 		return nodeType;
 	}
 
 	@Override
-	public String getPath() {
+	public final String getPath() {
 		return path;
 	}
 	/**
 	 * @param name - name of the attribute to get
 	 * @return the attribute with the given name from the json object
 	 */
-	protected Object internalGet(String name) {
+	protected Object internalGet(final String name) {
 		try {
 			return jsonObject.get(name);
 		} catch (JSONException e) {
 			if (jsonObject.has(name)) {
-				logger.log(Level.SEVERE, "Error while getting attribute {" + name
-						+ "} of node type {" + path + "}", e);
+				LOGGER.log(Level.SEVERE, "Error while getting attribute {"
+						+ name + "} of node type {" + path + "}", e);
 			}
 			return null;
 		}
@@ -77,29 +120,34 @@ public class SimpleJsonNode implements Node {
 	
 	
 	@Override
-	public Object get(String attributeName) {
+	public final Object get(final String attributeName) {
 		Object obj = internalGet(attributeName);
 		
 		// FIXME do this the "clean way"
-		if (obj instanceof String && ("class".equals(attributeName) || "type".equals(attributeName))) {
-		//if (obj instanceof String && ("class".equals(propertyName) )) {
+		if (obj instanceof String && ("class".equals(attributeName)
+				|| "type".equals(attributeName))) {
 			return obj;
 		}
 		if (getNodeType() == null) {
-			throw new RuntimeException("Unable to find nodetype for node " + getPath());
+			throw new RuntimeException("Unable to find nodetype for node "
+					+ getPath());
 		}
 		
-		AttributesDefinition attrDefinitions = getNodeType().getAttributeDefinitions();
-		logger.finest(this.getName() + ": Getting attribute {" + attributeName + "}: " + obj + " - attrDefinitions: " + attrDefinitions);
-		AttributeDefinition attrDefinition = attrDefinitions.getAttributeDefinition(attributeName);
+		AttributesDefinition attrDefinitions =
+			getNodeType().getAttributeDefinitions();
+		LOGGER.finest(this.getName() + ": Getting attribute {" + attributeName
+				+ "}: " + obj + " - attrDefinitions: " + attrDefinitions);
+		AttributeDefinition attrDefinition =
+			attrDefinitions.getAttributeDefinition(attributeName);
 		if (attrDefinition == null) {
-			throw new UnknownAttributeException("Unknown attribute {" + attributeName + "} for {" + getNodeType() + "}", null);
+			throw new UnknownAttributeException(attributeName, this);
 		}
 		AttributeType attributeType = attrDefinition.getAttributeType();
 		
-		if (attributeType == AttributeType.NODE_REFERENCE && obj instanceof String) {
+		if (attributeType == AttributeType.NODE_REFERENCE
+				&& obj instanceof String) {
 			String ref = (String) obj;
-			logger.fine("Trying to resolve object {" + ref + "}");
+			LOGGER.fine("Trying to resolve object {" + ref + "}");
 			if (!ref.startsWith("/")) {
 				try {
 					ref = new URI(getPath()).resolve(ref).toString();
@@ -109,12 +157,16 @@ public class SimpleJsonNode implements Node {
 				}
 			}
 			return branchAccess.getNode(ref);
-		} else if (attributeType == AttributeType.NODETYPE_REFERENCE && obj instanceof String) {
+		} else if (attributeType == AttributeType.NODETYPE_REFERENCE 
+				&& obj instanceof String) {
 			return branchAccess.getNodeType((String) obj);
 		} else if (attributeType == AttributeType.CLOB && obj == null) {
-			obj = branchAccess.getContentRepository().loadRepositoryFile(new File(internalPath, attributeName + ".clob.property"));
+			obj = branchAccess.getContentRepository().loadRepositoryFile(
+					new File(internalPath, attributeName + ".clob.property"));
 		} else if (attributeType == AttributeType.BLOB && obj == null) {
-			return branchAccess.getContentRepository().getInputStreamForRepositoryFile(new File(path, attributeName + ".blob.property"));
+			return branchAccess.getContentRepository()
+					.getInputStreamForRepositoryFile(new File(path,
+							attributeName + ".blob.property"));
 		}
 
 		if (obj instanceof String) {
@@ -126,9 +178,11 @@ public class SimpleJsonNode implements Node {
 		}
 
 
-		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject && attributeType == AttributeType.NODE_REFERENCE)) {
+		if (attributeType == AttributeType.NODE || (obj instanceof JSONObject 
+				&& attributeType == AttributeType.NODE_REFERENCE)) {
 
-			String subNodeTypeName = ((JSONObject)obj).optString("nodetype", null);
+			String subNodeTypeName =
+				((JSONObject) obj).optString("nodetype", null);
 			NodeType currentSubNodeType = null;
 			if (subNodeTypeName != null) {
 				currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
@@ -143,28 +197,35 @@ public class SimpleJsonNode implements Node {
 			if (currentSubNodeType == null) {
 				currentSubNodeType = new DefaultNodeType();
 			}
-			SimpleJsonNode retNode = new SimpleJsonNode(branchAccess, path, (JSONObject) obj, currentSubNodeType);
-			retNode.setInternalPath(internalPath + "/@" + attributeName);
+			SimpleJsonNode retNode = new SimpleJsonNode(branchAccess, path,
+					(JSONObject) obj, currentSubNodeType);
+			retNode.internalPath = internalPath + "/@" + attributeName;
 			return retNode;
 		} else if (attributeType == AttributeType.LIST_OF_NODES) {
 			JSONArray array = (JSONArray) obj;
-			String typeofsubnodes = (String) attrDefinition.get("typeofsubnodes");
+			String typeofsubnodes =
+				(String) attrDefinition.get("typeofsubnodes");
 			NodeType subNodeType = null;
 			if (typeofsubnodes != null) {
 				subNodeType = branchAccess.getNodeType(typeofsubnodes);
 			}
 			List<Node> ret = new ArrayList<Node>();
-			for (int i = 0 ; i < array.length() ; i++) {
+			for (int i = 0; i < array.length(); i++) {
 				try {
 					JSONObject arrayobj = (JSONObject) array.get(i);
-					String subNodeTypeName = arrayobj.optString("nodetype", null);
+					String subNodeTypeName =
+						arrayobj.optString("nodetype", null);
 					NodeType currentSubNodeType = subNodeType;
 					if (subNodeTypeName != null) {
-						currentSubNodeType = branchAccess.getNodeType(subNodeTypeName);
+						currentSubNodeType =
+							branchAccess.getNodeType(subNodeTypeName);
 					}
-					ret.add(new SimpleJsonNode(branchAccess, path, arrayobj, currentSubNodeType));
+					ret.add(new SimpleJsonNode(branchAccess, path, arrayobj,
+							currentSubNodeType));
 				} catch (JSONException e) {
-					logger.log(Level.SEVERE, "Error while converting property into ListOfNodes", e);
+					LOGGER.log(Level.SEVERE,
+							"Error while converting property into ListOfNodes",
+							e);
 				}
 				
 			}
@@ -178,34 +239,33 @@ public class SimpleJsonNode implements Node {
 			if (obj instanceof Integer) {
 				return obj;
 			}
-			return new Integer(obj.toString());
+			return Integer.valueOf(obj.toString());
 		}
-		logger.info("getting property " + attributeName + " --- attrDefinitions: " + attrDefinitions + " attrDefinition: " + attrDefinition);
-		logger.severe("FIXME: Not Implemented: Unable to convert property {" + attributeName + "} of node type {" + getName() + "}: {" + obj.getClass().getName() + "} - attributeType: {" + attributeType + "}");
+		LOGGER.info("getting property " + attributeName
+				+ " --- attrDefinitions: " + attrDefinitions
+				+ " attrDefinition: " + attrDefinition);
+		LOGGER.severe("FIXME: Not Implemented: Unable to convert property {"
+				+ attributeName + "} of node type {" + getName() + "}: {"
+				+ obj.getClass().getName() + "} - attributeType: {"
+				+ attributeType + "}");
 		return null;
 	}
 	
-	private void setInternalPath(String internalPath) {
-		this.internalPath = internalPath;
-	}
-
 	@Override
-	public String toString() {
+	public final String toString() {
 		return "{SimpleJsonNode:" + getPath() + "}";
-		//return "{SimpleJsonNode:" + jsonObject.toString() + "}";
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(final Object obj) {
 		if (obj instanceof SimpleJsonNode) {
-			return internalPath.equals(((SimpleJsonNode)obj).internalPath);
-//			return getPath().equals(((SimpleJsonNode)obj).getPath());
+			return internalPath.equals(((SimpleJsonNode) obj).internalPath);
 		}
 		return super.equals(obj);
 	}
 	
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		return internalPath.hashCode();
 	}
 
