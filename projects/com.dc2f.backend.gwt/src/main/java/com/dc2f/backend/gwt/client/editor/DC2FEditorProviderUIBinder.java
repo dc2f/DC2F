@@ -29,61 +29,56 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 /**
- * @author herbert
- *
+ * 
  */
 public class DC2FEditorProviderUIBinder extends Composite {
 
 	DTOEditableNode actualNode;
-	
+
 	public DC2FContentServiceAsync getContentService() {
 		return contentService;
 	}
-	
+
 	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
 
-	private Vector<Editor> availableEditors; 
+	private Vector<Editor> availableEditors;
 
 	private Widget lastMainWidget;
 
-	private static DC2FEditorProviderUIBinderUiBinder uiBinder = GWT
-			.create(DC2FEditorProviderUIBinderUiBinder.class);
-	@UiField Button closeButton;
-	@UiField Button saveButton;
-	@UiField HorizontalPanel editorList;
-	@UiField SimplePanel centerPanel;
-	@UiField Label selectionLabel;
+	private static DC2FEditorProviderUIBinderUiBinder uiBinder = GWT.create(DC2FEditorProviderUIBinderUiBinder.class);
+	@UiField
+	Button closeButton;
+	@UiField
+	Button saveButton;
+	@UiField
+	HorizontalPanel editorList;
+	@UiField
+	SimplePanel centerPanel;
+	@UiField
+	Label selectionLabel;
 
-	interface DC2FEditorProviderUIBinderUiBinder extends
-			UiBinder<Widget, DC2FEditorProviderUIBinder> {
+	interface DC2FEditorProviderUIBinderUiBinder extends UiBinder<Widget, DC2FEditorProviderUIBinder> {
 	}
 
 	/**
-	 * Because this class has a default constructor, it can
-	 * be used as a binder template. In other words, it can be used in other
-	 * *.ui.xml files as follows:
-	 * <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	 *   xmlns:g="urn:import:**user's package**">
-	 *  <g:**UserClassName**>Hello!</g:**UserClassName>
-	 * </ui:UiBinder>
-	 * Note that depending on the widget that is used, it may be necessary to
-	 * implement HasHTML instead of HasText.
+	 * Because this class has a default constructor, it can be used as a binder template. In other words, it can be used in other *.ui.xml files as follows: <ui:UiBinder
+	 * xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:**user's package**"> <g:**UserClassName**>Hello!</g:**UserClassName> </ui:UiBinder> Note that depending on the widget that is used,
+	 * it may be necessary to implement HasHTML instead of HasText.
 	 */
 	public DC2FEditorProviderUIBinder() {
 		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		
+
 		saveButton.setEnabled(false);
-		
+
 		saveButton.addClickHandler(new ClickHandler() {
-			
+
 			public void onClick(ClickEvent event) {
 				save();
 			}
 		});
 
-		//TODO better get this list dynamically
+		// TODO better get this list dynamically
 		availableEditors = new Vector<Editor>();
 		Editor attributeEditor = new AttributeEditor(this);
 		availableEditors.add(attributeEditor);
@@ -92,7 +87,6 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	}
 
-	
 	protected void save() {
 		// TODO Auto-generated method stub
 		contentService.saveNode(actualNode, new AsyncCallback<DTOEditableNode>() {
@@ -101,7 +95,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
@@ -124,7 +118,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 				});
 			}
@@ -133,36 +127,34 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
-	
+
 	public void refreshEditors() {
-		HashMap<String, Widget> editorButtons = new HashMap<String, Widget>(); 
-		//Check old editors for compatiblity
-		for(Widget editButton : editorList) {
+		HashMap<String, Widget> editorButtons = new HashMap<String, Widget>();
+		// Check old editors for compatiblity
+		for (Widget editButton : editorList) {
 			String name = ((Button) editButton).getText();
-			if(getEditor(name).isUsableFor(actualNode)) {
+			if (getEditor(name).isUsableFor(actualNode)) {
 				editorButtons.put(name, editButton);
 			} else {
 				editorList.remove(editButton);
 			}
 		}
-		//Add new editors for this article
-		for(Editor editor : getAvailableEditors()) {
+		// Add new editors for this article
+		for (Editor editor : getAvailableEditors()) {
 			String name = editor.getName();
-			if(editor.isUsableFor(actualNode) && !editorButtons.containsKey(name)) {
+			if (editor.isUsableFor(actualNode) && !editorButtons.containsKey(name)) {
 				final Button editButton = new Button(name);
 				editor.loadEditorOnButtonClick(editButton);
 				editorList.add(editButton);
 			}
 		}
 	}
-	
+
 	private Editor getEditor(String name) {
-		for(Editor editor : getAvailableEditors()) {
-			if(editor.getName().equals(name)) {
+		for (Editor editor : getAvailableEditors()) {
+			if (editor.getName().equals(name)) {
 				return editor;
 			}
 		}
@@ -172,7 +164,7 @@ public class DC2FEditorProviderUIBinder extends Composite {
 	private Collection<Editor> getAvailableEditors() {
 		return availableEditors;
 	}
-	
+
 	protected DTOEditableNode getActualNode() {
 		return actualNode;
 	}
@@ -181,13 +173,13 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		setMain(editor);
 		saveButton.setEnabled(false);
 	}
-	
+
 	private void chooseDefaultEditor(DTOEditableNode node) {
 		Editor editor = availableEditors.get(0);
 		editor.loadNode(node);
 		setMain(editor);
 	}
-	
+
 	private Widget setMain(Widget widget) {
 		Widget lastLastMainWidget = null;
 		if (lastMainWidget != null) {
