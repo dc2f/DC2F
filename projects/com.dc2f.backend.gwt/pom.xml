@@ -2,10 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                                      http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.dc2f</groupId>
 	<artifactId>backend.gwt</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<parent>
+		<groupId>com.dc2f</groupId>
+		<artifactId>master</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../com.dc2f.master/pom.xml</relativePath>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
