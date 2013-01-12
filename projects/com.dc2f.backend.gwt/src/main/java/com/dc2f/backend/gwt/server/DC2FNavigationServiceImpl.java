@@ -1,12 +1,12 @@
 package com.dc2f.backend.gwt.server;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.services.DC2FNavigationService;
 import com.dc2f.backend.gwt.shared.DC2FException;
-import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.DTONodeInfo;
+import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.Node;
 import com.dc2f.contentrepository.NodeType;
@@ -25,7 +25,7 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 	/**
 	 * content repository accessor.
 	 */
-	private BranchAccess craccess;
+	private transient BranchAccess craccess;
 
 	/**
 	 * create a new service.
@@ -49,7 +49,7 @@ public class DC2FNavigationServiceImpl extends RemoteServiceServlet implements D
 	 * @return returns a list of child nodes below the given path.
 	 */
 	public List<DTONodeInfo> getNodesForPath(final String path) {
-		Vector<DTONodeInfo> nodes = new Vector<DTONodeInfo>();
+		List<DTONodeInfo> nodes = new ArrayList<DTONodeInfo>();
 		for (Node dc2fNode : craccess.getChildren(craccess.getNode(path))) {
 			DTONodeInfo node = new DTONodeInfo();
 			node.setName(dc2fNode.getName());

@@ -34,9 +34,6 @@ public class DC2FBackend implements EntryPoint {
 		final DockPanel main = new DockPanel();
 		main.getElement().setId("DC2FMain");
 
-		// final LazyTree navigation = new LazyTree(navigationService);
-		// navigation.getElement().setId("DC2FNavigation");
-		// main.add(navigation, DockPanel.WEST);
 		final SingleSelectionModel<DTONodeInfo> selectionModel = new SingleSelectionModel<DTONodeInfo>();
 
 		NodeTreeModel nodeTreeModel = new NodeTreeModel(navigationService,

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
@@ -30,7 +31,7 @@ import com.dc2f.contentrepository.adapters.WriteAccessAdapter;
 public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements DC2FContentService {
 
 	/** **/
-	private Logger logger = Logger.getLogger(DC2FContentServiceImpl.class.getName());
+	private static transient Logger logger = Logger.getLogger(DC2FContentServiceImpl.class.getName());
 
 	/**
 	 * generated unique serialization id.
@@ -137,11 +138,9 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 				IOUtils.copy(new FileInputStream(file), writer, "UTF-8");
 				return writer.toString();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, "Error while loading source from file", e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, "Error while loading source from file", e);
 			}
 		}
 

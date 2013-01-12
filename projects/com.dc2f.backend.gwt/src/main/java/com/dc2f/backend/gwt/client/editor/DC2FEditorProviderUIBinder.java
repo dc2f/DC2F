@@ -5,6 +5,7 @@ package com.dc2f.backend.gwt.client.editor;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
@@ -33,47 +34,93 @@ import com.google.gwt.view.client.SingleSelectionModel;
  */
 public class DC2FEditorProviderUIBinder extends Composite {
 
-	DTOEditableNode actualNode;
+	/**
+	 * node which is edited.
+	 */
+	private DTOEditableNode actualNode;
 
+	/**
+	 * server side content service to retrieve data from CR.
+	 */
+	private DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
+
+	/**
+	 * list of all available editors.
+	 */
+	private List<Editor> availableEditors;
+
+	/**
+	 * the main widget of the active editor.
+	 */
+	private Widget lastMainWidget;
+
+	/**
+	 * UI binder singleton instance.
+	 */
+	private static DC2FEditorProviderUIBinderUiBinder uiBinder = GWT.create(DC2FEditorProviderUIBinderUiBinder.class);
+	
+	/**
+	 * button to close the editor.
+	 */
+	@UiField
+	protected Button closeButton;
+
+	/**
+	 * button to save editor changes.
+	 */
+	@UiField
+	protected Button saveButton;
+	
+	/**
+	 * list of editors to choose from.
+	 */
+	@UiField
+	protected HorizontalPanel editorList;
+	
+	/**
+	 * panel containing the editor.
+	 */
+	@UiField
+	protected SimplePanel centerPanel;
+	
+	/**
+	 * ?
+	 */
+	@UiField
+	protected Label selectionLabel;
+
+	/**
+	 * ui binder.
+	 */
+	interface DC2FEditorProviderUIBinderUiBinder extends UiBinder<Widget, DC2FEditorProviderUIBinder> {
+	}
+	
+	
+	/**
+	 * @return retrieves content service used to retrieve nodes, etc.
+	 */
 	public DC2FContentServiceAsync getContentService() {
 		return contentService;
 	}
 
-	DC2FContentServiceAsync contentService = GWT.create(DC2FContentService.class);
-
-	private Vector<Editor> availableEditors;
-
-	private Widget lastMainWidget;
-
-	private static DC2FEditorProviderUIBinderUiBinder uiBinder = GWT.create(DC2FEditorProviderUIBinderUiBinder.class);
-	@UiField
-	Button closeButton;
-	@UiField
-	Button saveButton;
-	@UiField
-	HorizontalPanel editorList;
-	@UiField
-	SimplePanel centerPanel;
-	@UiField
-	Label selectionLabel;
-
-	interface DC2FEditorProviderUIBinderUiBinder extends UiBinder<Widget, DC2FEditorProviderUIBinder> {
-	}
-
 	/**
-	 * Because this class has a default constructor, it can be used as a binder template. In other words, it can be used in other *.ui.xml files as follows: <ui:UiBinder
-	 * xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:**user's package**"> <g:**UserClassName**>Hello!</g:**UserClassName> </ui:UiBinder> Note that depending on the widget that is used,
+	 * Because this class has a default constructor, it can be used as a binder template. In other
+	 * words, it can be used in other *.ui.xml files as follows: 
+	 * &lt;ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:**user's package**"&gt;
+	 * &lt;g:**UserClassName**&gt;Hello!&lt;/g:**UserClassName&gt; &lt;/ui:UiBinder&gt; Note that depending on the
+	 * widget that is used,
 	 * it may be necessary to implement HasHTML instead of HasText.
 	 */
 	public DC2FEditorProviderUIBinder() {
-		((ServiceDefTarget) contentService).setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
+		((ServiceDefTarget) contentService)
+				.setServiceEntryPoint(GWT.getModuleBaseURL() + "content");
 		initWidget(uiBinder.createAndBindUi(this));
 
 		saveButton.setEnabled(false);
 
 		saveButton.addClickHandler(new ClickHandler() {
 
-			public void onClick(ClickEvent event) {
+			public void onClick(final ClickEvent event) {
 				save();
 			}
 		});
@@ -87,22 +134,29 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	}
 
+	/**
+	 * save the editor.
+	 */
 	protected void save() {
 		// TODO Auto-generated method stub
 		contentService.saveNode(actualNode, new AsyncCallback<DTOEditableNode>() {
-			public void onSuccess(DTOEditableNode result) {
+			public void onSuccess(final DTOEditableNode result) {
 			}
 
-			public void onFailure(Throwable caught) {
+			public void onFailure(final Throwable caught) {
 				// TODO Auto-generated method stub
 
 			}
 		});
 	}
 
+	/**
+	 * binds to navigation selection events.
+	 * @param selectionModel the selection model handling the selection.
+	 */
 	public void bindToNavigation(final SingleSelectionModel<DTONodeInfo> selectionModel) {
 		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-			public void onSelectionChange(SelectionChangeEvent event) {
+			public void onSelectionChange(final SelectionChangeEvent event) {
 				DTONodeInfo node = selectionModel.getSelectedObject();
 				System.out.println("selected node " + node.getPath());
 				if (lastMainWidget != null) {
@@ -110,13 +164,13 @@ public class DC2FEditorProviderUIBinder extends Composite {
 				}
 				selectionLabel.setText("Selected Node: " + node.getPath());
 				contentService.getEditableNodeForPath(node.getPath(), new AsyncCallback<DTOEditableNode>() {
-					public void onSuccess(DTOEditableNode result) {
+					public void onSuccess(final DTOEditableNode result) {
 						actualNode = result;
 						refreshEditors();
 						chooseDefaultEditor(result);
 					}
 
-					public void onFailure(Throwable caught) {
+					public void onFailure(final Throwable caught) {
 						// TODO Auto-generated method stub
 
 					}
@@ -125,11 +179,17 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		});
 	}
 
+	/**
+	 * called when module was loaded.
+	 */
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * refreshes the list of editors.
+	 */
 	public void refreshEditors() {
 		HashMap<String, Widget> editorButtons = new HashMap<String, Widget>();
 		// Check old editors for compatiblity
@@ -152,7 +212,12 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		}
 	}
 
-	private Editor getEditor(String name) {
+	/**
+	 * returns an editor with the given name.
+	 * @param name name of the editor to return
+	 * @return the editor with the given name, or null if none was found.
+	 */
+	private Editor getEditor(final String name) {
 		for (Editor editor : getAvailableEditors()) {
 			if (editor.getName().equals(name)) {
 				return editor;
@@ -161,26 +226,45 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		return null;
 	}
 
+	/**
+	 * @return all available editors.
+	 */
 	private Collection<Editor> getAvailableEditors() {
 		return availableEditors;
 	}
 
+	/**
+	 * @return currently edited node.
+	 */
 	protected DTOEditableNode getActualNode() {
 		return actualNode;
 	}
 
-	public void showEditor(Editor editor) {
+	/**
+	 * shows the given editor.
+	 * @param editor the editor to show.
+	 */
+	public void showEditor(final Editor editor) {
 		setMain(editor);
 		saveButton.setEnabled(false);
 	}
 
-	private void chooseDefaultEditor(DTOEditableNode node) {
+	/**
+	 * select a default editro for the given node.
+	 * @param node node to modify.
+	 */
+	private void chooseDefaultEditor(final DTOEditableNode node) {
 		Editor editor = availableEditors.get(0);
 		editor.loadNode(node);
 		setMain(editor);
 	}
 
-	private Widget setMain(Widget widget) {
+	/**
+	 * set the main widget of the editor.
+	 * @param widget main widget of the editor
+	 * @return the widget (which was passed in)
+	 */
+	private Widget setMain(final Widget widget) {
 		Widget lastLastMainWidget = null;
 		if (lastMainWidget != null) {
 			centerPanel.remove(lastMainWidget);
@@ -190,7 +274,11 @@ public class DC2FEditorProviderUIBinder extends Composite {
 		return lastLastMainWidget;
 	}
 
-	protected void nodeHasChanged(ChangeEvent event) {
+	/**
+	 * node has changed.
+	 * @param event hange event.
+	 */
+	protected void nodeHasChanged(final ChangeEvent event) {
 		saveButton.setEnabled(true);
 	}
 

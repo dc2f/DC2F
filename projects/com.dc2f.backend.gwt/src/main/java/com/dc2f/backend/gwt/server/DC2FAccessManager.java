@@ -69,7 +69,6 @@ public final class DC2FAccessManager {
 	public static BranchAccess getWriteAccess() {
 		if (writeAccess == null) {
 			File crdir = getCrDirPath();
-			// ContentRepository cr = ContentRepositoryFactory.getInstance().getContentRepository("simplejsonfile", Collections.singletonMap("directory", (Object)crdir.getAbsolutePath()));
 			ContentRepository cr = new JsonContentRepositoryProvider().getContentRepository("writeablejsonfile", Collections.singletonMap("directory", (Object) crdir.getAbsolutePath()));
 			CRSession conn = cr.authenticate(null);
 			writeAccess = conn.openTransaction(null);
