@@ -75,8 +75,12 @@ h1 {
 }
 
 #DC2FAttributeEditor .gwt-Label {
-	width: 10em;
+	min-width: 10em;
 	margin-left: 1em;
+}
+#DC2FAttributeEditor .gwt-TextArea {
+	min-width: 20em;
+	height: 7em;
 }
 #DC2FAttributeEditor td {
 	line-height: 2.3em;

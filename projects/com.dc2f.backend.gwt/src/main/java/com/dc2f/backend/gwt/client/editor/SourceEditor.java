@@ -72,18 +72,23 @@ public class SourceEditor extends Editor {
 			}
 		});
 		loadedNode = node;
-		editor.addChangeHandler(getChangeHandler());
+		editor.addChangeHandler(new ChangeHandler() {
+			@Override
+			public void onChange(final ChangeEvent event) {
+				getChangeHandler().onChange();
+			}
+		});
 	}
 
 	@Override
-	protected ChangeHandler getChangeHandler() {
+	protected NodeChangeHandler getChangeHandler() {
 		return changeHandler;
 	}
 
 	/**
 	 * detected a change.
 	 */
-	private final class SourceEditorChangeHandler extends NodeChangedChangeHandler {
+	private final class SourceEditorChangeHandler extends NodeChangeHandlerImpl {
 
 		/**
 		 * node before the change.
@@ -120,9 +125,8 @@ public class SourceEditor extends Editor {
 
 		/**
 		 * notified of changes to the node.
-		 * @param event event of the change.
 		 */
-		public void onChange(final ChangeEvent event) {
+		public void onChange() {
 			if (lastLoadedNode == null || lastLoadedNode.same(loadedNode)) {
 				String source = editor.getText();
 				JSONValue last;
@@ -147,7 +151,7 @@ public class SourceEditor extends Editor {
 			} else {
 				lastLoadedNode = loadedNode;
 			}
-			super.onChange(event);
+			super.onChange();
 		}
 
 	}

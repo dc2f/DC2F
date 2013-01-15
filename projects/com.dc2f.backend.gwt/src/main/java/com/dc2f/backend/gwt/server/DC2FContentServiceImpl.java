@@ -13,10 +13,13 @@ import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentService;
+import com.dc2f.backend.gwt.shared.DTOAttributeDefinition;
+import com.dc2f.backend.gwt.shared.DTOAttributeType;
 import com.dc2f.backend.gwt.shared.DTOAttributesDefinition;
 import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.dc2f.backend.gwt.shared.DTONodeType;
 import com.dc2f.backend.gwt.shared.NotChangeableException;
+import com.dc2f.contentrepository.AttributeDefinition;
 import com.dc2f.contentrepository.AttributesDefinition;
 import com.dc2f.contentrepository.BranchAccess;
 import com.dc2f.contentrepository.ChangeableNode;
@@ -78,7 +81,7 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		NodeType type = dc2fNode.getNodeType();
 		if (type != null) {
 			AttributesDefinition attrsDefinition = type.getAttributeDefinitions();
-			DTOAttributesDefinition dtoAttrsDef = new DTOAttributesDefinition(attrsDefinition.getAttributeNames());
+			DTOAttributesDefinition dtoAttrsDef = convertAttributesDefinitionToDTO(attrsDefinition);
 
 			node.setNodeType(new DTONodeType(type.getNodeTypeInfo().getPath(), dtoAttrsDef));
 			for (String attributeName : type.getAttributeDefinitions().getAttributeNames()) {
@@ -86,16 +89,31 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 				if (attributeValue instanceof String) {
 					node.set(attributeName, (String) attributeValue);
 				}
-				if (type instanceof AttributesDefinition) {
-					// don't serialize attributes definition of attributes definition :)
-					continue;
-				}
-
-				Node def = attrsDefinition.getAttributeDefinition(attributeName);
-				dtoAttrsDef.setAttributeDefinition(attributeName, convertNodeToDTO(def, simpleNodeCache));
+//				if (type instanceof AttributesDefinition) {
+//					// don't serialize attributes definition of attributes definition :)
+//					continue;
+//				}
+//
+//				Node def = attrsDefinition.getAttributeDefinition(attributeName);
+//				dtoAttrsDef.setAttributeDefinition(attributeName, convertNodeToDTO(def, simpleNodeCache));
 			}
 		}
 		return node;
+	}
+
+	/**
+	 * converts an attributes definition into a DTO.
+	 * @param attrsDefinition attributes definition to convert
+	 * @return a DTO.
+	 */
+	private static DTOAttributesDefinition convertAttributesDefinitionToDTO(final AttributesDefinition attrsDefinition) {
+		DTOAttributesDefinition dtoAttrsDef = new DTOAttributesDefinition(attrsDefinition.getAttributeNames());
+		for (String name : attrsDefinition.getAttributeNames()) {
+			AttributeDefinition attrDefinition = attrsDefinition.getAttributeDefinition(name);
+			DTOAttributeDefinition dtoAttrDef = new DTOAttributeDefinition(DTOAttributeType.nameToType(attrDefinition.getAttributeType().getName()));
+			dtoAttrsDef.setAttributeDefinition(name, dtoAttrDef);
+		}
+		return dtoAttrsDef;
 	}
 
 	/** {@inheritDoc} */

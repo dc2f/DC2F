@@ -2,8 +2,6 @@ package com.dc2f.backend.gwt.client.editor;
 
 import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.DTOEditableNode;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -22,7 +20,7 @@ public abstract class Editor extends Composite {
 	/**
 	 * handler which should get notified for changes.
 	 */
-	private ChangeHandler changeHandler = new NodeChangedChangeHandler();
+	private NodeChangeHandler changeHandler = new NodeChangeHandlerImpl();
 
 	/**
 	 * @return service to retrieve additional nodes.
@@ -98,14 +96,14 @@ public abstract class Editor extends Composite {
 	 * @param attributeName - name of the attribute to get the change handler for
 	 * @return change handler for this attribute
 	 */
-	protected ChangeHandler getChangeHandler(final String attributeName) {
+	protected NodeChangeHandler getChangeHandler(final String attributeName) {
 		return getChangeHandler();
 	}
 
 	/**
 	 * @return change handler to use when anything in the node has changed. if you know the specific changed attribute better use {@link #getChangeHandler(String)}.
 	 */
-	protected ChangeHandler getChangeHandler() {
+	protected NodeChangeHandler getChangeHandler() {
 		return changeHandler;
 	}
 
@@ -119,16 +117,18 @@ public abstract class Editor extends Composite {
 		// TODO add proper check for using this editor
 		return true;
 	}
-
+	
 	/**
-	 * handler which will receive change notifications.
+	 * implementation of change handler for this editor.
+	 * @author herbert
 	 */
-	protected class NodeChangedChangeHandler implements ChangeHandler {
+	protected class NodeChangeHandlerImpl implements NodeChangeHandler {
 
-		/** {@inheritDoc} */
-		public void onChange(final ChangeEvent event) {
-			editorProvider.nodeHasChanged(event);
+		@Override
+		public void onChange() {
+			editorProvider.nodeHasChanged();
 		}
+		
 	}
 
 }

@@ -19,7 +19,7 @@ public class DTOAttributesDefinition implements Serializable {
 	/**
 	 * all attribute definitions for each attribute.
 	 */
-	private Map<String, DTONodeInfo> attributeDefinition = new HashMap<String, DTONodeInfo>();
+	private Map<String, DTOAttributeDefinition> attributeDefinition = new HashMap<String, DTOAttributeDefinition>();
 	
 	/**
 	 * Required empty constructor.
@@ -40,8 +40,8 @@ public class DTOAttributesDefinition implements Serializable {
 	 * @param propertyName attribute name
 	 * @return null
 	 */
-	public DTONodeInfo getAttributeDefinition(final String propertyName) {
-		return null;
+	public DTOAttributeDefinition getAttributeDefinition(final String propertyName) {
+		return attributeDefinition.get(propertyName);
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class DTOAttributesDefinition implements Serializable {
 	 * @param dtoNode attribute definition node
 	 */
 	public void setAttributeDefinition(final String attributeName,
-			final DTOEditableNode dtoNode) {
+			final DTOAttributeDefinition dtoNode) {
 		attributeDefinition.put(attributeName, dtoNode);
 	}
 

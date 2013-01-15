@@ -1,12 +1,16 @@
-package com.dc2f.contentrepository;
+package com.dc2f.backend.gwt.shared;
 
-import com.dc2f.contentrepository.exception.InvalidAttributeTypeException;
+import java.io.Serializable;
+
 
 /**
- * contains all supported primitive data types.
+ * This is basically a copy of {@link com.dc2f.contentrepository.AttributeType} because i was not
+ * able to define it as a GWT module, without converting the whole content repository project into a
+ * GWT project(?).
+ * 
  * @author herbert
  */
-public enum AttributeType {
+public enum DTOAttributeType implements Serializable {
 	/**
 	 * Attribute type for attributes that contain boolean values (true, false).
 	 */
@@ -62,15 +66,8 @@ public enum AttributeType {
 	 * construct a new attribute type enum.
 	 * @param name name of the attribute type as defined in the content repository.
 	 */
-	private AttributeType(final String name) {
+	private DTOAttributeType(final String name) {
 		this.name = name;
-	}
-	
-	/**
-	 * @return public name
-	 */
-	public String getName() {
-		return name;
 	}
 
 	/**
@@ -78,12 +75,19 @@ public enum AttributeType {
 	 * @param name the string name of the attribute type
 	 * @return an enum instance for the given attribute name.
 	 */
-	public static AttributeType nameToType(final String name) {
-		for (AttributeType type : AttributeType.values()) {
+	public static DTOAttributeType nameToType(final String name) {
+		for (DTOAttributeType type : DTOAttributeType.values()) {
 			if (type.name.equals(name)) {
 				return type;
 			}
 		}
-		throw new InvalidAttributeTypeException("invalid attribute type {" + name + "}", null);
+		throw new DC2FGWTRuntimeException("invalid attribute type {" + name + "}", null);
+	}
+
+	/**
+	 * @return name.
+	 */
+	public String getName() {
+		return name;
 	}
 }

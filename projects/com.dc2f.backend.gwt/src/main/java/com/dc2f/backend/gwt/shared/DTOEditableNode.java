@@ -17,14 +17,14 @@ public class DTOEditableNode extends DTONodeInfo {
 	/**
 	 * all attributes for this node.
 	 */
-	private HashMap<String, String> attributes = new HashMap<String, String>();
+	private HashMap<String, Object> attributes = new HashMap<String, Object>();
 
 	/**
 	 * sets a attribute to the given value.
 	 * @param attributeName name of the attribute
 	 * @param attributeValue value for this attribute.
 	 */
-	public void set(final String attributeName, final String attributeValue) {
+	public void set(final String attributeName, final Object attributeValue) {
 		attributes.put(attributeName, attributeValue);
 	}
 	
@@ -33,7 +33,7 @@ public class DTOEditableNode extends DTONodeInfo {
 	 * @param attributeName which attribute value to return
 	 * @return value for the given attribute name.
 	 */
-	public String get(final String attributeName) {
+	public Object get(final String attributeName) {
 		return attributes.get(attributeName);
 	}
 	

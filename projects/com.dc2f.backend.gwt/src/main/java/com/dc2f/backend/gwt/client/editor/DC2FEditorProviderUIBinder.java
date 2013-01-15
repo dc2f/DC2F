@@ -13,7 +13,6 @@ import com.dc2f.backend.gwt.client.services.DC2FContentServiceAsync;
 import com.dc2f.backend.gwt.shared.DTOEditableNode;
 import com.dc2f.backend.gwt.shared.DTONodeInfo;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -276,9 +275,8 @@ public class DC2FEditorProviderUIBinder extends Composite {
 
 	/**
 	 * node has changed.
-	 * @param event hange event.
 	 */
-	protected void nodeHasChanged(final ChangeEvent event) {
+	protected void nodeHasChanged() {
 		saveButton.setEnabled(true);
 	}
 
