@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -122,9 +123,10 @@ public class DC2FContentServiceImpl extends DC2FNavigationServiceImpl implements
 		com.dc2f.contentrepository.Node dc2fNode = craccess.getNode(node.getPath());
 		if (dc2fNode instanceof ChangeableNode) {
 			ChangeableNode dc2fChangeableNode = (ChangeableNode) dc2fNode;
-			for (String attributeName : node.getAttributeNames()) {
-				dc2fChangeableNode.set(attributeName, node.get(attributeName));
+			for (Entry<String, Object> entry  : node.getModifiedAttributes().entrySet()) {
+				dc2fChangeableNode.set(entry.getKey(), entry.getValue());
 			}
+			logger.info("Saving node by overwriting modified attributes: " + node.getModifiedAttributes());
 			craccess.getAdapter(WriteAccessAdapter.class).saveNode(dc2fNode);
 			return node;
 		} else {
