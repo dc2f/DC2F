@@ -1,0 +1,45 @@
+{
+	'nodetype':	'classpath:com/dc2f/renderer/nodetype/Project', 
+	'_comment': '/* tries to load Project.json from classpath, if it fails it asks all other file managers */',
+	
+	'domains': [ 'mycoolblog.com', 'blog.dc2f.com' ],
+	'label': 'DC2F Blog',
+	'renderconfiguration':
+		[
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web',
+				'template': '/cmsblog/templates/myblogtemplate',
+				'index': '/cmsblog/startpage',
+			},
+
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web.breadcrumbs',
+				'template': '/cmsblog/templates/breadcrumbstemplate',
+				'addtocontext': {
+					'title': {
+						'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+						'_commentxxrefcontext': 'node',
+						'ref': '.@label',
+					},
+				},
+			},
+
+
+
+
+
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web.mobile',
+				'template': 'mymobileblogtemplate',
+			},
+			{
+				'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+				'rendertype': 'com.dc2f.rendertype.web',
+				'properties': {
+				}
+			}
+		]
+}

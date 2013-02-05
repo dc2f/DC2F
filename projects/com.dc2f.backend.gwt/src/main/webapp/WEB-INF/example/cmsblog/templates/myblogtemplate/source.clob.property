@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>$title</title>
+    <meta name="description"></meta>
+    <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    
+    <link href="$basecss" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>$title</h1>
+    </div>
+    <div class="breadcrumbs">
+      <ul>
+        $breadcrumbs
+      </ul>
+    </div>
+    <div id="content">
+      $content
+    </div>
+    <!-- div id="navigation">
+      $navigation
+    </div -->
+  </body>
+</html>

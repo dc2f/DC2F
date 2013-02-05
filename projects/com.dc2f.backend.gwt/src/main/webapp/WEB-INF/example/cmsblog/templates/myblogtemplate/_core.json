@@ -1,0 +1,41 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+	'context': {
+		'content': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+		},
+		
+		'breadcrumbs': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+			'renderSubtype': 'breadcrumbs',
+			'rootNode': '/cmsblog',
+		},
+		
+		
+		
+		
+		
+		'navigation': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'renderednode',
+			'ref': '/cmsblog/templates/navigation',
+			
+		},
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'explicit',
+			'value': 'hehe',
+		},
+		'basecss': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'ref': '/cmsblog/templates/myblogtemplate/basecss',
+		},
+	}
+
+}
+

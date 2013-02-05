@@ -1,0 +1,16 @@
+<h1>DC2F</h1>
+
+<p>DC2F (Distributed Content Creation Framework) is a Content Management System which builds upon the idea to manage content the same way as code - with <bold>Git</bold> ;-)</p>
+
+<p>Currently it is nothing more than a (very) simple <strong>Java Framework</strong> for a static page generator, quite similar to awestruct or jekyll.</p>
+
+
+<h2>Goal</h2>
+
+<p>The goal is to have a frontend editable website which can be hosted and edited 
+distributed by having a git backend. Migrations, staging, merging, branching - everything 
+you ever wanted to do in a CMS with the power of Git.</p>
+
+<h2>Problems</h2>
+
+<p>Here we will collect all problems we encounter :-)</p>

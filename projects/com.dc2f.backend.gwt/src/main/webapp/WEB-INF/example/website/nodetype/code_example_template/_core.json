@@ -1,0 +1,23 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<strong>$title</strong><pre>$examplecode</pre>',
+	'context': {
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@title',
+		},
+		'examplecode': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@examplecode',
+		},
+		'_body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+	},
+}

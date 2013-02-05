@@ -1,0 +1,34 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<li>$date <a href="$articleurl">$title</a></li>',
+	'context': {
+		'date': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/DateRenderer',
+			'refcontext': 'node',
+			'ref': '.@date',
+		},
+		'image': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
+			'refcontext': 'node',
+			'ref': '.@image',
+			'size': '500x300',
+		},
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@title',
+		},
+		'body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+		'articleurl': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/url/NodeURLRenderer',
+			'refcontext': 'node',
+			'ref': '.',
+		},
+	},
+}

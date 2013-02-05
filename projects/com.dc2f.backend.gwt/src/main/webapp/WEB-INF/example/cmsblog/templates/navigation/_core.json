@@ -1,0 +1,6 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+	
+	'context': {
+	},
+}

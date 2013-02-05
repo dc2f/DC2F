@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #e7e7e7;
+  color: #000;
+  font-family: 'Droid Serif', arial, serif;
+  width: 60em;
+  margin: 0 auto;
+}
+.header {
+  border-bottom: 0.1em solid #a7a7a7;
+  margin-bottom: 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Amaranth', arial, serif;
+}
+h1 {
+  font-size: 36pt;
+  letter-spacing: 10px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5em;
+}
+h2 {
+  margin-bottom: 0.5em;
+}
+.section {
+  margin-bottom: 0.5em;
+}
+
+.linklist {
+  margin-top: 0.5em;
+}
+
+ul {
+	margin-left: 1em;
+}
+.breadcrumbs {
+	margin-bottom: 3em;
+	font-size: smaller;
+}
+.breadcrumbs ul {
+	margin: 0;
+}
+.breadcrumbs ul li {
+	display: block;
+	float: left;
+	margin-left: 0.5em;
+}
+.breadcrumbs ul li:before {
+	content: ' >> ';
+}
+.breadcrumbs ul li:first-child:before {
+	content: '';
+}
+.breadcrumbs ul li:last-child a {
+	color: #000;
+	text-decoration: none;
+}
+.breadcrumbs a {
+	color: #f00;
+	text-decoration: none;
+}
+#content {
+	clear: both;
+}

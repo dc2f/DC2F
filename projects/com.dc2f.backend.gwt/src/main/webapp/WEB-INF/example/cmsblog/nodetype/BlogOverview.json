@@ -1,0 +1,24 @@
+{
+	'extends': 'classpath:com/dc2f/renderer/nodetype/RenderableNodeType',
+
+	'attributes': {
+		'intro': { 'type': 'String', },
+		'overviewnode': { 'type': 'NodeReference', },
+	},
+
+
+	'renderconfiguration': [
+		{
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/RenderConfiguration',
+			'rendertype': 'com.dc2f.rendertype.web',
+			'template': 'overviewtemplate',
+			'addtocontext': {
+				'overviewnode': {
+					'ref': '/cmsblog/articles',
+				},
+			},
+		},
+	],
+
+
+}

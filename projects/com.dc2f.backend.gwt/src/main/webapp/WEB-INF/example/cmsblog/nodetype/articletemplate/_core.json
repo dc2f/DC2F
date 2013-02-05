@@ -1,0 +1,19 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<div class="article">\n	$image\n	<div class="body">$body</div>\n</div>',
+	'context': {
+		'image': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/image/ImageTagRenderer',
+			'refcontext': 'node',
+			'ref': '.@image',
+			'size': '500x300',
+		},
+		'body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+	},
+}

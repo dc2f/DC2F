@@ -1,0 +1,23 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<div class="content">\n	<h1>$title</h1>	<div class="body">$body</div>\n</div>',
+	'context': {
+		'title': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@title',
+		},
+		'body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/NodeRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+		'_body': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/StringRenderer',
+			'refcontext': 'node',
+			'ref': '.@body',
+		},
+	},
+}

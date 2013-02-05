@@ -1,0 +1,11 @@
+{
+	'nodetype': '/website/nodetype/StaticContent',
+
+
+	'title': 'Start Page',
+	'body': {
+	},
+	'lastmodified': { timestamp: 1234567890 },
+	'sortorder': 1,
+
+}

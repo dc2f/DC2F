@@ -1,0 +1,14 @@
+{
+	'nodetype': 'classpath:com/dc2f/renderer/nodetype/template/HtmlTemplate',
+
+
+	'source': '<ul class="nav">$linklist</ul>',
+	'context': {
+		'linklist': {
+			'nodetype': 'classpath:com/dc2f/renderer/nodetype/list/OverviewNodeType',
+			'ref': '/website/content',
+			'acceptedVariants': 'navigation',
+			'sortBy': 'sortorder'
+		},
+	},
+}

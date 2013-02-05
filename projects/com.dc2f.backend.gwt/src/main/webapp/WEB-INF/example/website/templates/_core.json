@@ -1,0 +1,4 @@
+{
+	'_comment': 'this is the root node :)',
+	'nodetype': 'classpath:com/dc2f/nodetype/Node',
+}
