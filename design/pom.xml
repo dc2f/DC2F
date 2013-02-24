@@ -7,9 +7,9 @@
 
 	<parent>
 		<groupId>com.dc2f</groupId>
-		<artifactId>master</artifactId>
+		<artifactId>dc2f</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../com.dc2f.master/pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<dependencies>
